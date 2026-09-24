@@ -234,7 +234,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>100 Apps, 100 Toolkits? — Composio take-home case study</title>
-<meta name="description" content="Agent-built research across 100 apps: auth patterns, self-serve vs gated access, API surface, MCP presence, buildability verdicts — with a verified accuracy loop (96.9% -> 100% on a 40-app audit).">
+<meta name="description" content="Agent-built research across 100 apps: auth patterns, self-serve vs gated access, API surface, MCP presence, buildability verdicts — verified against live docs (96.9% to 100% agreement on 195 audited checks, 0 dead evidence links after a full-set sweep).">
 <meta name="author" content="AI Product Ops Intern applicant">
 <style>
 :root{--bg:#0b0d14;--card:#12151f;--card2:#171b28;--ink:#e8eaf2;--dim:#98a0b3;--line:#242a3a;
@@ -332,6 +332,16 @@ ul.tight{margin:6px 0 0 18px} ul.tight li{margin:3px 0;font-size:13.5px}
 .run code{background:var(--card2);border:1px solid var(--line);border-radius:8px;display:block;padding:11px 14px;margin:8px 0;font-size:12.8px;overflow:auto;color:#c4b5fd;font-family:ui-monospace,monospace}
 footer{margin-top:50px;padding:26px 0;border-top:1px solid var(--line);color:var(--dim);font-size:12.5px}
 .hl{color:var(--ink);font-weight:700}
+.submit{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:18px 0 4px;padding:14px 16px;background:var(--card);border:1px solid rgba(139,124,248,.4);border-radius:12px}
+.btn{display:inline-block;background:linear-gradient(92deg,var(--vio2),var(--vio));color:#fff;font-weight:700;font-size:13.5px;padding:9px 16px;border-radius:10px}
+.btn:hover{text-decoration:none;filter:brightness(1.1)}
+.tldr{margin:14px 0;padding:16px 18px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--grn);border-radius:12px}
+.tldr>b{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--grn)}
+.covmap{margin-top:12px;font-size:12.3px;color:var(--dim)}
+.covmap a{color:var(--dim);text-decoration:underline dotted}
+.covmap a:hover{color:var(--ink)}
+.hitl{border:1px solid rgba(56,189,248,.45);background:rgba(56,189,248,.08);border-radius:12px;padding:16px 18px;margin:0 0 16px}
+.hitl h4{color:#7dd3fc;letter-spacing:.1em}
 table.compact td,table.compact th{padding:7px 9px}
 </style>
 </head>
@@ -349,26 +359,44 @@ table.compact td,table.compact th{padding:7px 9px}
 
 <header class="hero"><div class="wrap">
   <div class="kicker">Composio · AI Product Ops Intern · take-home case study</div>
-  <h1>100 apps, 100 toolkits? <span class="grad">The market has a shape — and it's mostly buildable.</span></h1>
-  <p class="sub">We ran an agent pipeline across the full research set, then attacked its answers with verification loops
-  and a human audit. Findings first, proof second, receipts always. Every claim on this page is backed by a docs URL
-  in the table below and a checkable artifact in the repo.</p>
+  <h1>100 apps, 100 toolkits? <span class="grad">This research set has a shape — and it's mostly buildable.</span></h1>
+  <p class="sub">An agent pipeline researched the full set, then verification loops and a human audit attacked its answers.
+  Findings first, proof second, receipts always. Every claim below is backed by a docs URL in the table and a checkable
+  artifact in the repo.</p>
+
+  <div class="submit">
+    <a class="btn" href="#run">▶ Live case study — this page (deploy link in §6)</a>
+    <a class="btn" href="https://github.com/OWNER/appkit-research" target="_blank" rel="noopener">▶ Source repo — github.com/OWNER/appkit-research</a>
+    <span class="dim small">replace OWNER after <span class="mono">git push -u origin main</span> — repo is commit-ready in <span class="mono">appkit-research/</span></span>
+  </div>
+
+  <div class="tldr">
+    <b>TL;DR</b>
+    <ul class="tight">
+      <li><b>100 apps / 10 categories</b> researched + verified: auth, self-serve vs gated, API surface, MCP, buildability, evidence.</li>
+      <li><b>Key pattern:</b> static keys (81/100) and OAuth2 (69/100) are the twin standard — 57 apps ship both (keys for automation, OAuth for marketplace).</li>
+      <li><b>__BUILD_NOW__/100 build-now</b> today; <b>__SS_PCT__% self-serveable</b> (free or paid/trial). Top blocker classes: enterprise/sales gates and approval/policy friction (7 + 7 of the 21 that aren't build-now).</li>
+      <li><b>Verification:</b> 96.9% → <b>100% agreement with docs on 195 audited checks</b> (40-app sample); a full-set sweep of all 100 rows then found and fixed 5 more row errors + 20 dead links — 0 dead links remain.</li>
+    </ul>
+  </div>
+
   <div class="meta-chips">
     <span>__N__ apps · 10 categories</span>
-    <span>__S1_C__ → __S2_C__ field checks vs docs (audit of 40 apps)</span>
-    <span>0 dead evidence links after verification</span>
-    <span>29 web searches · 155 docs fetches · 11 JSON-RPC probes · 23 human decisions</span>
+    <span>__S1_C__ → __S2_C__ agreement on audited checks (40-app audit)</span>
+    <span>0 dead evidence links after full-set sweep (196 URLs)</span>
+    <span>41 web searches · 351 docs fetches · 11 JSON-RPC probes · 2 human review rounds</span>
     <span>self-contained HTML · JSON-LD + embedded dataset</span>
   </div>
+  <div class="covmap">Assignment map → <a href="#findings">category &amp; one-line · auth · self-serve vs gated · API surface · MCP · verdict &amp; blocker · evidence (§2)</a> · <a href="#patterns">patterns (§1)</a> · <a href="#agent">agent + human role (§3)</a> · <a href="#verification">verification, hits &amp; misses (§4)</a> · <a href="#queues">easy wins vs outreach (§5)</a> · <a href="#run">proof &amp; run triggers (§6)</a> · <a href="#data">machine-readable data (§7)</a></div>
 </div></header>
 
 <nav class="sticky"><div class="wrap">
   <a href="#patterns">1 · Patterns (headline)</a>
   <a href="#findings">2 · Findings matrix (100 rows)</a>
   <a href="#agent">3 · The agent</a>
-  <a href="#verification">4 · Verification &amp; accuracy</a>
+  <a href="#verification">4 · Verification &amp; human-in-the-loop</a>
   <a href="#queues">5 · Queues: ship / outreach / shelf</a>
-  <a href="#run">6 · Run it</a>
+  <a href="#run">6 · Run it &amp; links</a>
 </div></nav>
 
 <main class="wrap">
@@ -376,16 +404,16 @@ table.compact td,table.compact th{padding:7px 9px}
 <!-- ============ 1 · PATTERNS ============ -->
 <section id="patterns">
   <h2><span class="n">01</span>Find the patterns — six headlines</h2>
-  <p class="lede">If you read only this block: the 100-app market splits cleanly into a big, agent-ready majority and a
+  <p class="lede">If you read only this block: this 100-app research set splits cleanly into a big, agent-ready majority and a
   small gated tail where the blocker is <span class="hl">process (sales, approvals, policy), not technology</span>.</p>
 
   <div class="grid g2" style="margin-bottom:14px">
     <div class="pattern"><b class="t">1 · Static keys and OAuth2 are the twin standard — usually together.</b>
       <p><b>__STATIC__</b>/100 apps use a static key (API key / token / PAT) and <b>__OAUTH__</b>/100 use OAuth2;
       <b>__HYBRID__</b> ship <i>both</i> (OAuth2 for marketplace apps, keys for internal automation). Build one auth
-      layer that does both and you cover most of the market. Everything else is garnish: Basic (__AUTH_BASIC_N__),
+      layer that does both and you cover most of this set. Everything else is garnish: Basic (__AUTH_BASIC_N__),
       JWT families (__AUTH_JWT_N__), HMAC request-signing (__AUTH_HMAC_N__ — Amazon SP-API, Binance, LiveAgent), bot tokens (__AUTH_BOT_N__).</p></div>
-    <div class="pattern"><b class="t">2 · __SS_PCT__% of the market is self-serveable today.</b>
+    <div class="pattern"><b class="t">2 · __SS_PCT__% of this set is self-serveable today.</b>
       <p>__FREE__ apps give free credentials (free tier / free dev org / OSS) and __PAID__ more are self-serve after
       signup on a paid plan or trial. Only <b>__APPROVAL__ approval-gated</b> + <b>__ENTERPRISE__ enterprise-gated</b> +
       __NOAPI__ with no API at all — and those cluster hard (see heatmap).</p></div>
@@ -410,7 +438,7 @@ table.compact td,table.compact th{padding:7px 9px}
   </div>
 
   <div class="card">
-    <h4>Self-serve vs gated — the whole market in one bar</h4>
+    <h4>Self-serve vs gated — this 100-app research set in one bar</h4>
     __ACCESS_BAR__
   </div>
 
@@ -492,38 +520,60 @@ table.compact td,table.compact th{padding:7px 9px}
       <li><b>Probe physics:</b> 3 MCP probes "went live" on docs-site catch-alls (Stoplight/Redocly/Intuit). Only a human tightened the classifier to require JSON-RPC-shaped responses.</li>
       <li><b>Access-tier judgment calls:</b> Waterfall (docs complete, onboarding sales-flavored) and FanBasis (sandbox self-serve, white-glove live onboarding) sit on tier boundaries — flagged medium-confidence rather than fake-precisiond.</li>
     </ul>
-    <div class="callout vio"><b>Spirit-of-role note:</b> <span class="mono">pipeline/composio_runner.py</span> is the plug-in slot for
-    Composio's own toolkits (search + browser toolkits for SPA-gated docs, MCP passthrough for apps that already speak MCP —
-    42 of them). The submission ran on built-in fetch/search adapters + the human loop because no API keys were required for
-    this assignment ("You do not need paid accounts"). The slot is wired and dry-runs offline — try it:
-    <span class="mono" style="display:inline-block;margin-top:6px">python3 pipeline/composio_runner.py</span></div>
+    <div class="callout vio"><b>What we actually used vs. what is a Composio adapter — be precise:</b>
+    <div class="grid g2" style="margin-top:8px">
+      <div><b style="color:#86efac">Actually used to produce this submission</b>
+      <ul class="tight small">
+        <li>LLM research agent with web-search + page-fetch tools (41 searches, knowledge digests for mainstream SaaS)</li>
+        <li>The repo pipeline: <span class="mono">agent.py</span> (schema/validation), <span class="mono">verify.py</span> (155+196 live docs fetches, keyword corroboration, MCP probes), <span class="mono">apply_corrections.py</span>, <span class="mono">analyze.py</span>, <span class="mono">build_site.py</span></li>
+        <li>Manual JSON-RPC probes (11) + 2 human adjudication rounds (71 logged decisions)</li>
+      </ul></div>
+      <div><b style="color:#fcd34d">Implemented as a Composio adapter — NOT run here (no API key in this sandbox)</b>
+      <ul class="tight small">
+        <li><span class="mono">pipeline/composio_runner.py</span> — routes RESEARCH through Composio toolkits (search + browser toolkits for SPA-gated docs) when <span class="mono">COMPOSIO_API_KEY</span> is set</li>
+        <li>Its offline half runs today: official-MCP passthrough (tools/list against apps that already speak MCP — 42 of them in this set)</li>
+        <li>Assignment said no paid accounts were needed, so the built-in adapters + human loop did the work; the Composio slot is wired and dry-runs: <span class="mono">python3 pipeline/composio_runner.py</span></li>
+      </ul></div>
+    </div></div>
   </div>
 </section>
 
 <!-- ============ 4 · VERIFICATION ============ -->
 <section id="verification">
-  <h2><span class="n">04</span>Verification — how we know, what we got wrong</h2>
-  <p class="lede">Accuracy is the product. We sampled 40/100 apps (30 stratified toward low-confidence + trap names,
-  10 blind holdout), fixed ground truth against live docs, and measured before/after. App #84 was declared
-  <b>unscorable</b> rather than guessed — 195 real checks remained.</p>
+  <h2><span class="n">04</span>Verification &amp; human-in-the-loop — how we know, what we got wrong</h2>
+  <p class="lede">Accuracy is the product. Note the wording: below are <b>agreement rates with docs-adjudicated ground truth on
+  audited checks</b> — not a blanket accuracy claim. We sampled 40/100 apps (30 stratified toward low-confidence + trap names,
+  10 blind holdout), fixed ground truth against live docs, measured before/after — then swept all 100 rows. App #84 was declared
+  <b>unscorable</b> rather than guessed; 195 real checks remained.</p>
 
-  <div class="grid g3">
-    <div class="card"><h4>Fields vs docs (195 checks)</h4>
-      <div class="big vio">__S1_PCT__% → __S2_PCT__%</div>
-      <p>First pass <b>__S1_C__</b> correct (6 misses, table below). After the loops + reviewed corrections:
-      <b>__S2_C__</b>. Re-measuring on the audit set is partly by-construction — that is what an audit set is for;
-      the blind holdout guards against overfitting.</p></div>
-    <div class="card"><h4>Evidence integrity (live fetches)</h4>
-      <div class="big amb">88.6% → 100%</div>
-      <p>Pass 1 cited <b>9 dead URLs</b> out of 79 (8×404 link-rot + 1 DNS-dead subdomain). After loop A+B:
-      <b>76/76 resolve</b> (5 are bot-walled/JS-rendered for our fetcher but human-valid — disclosed, cross-cited).</p></div>
-    <div class="card"><h4>Blind holdout (10 apps · 50 checks)</h4>
-      <div class="big grn">50/50 both passes</div>
-      <p>Sample-derived rules regressed nothing on unseen apps (#1,12,22,33,41,55,61,73,86,97). All discovered errors
-      concentrated in the long tail — exactly where priors are weakest.</p></div>
+  <div class="hitl">
+    <h4>Human-in-the-loop — exactly where humans corrected the agent</h4>
+    <p class="small" style="color:#bae6fd;margin-bottom:8px">Everything below changed because a human overruled or fixed the machine. Full ledger with reasons + citations in the table at the end of this section (<span class="mono">data/corrections.json</span>, 71 entries).</p>
+    <ul class="tight">
+      <li><b>Audit round (40 apps):</b> killed a <b>phantom OAuth2</b> (Pylon — Bearer tokens only), fixed <b>3 over-listings</b> (Freshdesk "API key" was the Basic password; Gladly "Token" was its Basic credential; iPayX "None" described its MCP, not its API), fixed <b>1 auth misfamily</b> (Neo4j: Aura is OAuth2 client-credentials, not JWT), caught <b>1 MCP under-claim</b> (Pumble — <span class="mono">mcp.pumble.com</span> is first-party), and replaced <b>9 dead evidence links</b>.</li>
+      <li><b>Full-set sweep (all 100 rows):</b> found <b>5 more row errors in the un-audited 60</b> — Discord (phantom official MCP; only community servers exist), Plain (phantom OAuth2 #2), Brex (under-listed dashboard tokens), MrScraper (under-claimed hosted MCP), LiveAgent confidence downgrade — plus <b>20 dead evidence links across 16 apps</b>. All fixed; re-verified with <b>0 dead links</b>.</li>
+      <li><b>Judgment only a human owned:</b> the scoring taxonomy (pre-registered rule R3), the decision to record Paygent Connect as <b>unscorable/"app defeated us"</b> instead of inventing docs, and killing <b>3 MCP probe false-positives</b> (docs-site catch-alls answered any path — tightened the classifier to require JSON-RPC-shaped responses).</li>
+    </ul>
   </div>
 
-  <h3>The six misses, in full (pass 1 → adjudicated truth)</h3>
+  <div class="grid g3">
+    <div class="card"><h4>Fields vs docs — 195 audited checks</h4>
+      <div class="big vio">__S1_PCT__% → __S2_PCT__%</div>
+      <p><b>agreement with ground truth</b> (not blanket accuracy). First pass <b>__S1_C__</b> (6 misses, table below);
+      after loops + reviewed corrections <b>__S2_C__</b>. Re-measuring on the audit set is partly by-construction — that is
+      what an audit set is for; the blind holdout guards against overfitting.</p></div>
+    <div class="card"><h4>Evidence integrity — full-set sweep</h4>
+      <div class="big amb">20 dead → 0 dead</div>
+      <p>Pass 1: <b>9 dead of 79</b> URLs in the audited sample. The full-set sweep then found <b>20 dead of 196</b> total
+      URLs hiding in the un-audited rows (link-rot + 1 DNS-dead subdomain). All replaced; re-fetched: <b>0/196 dead</b>.
+      Separately disclosed: bot-walled/JS-rendered-but-valid URLs (Salesforce, Zoho, Zendesk, Meta, Intuit, Otter…).</p></div>
+    <div class="card"><h4>Blind holdout (10 apps · 50 checks)</h4>
+      <div class="big grn">50/50 both passes</div>
+      <p>Sample-derived rules regressed nothing on unseen apps (#1,12,22,33,41,55,61,73,86,97). But the full-set sweep
+      found errors the 40-app audit hadn't sampled — which is why sweep &gt; sample for final trust.</p></div>
+  </div>
+
+  <h3>The six audit misses, in full (pass 1 → adjudicated truth) — kept on purpose</h3>
   <div class="card" style="padding:0;overflow:auto"><table class="compact">
     <thead><tr><th>#</th><th>App</th><th>Field</th><th>Agent said</th><th>Docs said</th></tr></thead>
     <tbody>__MISS_ROWS__</tbody></table></div>
@@ -553,9 +603,10 @@ table.compact td,table.compact th{padding:7px 9px}
     <tbody>__CHANGE_ROWS__</tbody></table></div>
 
   <div class="callout"><b>Residual risk (say it plainly):</b> six rows are SPA-gated (Salesforce, SFCC, GoHighLevel, QuickBooks,
-  Otter, Consensus) — their pass-2 status rests on cross-exam search + secondary sources, not a clean fetch of vendor docs.
-  Two access-tier calls (Waterfall, FanBasis) are medium-confidence judgment. And "none-found" for MCP/community is an absence
-  claim — it can decay. Everything else in the 40-app audit is live-fetch-verified.</div>
+  Otter, Consensus) — their status rests on cross-exam search + secondary sources, not a clean fetch of vendor docs.
+  Two access-tier calls (Waterfall, FanBasis) are medium-confidence judgment. "none-found" for MCP/community is an absence
+  claim that can decay. And the metric itself is agreement with human-adjudicated ground truth on audited checks — the
+  full-set sweep found 5 errors the audit hadn't sampled, so treat any un-swept claim set the same way.</div>
   <div class="callout red"><b>Apps that defeated the agent:</b> Paygent Connect — three searches surfaced only NMI (its
   underlying white-label gateway). No Paygent developer docs exist on the public web. Verdict recorded as blocked with the NMI
   surface documented; unscorable in the accuracy run. This is the correct finding, not a coverage gap to paper over.</div>
@@ -589,9 +640,9 @@ python3 pipeline/agent.py validate
 # 1 · re-run the verification loop against LIVE docs (the audit trigger)
 python3 pipeline/verify.py check --pass data/pass1_research.json --out reports/pass1_verification.json
 
-# 2 · score a pass against human ground truth (reproduces 96.9% -> 100%)
-python3 pipeline/verify.py score --pass data/pass1_research.json
-python3 pipeline/verify.py score --pass data/final_research.json
+# 2 · score any pass against human ground truth (reproduces 96.9% -> 100% agreement on audited checks)
+python3 pipeline/verify.py score --pass data/pass1_research.json   # 189/195 = 96.9% agreement
+python3 pipeline/verify.py score --pass data/final_research.json   # 195/195 = 100% agreement on audited checks
 
 # 3 · apply reviewed corrections -> final dataset
 python3 pipeline/apply_corrections.py

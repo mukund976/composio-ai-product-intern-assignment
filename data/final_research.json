@@ -2,8 +2,8 @@
   "pass": 2,
   "method": "pass-1 research + machine verification (loop A) + cross-exam search & manual MCP probes (loop B) + human adjudication (data/corrections.json).",
   "tool_calls_total": {
-    "web_search": 29,
-    "docs_fetches_via_verify": 155,
+    "web_search": 41,
+    "docs_fetches_via_verify": 351,
     "mcp_probes": 69
   },
   "records": [
@@ -86,8 +86,7 @@
       "verdict": "build-now",
       "blocker": "",
       "evidence": [
-        "https://developers.pipedrive.com/docs/api/v1",
-        "https://developers.pipedrive.com/docs/api/authentication"
+        "https://developers.pipedrive.com/docs/api/v1"
       ],
       "confidence": "high",
       "source": "knowledge"
@@ -222,7 +221,7 @@
       "verdict": "build-now",
       "blocker": "",
       "evidence": [
-        "https://developer.close.com/getting-started/",
+        "https://developer.close.com/",
         "https://developer.close.com/topics/authentication/"
       ],
       "confidence": "high",
@@ -249,8 +248,7 @@
       "verdict": "build-now",
       "blocker": "",
       "evidence": [
-        "https://developer.copper.com/introduction/quick-start/",
-        "https://developer.copper.com/introduction/authentication/"
+        "https://developer.copper.com/"
       ],
       "confidence": "high",
       "source": "knowledge"
@@ -303,7 +301,7 @@
       "verdict": "build-now",
       "blocker": "",
       "evidence": [
-        "https://developer.zendesk.com/api-reference/introduction/using-the-api/",
+        "https://developer.zendesk.com/api-reference/introduction/",
         "https://developer.zendesk.com/api-reference/introduction/security-and-auth/"
       ],
       "confidence": "high",
@@ -380,12 +378,12 @@
       ],
       "api_breadth": "broad",
       "mcp": "official",
-      "mcp_detail": "Front announced an MCP server; verify endpoint.",
+      "mcp_detail": "Official Front MCP (open beta): mcp.frontapp.com/mcp, Streamable HTTP, OAuth 2.1 + PKCE, per-user tokens.",
       "verdict": "build-now",
       "blocker": "",
       "evidence": [
         "https://dev.frontapp.com/docs/getting-started",
-        "https://dev.frontapp.com/docs/auth"
+        "https://dev.frontapp.com/docs/mcp-server"
       ],
       "confidence": "medium",
       "source": "knowledge"
@@ -436,8 +434,8 @@
       "verdict": "build-now",
       "blocker": "",
       "evidence": [
-        "https://www.liveagent.com/docs/api/",
-        "https://www.liveagent.com/api/"
+        "https://support.liveagent.com/567924-Documentation--examples",
+        "https://support.liveagent.com/741982-API-key"
       ],
       "confidence": "medium",
       "source": "knowledge"
@@ -448,10 +446,9 @@
       "category": "Support and Helpdesk",
       "one_liner": "Developer-first customer support platform (GraphQL API, dark-mode-native).",
       "auth": [
-        "API key",
-        "OAuth2"
+        "API key"
       ],
-      "auth_detail": "Workspace API keys (Bearer); OAuth for third-party apps.",
+      "auth_detail": "Machine User API keys (Bearer plainApiKey_...) with fine-grained permissions; GraphQL-only API. No OAuth.",
       "access": "self-serve-paid-or-trial",
       "access_detail": "Paid product after trial; API keys self-serve in settings.",
       "api_surface": [
@@ -463,10 +460,10 @@
       "verdict": "build-now",
       "blocker": "",
       "evidence": [
-        "https://plain.com/docs/api/",
-        "https://plain.com/docs/graphql/"
+        "https://www.plain.com/docs/graphql/introduction",
+        "https://www.plain.com/docs/graphql/authentication"
       ],
-      "confidence": "medium",
+      "confidence": "high",
       "source": "knowledge"
     },
     {
@@ -517,8 +514,7 @@
       "verdict": "build-now",
       "blocker": "",
       "evidence": [
-        "https://developers.gorgias.com/docs",
-        "https://developers.gorgias.com/reference/rest-api"
+        "https://developers.gorgias.com/docs"
       ],
       "confidence": "medium",
       "source": "knowledge"
@@ -627,8 +623,7 @@
       "verdict": "build-now",
       "blocker": "",
       "evidence": [
-        "https://www.zoho.com/cliq/developer/api/",
-        "https://www.zoho.com/cliq/developer/api/introduction.html"
+        "https://www.zoho.com/cliq/help/api/"
       ],
       "confidence": "medium",
       "source": "knowledge"
@@ -701,8 +696,8 @@
         "REST"
       ],
       "api_breadth": "broad",
-      "mcp": "official",
-      "mcp_detail": "Discord rolled out MCP-related developer tooling 2025; verify.",
+      "mcp": "community",
+      "mcp_detail": "No official server evidenced as of Sep 2026; several community MCP servers (bot/OAuth wrappers around the Discord API).",
       "verdict": "build-now",
       "blocker": "",
       "evidence": [
@@ -789,7 +784,7 @@
         "https://developer.aircall.io/api-references/",
         "https://developer.aircall.io/"
       ],
-      "confidence": "medium",
+      "confidence": "high",
       "source": "knowledge"
     },
     {
@@ -813,8 +808,8 @@
       "verdict": "build-now",
       "blocker": "",
       "evidence": [
-        "https://developer.vonage.com/en/getting-started",
-        "https://developer.vonage.com/en/communication-apis/sms/overview"
+        "https://developer.vonage.com/",
+        "https://developer.vonage.com/en/api/overview"
       ],
       "confidence": "high",
       "source": "knowledge"
@@ -867,7 +862,7 @@
       "blocker": "Approval: App Review / Marketing API Standard Access verification.",
       "evidence": [
         "https://developers.facebook.com/docs/marketing-apis/overview",
-        "https://developers.facebook.com/docs/development/create-an-app/app-review"
+        "https://developers.facebook.com/docs/development/release/"
       ],
       "confidence": "high",
       "source": "knowledge"
@@ -972,8 +967,7 @@
       "verdict": "build-now",
       "blocker": "",
       "evidence": [
-        "https://developers.klaviyo.com/en/reference/api_overview",
-        "https://developers.klaviyo.com/en/docs/retrieve_api_credentials"
+        "https://developers.klaviyo.com/en/reference/api_overview"
       ],
       "confidence": "high",
       "source": "knowledge"
@@ -1402,8 +1396,7 @@
       "verdict": "build-now",
       "blocker": "",
       "evidence": [
-        "https://seranking.com/api.html",
-        "https://docs.seranking.com/"
+        "https://seranking.com/api.html"
       ],
       "confidence": "high",
       "source": "search"
@@ -1450,15 +1443,15 @@
         "REST"
       ],
       "api_breadth": "narrow",
-      "mcp": "none-found",
-      "mcp_detail": "",
+      "mcp": "official",
+      "mcp_detail": "Official hosted MCP server (separate bearer key) + CLI + Python SDK per github.com/mrscraper-com/cli.",
       "verdict": "build-now",
       "blocker": "",
       "evidence": [
-        "https://docs.mrscraper.com/",
-        "https://mrscraper.com/"
+        "https://docs.mrscraper.com/docs/api/authentication",
+        "https://github.com/mrscraper-com/cli"
       ],
-      "confidence": "medium",
+      "confidence": "high",
       "source": "knowledge"
     },
     {
@@ -1666,7 +1659,7 @@
       ],
       "api_breadth": "broad",
       "mcp": "official",
-      "mcp_detail": "Vercel MCP/marketplace tooling (2025) \u2014 verify.",
+      "mcp_detail": "Official hosted Vercel MCP: mcp.vercel.com (OAuth, Streamable HTTP, all plans).",
       "verdict": "build-now",
       "blocker": "",
       "evidence": [
@@ -1841,8 +1834,7 @@
       "verdict": "build-now",
       "blocker": "",
       "evidence": [
-        "https://www.mongodb.com/docs/atlas/api/",
-        "https://www.mongodb.com/docs/atlas/api/get-started/"
+        "https://www.mongodb.com/docs/atlas/api/"
       ],
       "confidence": "high",
       "source": "knowledge"
@@ -2032,8 +2024,7 @@
       "verdict": "build-now",
       "blocker": "",
       "evidence": [
-        "https://developers.asana.com/docs",
-        "https://developers.asana.com/docs/authentication-quick-start"
+        "https://developers.asana.com/docs"
       ],
       "confidence": "high",
       "source": "knowledge"
@@ -2350,7 +2341,7 @@
       ],
       "api_breadth": "broad",
       "mcp": "official",
-      "mcp_detail": "Xero MCP (official, 2025) \u2014 verify.",
+      "mcp_detail": "Official XeroAPI/xero-mcp-server (self-hosted stdio, run with dev credentials) \u2014 not a hosted endpoint.",
       "verdict": "build-now",
       "blocker": "",
       "evidence": [
@@ -2366,9 +2357,10 @@
       "category": "Finance and Fintech",
       "one_liner": "Corporate cards, spend management and banking for startups.",
       "auth": [
-        "OAuth2"
+        "OAuth2",
+        "Token"
       ],
-      "auth_detail": "OAuth2 client-credentials (scoped bearer tokens) via developer.brex.com.",
+      "auth_detail": "User tokens (Bearer) from the dashboard for direct use + OAuth2 authorization-code / client-credentials for partners and onboarding APIs.",
       "access": "approval-gated",
       "access_detail": "Requires an approved Brex account (company eligibility) + admin-granted token; onboarding is account-reviewed.",
       "api_surface": [
@@ -2380,10 +2372,10 @@
       "verdict": "build-with-friction",
       "blocker": "Account gate: Brex customer eligibility + admin token issuance.",
       "evidence": [
-        "https://developer.brex.com/",
-        "https://developer.brex.com/docs/authentication"
+        "https://developer.brex.com/guides/authentication",
+        "https://developer.brex.com/guides/partner_authentication"
       ],
-      "confidence": "medium",
+      "confidence": "high",
       "source": "knowledge"
     },
     {
@@ -2408,7 +2400,7 @@
       "blocker": "Partner review for public apps; account eligibility gates live data.",
       "evidence": [
         "https://docs.ramp.com/",
-        "https://docs.ramp.com/enterprise/get-started"
+        "https://ramp.com/blog/technology-partner-program"
       ],
       "confidence": "medium",
       "source": "knowledge"
@@ -2460,7 +2452,7 @@
       "blocker": "No API at all. Treat Gemini API as a different app if the intent is LLM access.",
       "evidence": [
         "https://notebooklm.google/",
-        "https://cloud.google.com/gemini/docs/discover/gemini-api"
+        "https://ai.google.dev/gemini-api/docs"
       ],
       "confidence": "high",
       "source": "knowledge"
@@ -2553,7 +2545,7 @@
       "auth": [
         "API key"
       ],
-      "auth_detail": "Bearer API key (XC-API-KEY / Authorization variants \u2014 verify in loop).",
+      "auth_detail": "Bearer API key (REDUCTO_API_KEY) from studio.reducto.ai \u2014 instant self-serve, 15k free credits.",
       "access": "self-serve-free",
       "access_detail": "Free credits on signup; dashboard keys.",
       "api_surface": [
@@ -2565,10 +2557,10 @@
       "verdict": "build-now",
       "blocker": "",
       "evidence": [
-        "https://docs.reducto.ai/",
-        "https://reducto.ai/"
+        "https://docs.reducto.ai/quickstart",
+        "https://docs.reducto.ai/agent-guide"
       ],
-      "confidence": "medium",
+      "confidence": "high",
       "source": "knowledge"
     },
     {

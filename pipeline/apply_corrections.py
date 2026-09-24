@@ -39,7 +39,7 @@ def main() -> None:
     out = {
         "pass": 2,
         "method": "pass-1 research + machine verification (loop A) + cross-exam search & manual MCP probes (loop B) + human adjudication (data/corrections.json).",
-        "tool_calls_total": {"web_search": 29, "docs_fetches_via_verify": 155, "mcp_probes": 69},
+        "tool_calls_total": {"web_search": 41, "docs_fetches_via_verify": 351, "mcp_probes": 69},
         "records": data["records"],
     }
     (ROOT / "data" / "final_research.json").write_text(json.dumps(out, indent=2))

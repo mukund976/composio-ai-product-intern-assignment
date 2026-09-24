@@ -1,0 +1,6467 @@
+{
+  "pass_file": "2",
+  "apps_checked": 100,
+  "evidence_urls_live": "92/100 apps fully live",
+  "keyword_checks_run": 491,
+  "flags_for_human_review": 85,
+  "rows": [
+    {
+      "id": 1,
+      "name": "Salesforce",
+      "evidence_fetches": [
+        {
+          "url": "https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_what_is_rest_api.htm",
+          "status": 403,
+          "final_url": "https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_what_is_rest_api.htm",
+          "error": null,
+          "text_chars": 71
+        },
+        {
+          "url": "https://help.salesforce.com/s/articleView?id=sf.remoteaccess_oauth_flows.htm",
+          "status": 200,
+          "final_url": "https://help.salesforce.com/s/articleView?language=en_US&id=sf.remoteaccess_oauth_flows.htm",
+          "error": null,
+          "text_chars": 63
+        }
+      ],
+      "evidence_live": false,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "JWT key-pair",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "SOAP",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "GraphQL",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "Bulk",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "Metadata",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs",
+        "auth 'JWT key-pair' not corroborated in fetched docs",
+        "claimed official MCP: no docs mention AND no live endpoint"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "HubSpot",
+      "evidence_fetches": [
+        {
+          "url": "https://developers.hubspot.com/docs/api/overview",
+          "status": 200,
+          "final_url": "https://developers.hubspot.com/docs/api-reference/latest/overview",
+          "error": null,
+          "text_chars": 1568
+        },
+        {
+          "url": "https://developers.hubspot.com/docs/guides/apps/authentication/intro-to-auth",
+          "status": 200,
+          "final_url": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/authentication/overview",
+          "error": null,
+          "text_chars": 7027
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "client credentials"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "apikey",
+            "access token",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "\\bmcp\\b"
+          ],
+          "strength": "hit",
+          "probe_live": true,
+          "first_live": "https://hubspot.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 3,
+      "name": "Pipedrive",
+      "evidence_fetches": [
+        {
+          "url": "https://developers.pipedrive.com/docs/api/v1",
+          "status": 200,
+          "final_url": "https://developers.pipedrive.com/docs/api/v1",
+          "error": null,
+          "text_chars": 2854
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "pricing"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026 pipedrive\u2019s developer newsletter your email address subscribe we promise not to send you any marketing materials or spam, just developer news. pipedrive about pricing jobs blog newsroom product sales software features privacy and security marketplace status api discover partner program sales pipeline course what is crm? crm \u2026"
+        },
+        {
+          "field": "gate-signals",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "partner program"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026s or spam, just developer news. pipedrive about pricing jobs blog newsroom product sales software features privacy and security marketplace status api discover partner program sales pipeline course what is crm? crm comparison resources help center knowledge base academy support ( available now ) \u00a9 2026 pipedrive terms of service priv\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'API key' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Attio",
+      "evidence_fetches": [
+        {
+          "url": "https://docs.attio.com/docs/overview",
+          "status": 200,
+          "final_url": "https://docs.attio.com/docs/overview",
+          "error": null,
+          "text_chars": 1759
+        },
+        {
+          "url": "https://docs.attio.com/rest-api/overview",
+          "status": 200,
+          "final_url": "https://docs.attio.com/rest-api/overview",
+          "error": null,
+          "text_chars": 2003
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "\\bmcp\\b"
+          ],
+          "strength": "hit",
+          "probe_live": true,
+          "first_live": "https://attio.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'API key' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Twenty",
+      "evidence_fetches": [
+        {
+          "url": "https://docs.twenty.com/developers",
+          "status": 200,
+          "final_url": "https://docs.twenty.com/developers/introduction",
+          "error": null,
+          "text_chars": 1176
+        },
+        {
+          "url": "https://twenty.com/developers",
+          "status": 200,
+          "final_url": "https://docs.twenty.com/developers/introduction",
+          "error": null,
+          "text_chars": 1176
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "JWT",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "GraphQL",
+          "hits": [
+            "graphql"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'API key' not corroborated in fetched docs",
+        "auth 'JWT' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Podio",
+      "evidence_fetches": [
+        {
+          "url": "https://developers.podio.com/authentication",
+          "status": 200,
+          "final_url": "https://developers.podio.com/authentication",
+          "error": null,
+          "text_chars": 4890
+        },
+        {
+          "url": "https://developers.podio.com/",
+          "status": 200,
+          "final_url": "https://developers.podio.com/",
+          "error": null,
+          "text_chars": 2284
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "oauth2",
+            "authorization code",
+            "refresh token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "access token",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "pricing"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026 authentication - podio api documentation podio home pricing what people say blog about app market log in getting started get an api key authentication scopes & permissions server-side flow client-side flow username & pa\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 7,
+      "name": "Zoho CRM",
+      "evidence_fetches": [
+        {
+          "url": "https://www.zoho.com/crm/developer/docs/api/v2/",
+          "status": 200,
+          "final_url": "https://www.zoho.com/crm/developer/docs/api/v2/",
+          "error": null,
+          "text_chars": 440
+        },
+        {
+          "url": "https://www.zoho.com/crm/developer/docs/api/oauth-overview.html",
+          "status": 200,
+          "final_url": "https://www.zoho.com/crm/developer/docs/api/v3/oauth-overview.html",
+          "error": null,
+          "text_chars": 2671
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "oauth2",
+            "refresh token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "access token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": true,
+          "first_live": "https://zoho.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 8,
+      "name": "Close",
+      "evidence_fetches": [
+        {
+          "url": "https://developer.close.com/",
+          "status": 200,
+          "final_url": "https://developer.close.com/",
+          "error": null,
+          "text_chars": 3028
+        },
+        {
+          "url": "https://developer.close.com/topics/authentication/",
+          "status": 200,
+          "final_url": "https://developer.close.com/api/overview/api-key-authentication",
+          "error": null,
+          "text_chars": 13622
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "apikey"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [
+            "model context protocol",
+            "\\bmcp\\b",
+            "mcp server"
+          ],
+          "strength": "hit",
+          "probe_live": true,
+          "first_live": "https://developer.close.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "pricing",
+            "subscription"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026helpful? yes no edit this page next build an integration built with product overview communication automation integrations reporting sms calling security forms pricing & use cases pricing close vs other crms customer stories resources sales blog sales resources sales guides webinars on-demand demo sales tools company about ca\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 9,
+      "name": "Copper",
+      "evidence_fetches": [
+        {
+          "url": "https://developer.copper.com/",
+          "status": 200,
+          "final_url": "https://developer.copper.com/",
+          "error": null,
+          "text_chars": 5614
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "oauth2"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "subscription"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026p 1: get signed s3 url step 2: upload your file to s3 step 3: relate the uploaded file to a specific entity delete a file webhooks webhooks overview create new subscription update a subscription delete subscription list all subscriptions view subscription by id webhook notification example table of contents changelog \u00f0\u009f\u0086\u0095 domain u\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'API key' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "DealCloud",
+      "evidence_fetches": [
+        {
+          "url": "https://api.docs.dealcloud.com/docs/token",
+          "status": 200,
+          "final_url": "https://api.docs.dealcloud.com/docs/token",
+          "error": null,
+          "text_chars": 8434
+        },
+        {
+          "url": "https://api.docs.dealcloud.com/sdk/python/authentication",
+          "status": 200,
+          "final_url": "https://api.docs.dealcloud.com/sdk/python/authentication",
+          "error": null,
+          "text_chars": 9300
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "oauth2",
+            "client credentials"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "swagger"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "access",
+          "claim": "enterprise-gated",
+          "hits": [
+            "contract"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026ser bootstrap site backups request backup retrieve backups delete encryption relationship intelligence post emails post meetings get status get settings schema contracts mcp getting started ai clients authentication available tools custom mcp servers sdks python sdk (beta) v1.x getting started getting started installation quic\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 11,
+      "name": "Zendesk",
+      "evidence_fetches": [
+        {
+          "url": "https://developer.zendesk.com/api-reference/introduction/",
+          "status": 403,
+          "final_url": "https://developer.zendesk.com/api-reference/introduction/",
+          "error": null,
+          "text_chars": 42
+        },
+        {
+          "url": "https://developer.zendesk.com/api-reference/introduction/security-and-auth/",
+          "status": 200,
+          "final_url": "https://developer.zendesk.com/api-reference/introduction/security-and-auth/",
+          "error": null,
+          "text_chars": 6314
+        }
+      ],
+      "evidence_live": false,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "access token",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "Basic",
+          "hits": [
+            "basic auth",
+            "basic authentication"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs",
+        "claimed official MCP: no docs mention AND no live endpoint"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Intercom",
+      "evidence_fetches": [
+        {
+          "url": "https://developers.intercom.com/docs/build-an-integration/learn-more/authentication",
+          "status": 200,
+          "final_url": "https://developers.intercom.com/docs/build-an-integration/learn-more/authentication",
+          "error": null,
+          "text_chars": 3893
+        },
+        {
+          "url": "https://developers.intercom.com/docs/build-an-integration/getting-started/",
+          "status": 200,
+          "final_url": "https://developers.intercom.com/docs/build-an-integration/getting-started",
+          "error": null,
+          "text_chars": 6756
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "access token",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "model context protocol",
+            "\\bmcp\\b"
+          ],
+          "strength": "hit",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "subscription"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026\": false }, \"companies\": { \"type\": \"list\", \"data\": [], \"url\": \"/contacts/667559f6b87a49792720b62f/companies\", \"total_count\": 0, \"has_more\": false }, \"opted_out_subscription_types\": { \"type\": \"list\", \"data\": [], \"url\": \"/contacts/667559f6b87a49792720b62f/subscriptions\", \"total_count\": 0, \"has_more\": false }, \"opted_in_subscription_\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Freshdesk",
+      "evidence_fetches": [
+        {
+          "url": "https://developers.freshdesk.com/api/",
+          "status": 200,
+          "final_url": "https://developers.freshdesk.com/api/",
+          "error": null,
+          "text_chars": 580686
+        },
+        {
+          "url": "https://developers.freshdesk.com/api/#authentication",
+          "status": 200,
+          "final_url": "https://developers.freshdesk.com/api/#authentication",
+          "error": null,
+          "text_chars": 580686
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "Basic",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "pricing",
+            "/mo",
+            "paid plan"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026 to view the old api rate limits, click here note : an account can purchase additional api calls, to increase the rate limit. contact us to know more about our pricing policy and purchase additional api calls. plan rate limit/hr blossom 3000 garden 3000 estate 5000 forest 5000 to view the limits in the older plans, click here\u2026"
+        },
+        {
+          "field": "gate-signals",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "enterprise plan",
+            "approval"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026or outbound messages cover both send and retrieve endpoints. these limits are set at 1,000 calls per minute for the pro plan and 2,000 calls per minute for the enterprise plan. to comply with whatsapp's policies, these outbound messages must use structured templates, which are: pre-approved: each template must be defined by the busin\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'Basic' not corroborated in fetched docs",
+        "auth 'OAuth2' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Front",
+      "evidence_fetches": [
+        {
+          "url": "https://dev.frontapp.com/docs/getting-started",
+          "status": 200,
+          "final_url": "https://dev.frontapp.com/reference/getting-started",
+          "error": null,
+          "text_chars": 9039
+        },
+        {
+          "url": "https://dev.frontapp.com/docs/mcp-server",
+          "status": 200,
+          "final_url": "https://dev.frontapp.com/docs/mcp-server",
+          "error": null,
+          "text_chars": 25465
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "pkce"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "access token",
+            "api token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "\\bmcp\\b",
+            "mcp server"
+          ],
+          "strength": "hit",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        },
+        {
+          "field": "gate-signals",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "approval"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026hich tier was exceeded. if you're seeing rate-limit errors during normal operation, the most common cause is a polling loop that's tighter than it needs to be. approval-by-polling loops should generally poll on the order of seconds-to-minutes, not sub-second. feedback to share feedback during this beta, please join our communi\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 15,
+      "name": "Pylon",
+      "evidence_fetches": [
+        {
+          "url": "https://docs.usepylon.com/pylon-docs/developer/api/authentication",
+          "status": 200,
+          "final_url": "https://docs.usepylon.com/pylon-docs/developer/api/authentication",
+          "error": null,
+          "text_chars": 2544
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "bearer",
+            "api token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 16,
+      "name": "LiveAgent",
+      "evidence_fetches": [
+        {
+          "url": "https://support.liveagent.com/567924-Documentation--examples",
+          "status": 200,
+          "final_url": "https://support.liveagent.com/567924-Documentation?r=1",
+          "error": null,
+          "text_chars": 2833
+        },
+        {
+          "url": "https://support.liveagent.com/741982-API-key",
+          "status": 200,
+          "final_url": "https://support.liveagent.com/741982-API-key",
+          "error": null,
+          "text_chars": 3080
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "apikey"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "HMAC",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "swagger"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "free trial",
+            "pricing"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026with my account? within the documentation, you can find examples and use the possibility to test the api commands with your account. consider registering a new free trial account for testing purposes, before using api with your live account. generate api key for apiv3: https://support.liveagent.com/741982-api-key authorize the l\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'HMAC' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Plain",
+      "evidence_fetches": [
+        {
+          "url": "https://www.plain.com/docs/graphql/introduction",
+          "status": 200,
+          "final_url": "https://www.plain.com/docs/graphql/introduction",
+          "error": null,
+          "text_chars": 3629
+        },
+        {
+          "url": "https://www.plain.com/docs/graphql/authentication",
+          "status": 200,
+          "final_url": "https://www.plain.com/docs/graphql/authentication",
+          "error": null,
+          "text_chars": 2608
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "apikey",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "GraphQL",
+          "hits": [
+            "graphql"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [
+            "\\bmcp\\b",
+            "mcp server"
+          ],
+          "strength": "hit",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 18,
+      "name": "Help Scout",
+      "evidence_fetches": [
+        {
+          "url": "https://developer.helpscout.com/help-desk-api/",
+          "status": 200,
+          "final_url": "https://developer.helpscout.com/help-desk-api/",
+          "error": null,
+          "text_chars": 5595
+        },
+        {
+          "url": "https://developer.helpscout.com/apps/",
+          "status": 200,
+          "final_url": "https://developer.helpscout.com/apps/",
+          "error": null,
+          "text_chars": 1698
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Gorgias",
+      "evidence_fetches": [
+        {
+          "url": "https://developers.gorgias.com/docs",
+          "status": 200,
+          "final_url": "https://developers.gorgias.com/docs/private-vs-public-app",
+          "error": null,
+          "text_chars": 1976
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "oauth2"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "access token",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": true,
+          "first_live": "https://mcp.gorgias.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 20,
+      "name": "Gladly",
+      "evidence_fetches": [
+        {
+          "url": "https://developer.gladly.com/rest/",
+          "status": 200,
+          "final_url": "https://developer.gladly.com/rest/",
+          "error": null,
+          "text_chars": 140576
+        },
+        {
+          "url": "https://help.gladly.com/implementation/docs/get-your-api-tokens",
+          "status": 200,
+          "final_url": "https://help.gladly.com/implementation/docs/get-your-api-tokens",
+          "error": null,
+          "text_chars": 2079
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "Basic",
+          "hits": [
+            "basic auth",
+            "basic authentication"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "access",
+          "claim": "enterprise-gated",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 21,
+      "name": "Slack",
+      "evidence_fetches": [
+        {
+          "url": "https://api.slack.com/web",
+          "status": 200,
+          "final_url": "https://docs.slack.dev/apis/web-api/",
+          "error": null,
+          "text_chars": 8549
+        },
+        {
+          "url": "https://api.slack.com/authentication/token-types",
+          "status": 200,
+          "final_url": "https://docs.slack.dev/authentication/tokens/",
+          "error": null,
+          "text_chars": 9805
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "authorization code",
+            "pkce",
+            "refresh token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "Bot token",
+          "hits": [
+            "bot token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "bearer",
+            "api token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": true,
+          "first_live": "https://mcp.slack.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 22,
+      "name": "Twilio",
+      "evidence_fetches": [
+        {
+          "url": "https://www.twilio.com/docs/usage/api",
+          "status": 200,
+          "final_url": "https://www.twilio.com/docs/usage/api",
+          "error": null,
+          "text_chars": 4394
+        },
+        {
+          "url": "https://www.twilio.com/docs/iam",
+          "status": 200,
+          "final_url": "https://www.twilio.com/docs/iam",
+          "error": null,
+          "text_chars": 3906
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "Basic",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "access token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "JWT",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": true,
+          "first_live": "https://mcp.twilio.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'Basic' not corroborated in fetched docs",
+        "auth 'JWT' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 23,
+      "name": "Zoho Cliq",
+      "evidence_fetches": [
+        {
+          "url": "https://www.zoho.com/cliq/help/api/",
+          "status": 403,
+          "final_url": "https://www.zoho.com/cliq/help/api/",
+          "error": null,
+          "text_chars": 29
+        }
+      ],
+      "evidence_live": false,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "Bot token",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": true,
+          "first_live": "https://zoho.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs",
+        "auth 'Bot token' not corroborated in fetched docs",
+        "auth 'API key' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 24,
+      "name": "Lark (Larksuite)",
+      "evidence_fetches": [
+        {
+          "url": "https://open.larksuite.com/doc/server-docs/api-call-guide/server-api-list",
+          "status": 200,
+          "final_url": "https://open.larksuite.com/doc/server-docs/api-call-guide/server-api-list",
+          "error": null,
+          "text_chars": 41
+        },
+        {
+          "url": "https://open.larksuite.com/document/server-docs/api-call-guide/server-api-list",
+          "status": 200,
+          "final_url": "https://open.larksuite.com/document/server-docs/api-call-guide/server-api-list",
+          "error": null,
+          "text_chars": 16
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs",
+        "auth 'Token' not corroborated in fetched docs",
+        "claimed official MCP: no docs mention AND no live endpoint"
+      ]
+    },
+    {
+      "id": 25,
+      "name": "Pumble",
+      "evidence_fetches": [
+        {
+          "url": "https://pumble.com/help/integrations/automation-workflow-integrations/api-keys-integration/",
+          "status": 200,
+          "final_url": "https://pumble.com/help/integrations/automation-workflow-integrations/api-keys-integration/",
+          "error": null,
+          "text_chars": 4504
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "swagger"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": true,
+          "first_live": "https://mcp.pumble.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 26,
+      "name": "Discord",
+      "evidence_fetches": [
+        {
+          "url": "https://discord.com/developers/docs/intro",
+          "status": 200,
+          "final_url": "https://docs.discord.com/developers/intro",
+          "error": null,
+          "text_chars": 2136
+        },
+        {
+          "url": "https://discord.com/developers/docs/topics/oauth2",
+          "status": 200,
+          "final_url": "https://docs.discord.com/developers/topics/oauth2",
+          "error": null,
+          "text_chars": 25595
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "oauth2",
+            "authorization code",
+            "client credentials",
+            "refresh token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "Bot token",
+          "hits": [
+            "bot token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "http api"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        },
+        {
+          "field": "gate-signals",
+          "claim": "self-serve-free",
+          "hits": [
+            "approval"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026ed . json content is not permitted and will return an error. oauth2 scopes these are a list of all the oauth2 scopes that discord supports. some scopes require approval from discord to use. requesting them from a user without approval from discord may cause errors or undocumented behavior in the oauth2 flow. to inquire about a\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 27,
+      "name": "Telegram",
+      "evidence_fetches": [
+        {
+          "url": "https://core.telegram.org/bots/api",
+          "status": 200,
+          "final_url": "https://core.telegram.org/bots/api",
+          "error": null,
+          "text_chars": 492005
+        },
+        {
+          "url": "https://core.telegram.org/bots/api#authorizing-your-bot",
+          "status": 200,
+          "final_url": "https://core.telegram.org/bots/api#authorizing-your-bot",
+          "error": null,
+          "text_chars": 492005
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "Bot token",
+          "hits": [
+            "botfather"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": true,
+          "first_live": "https://core.telegram.org/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        },
+        {
+          "field": "gate-signals",
+          "claim": "self-serve-free",
+          "hits": [
+            "approval"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026e: answer option was deleted from a poll suggested_post_approved suggestedpostapproved optional . service message: a suggested post was approved suggested_post_approval_failed suggestedpostapprovalfailed optional . service message: approval of a suggested post has failed suggested_post_declined suggestedpostdeclined optional .\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 28,
+      "name": "WhatsApp Business",
+      "evidence_fetches": [
+        {
+          "url": "https://developers.facebook.com/docs/whatsapp/cloud-api/overview",
+          "status": 200,
+          "final_url": "https://developers.facebook.com/documentation/business-messaging/whatsapp/about-the-platform",
+          "error": null,
+          "text_chars": 15798
+        },
+        {
+          "url": "https://developers.facebook.com/docs/whatsapp/cloud-api/get-started",
+          "status": 200,
+          "final_url": "https://developers.facebook.com/documentation/business-messaging/whatsapp/get-started",
+          "error": null,
+          "text_chars": 10371
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "access token",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "access",
+          "claim": "approval-gated",
+          "hits": [
+            "app review",
+            "approval",
+            "verification"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026settings at any time. - [**permissions and features**](#permissions-and-features) - view required and optional permissions for this use case and add them to an app review submission, if applicable. - [**quickstart**](#quickstart) - start using the api and learn how to scale your business, improve roi, and manage your whatsapp bu\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 29,
+      "name": "Aircall",
+      "evidence_fetches": [
+        {
+          "url": "https://developer.aircall.io/api-references/",
+          "status": 200,
+          "final_url": "https://developers.aircall.io/api-references",
+          "error": null,
+          "text_chars": 419895
+        },
+        {
+          "url": "https://developer.aircall.io/",
+          "status": 200,
+          "final_url": "https://developer.aircall.io/",
+          "error": null,
+          "text_chars": 5233
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "access token",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "authorization code"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [
+            "\\bmcp\\b"
+          ],
+          "strength": "hit",
+          "probe_live": true,
+          "first_live": "https://developer.aircall.io/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "pricing",
+            "/mo"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026y cannot access this feature. 500 internal server error: unknown error. request get /v1/trackers response status: 200 ok { \"trackers\": [ { \"id\": 123, \"title\": \"pricing objections\", \"type\": \"keywords\", \"created_at\": \"2026-01-15t09:00:00.000z\", \"created_by\": 456, \"updated_at\": null, \"updated_by\": null, \"filters\": { \"query_terms\u2026"
+        },
+        {
+          "field": "gate-signals",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "request a demo",
+            "partner program",
+            "approval"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026us mobile app solutions call center support sales phone system ecommerce non-profits product integrations quality and reliability apps pricing country coverage request a demo features powerdialer ivr call routing call center analytics cti integration click to dial resources knowledge base customer stories partner stories become a pa\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 30,
+      "name": "Vonage",
+      "evidence_fetches": [
+        {
+          "url": "https://developer.vonage.com/",
+          "status": 200,
+          "final_url": "https://developer.vonage.com/en/home",
+          "error": null,
+          "text_chars": 8883
+        },
+        {
+          "url": "https://developer.vonage.com/en/api/overview",
+          "status": 200,
+          "final_url": "https://developer.vonage.com/en/api/overview",
+          "error": null,
+          "text_chars": 528
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "JWT",
+          "hits": [
+            "\\bjwt\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [
+            "free (tier|plan|trial|forever|account)"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026ideo messaging network features low code and ai privacy and security learning center most popular video verify identity voice ready to start building? create a free account now! experience seamless connectivity, real-time messaging, and crystal-clear voice and video calls\u2014all at your fingertips. i am interested in... please let us\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'API key' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 31,
+      "name": "Google Ads",
+      "evidence_fetches": [
+        {
+          "url": "https://developers.google.com/google-ads/api/docs/start",
+          "status": 200,
+          "final_url": "https://developers.google.com/google-ads/api/docs/get-started/introduction",
+          "error": null,
+          "text_chars": 13280
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [
+            "\\bmcp\\b",
+            "mcp server"
+          ],
+          "strength": "hit",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "approval-gated",
+          "hits": [
+            "approval",
+            "verification"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026-user authentication workflow security requirements oauth 2.0 internals set up a google api console project for authorization credential management multi-party approvals basic concepts overview account types api structure versioning changing objects retrieving objects resource metadata call structure mutates overview resource \u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 32,
+      "name": "Meta Ads",
+      "evidence_fetches": [
+        {
+          "url": "https://developers.facebook.com/docs/marketing-apis/overview",
+          "status": 200,
+          "final_url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/overview",
+          "error": null,
+          "text_chars": 2494
+        },
+        {
+          "url": "https://developers.facebook.com/docs/development/release/",
+          "status": 200,
+          "final_url": "https://developers.facebook.com/documentation/development/release",
+          "error": null,
+          "text_chars": 5467
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "GraphQL",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": true,
+          "first_live": "https://mcp.facebook.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "approval-gated",
+          "hits": [
+            "app review",
+            "approval",
+            "verification",
+            "review process"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026of these processes because your app is already available to these users. if you have already published your app and want to add new functionality that requires app review, follow the steps in our [app review for published apps](https://developers.facebook.com/docs/app-review/introduction#app-review-for-live-apps) instructions. #\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs",
+        "auth 'Token' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 33,
+      "name": "LinkedIn Ads",
+      "evidence_fetches": [
+        {
+          "url": "https://learn.microsoft.com/en-us/linkedin/marketing/",
+          "status": 200,
+          "final_url": "https://learn.microsoft.com/en-us/linkedin/marketing/?view=li-lms-2026-09",
+          "error": null,
+          "text_chars": 4097
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "access",
+          "claim": "approval-gated",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 34,
+      "name": "GoHighLevel",
+      "evidence_fetches": [
+        {
+          "url": "https://highlevel.stoplight.io/docs/integrations/0443d7d19f5cf-api-basics",
+          "status": 200,
+          "final_url": "https://highlevel.stoplight.io/docs/integrations/0443d7d19f5cf-api-basics",
+          "error": null,
+          "text_chars": 0
+        },
+        {
+          "url": "https://highlevel.stoplight.io/",
+          "status": 200,
+          "final_url": "https://highlevel.stoplight.io/",
+          "error": null,
+          "text_chars": 9
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": true,
+          "first_live": "https://highlevel.stoplight.io/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs",
+        "auth 'API key' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 35,
+      "name": "Mailchimp",
+      "evidence_fetches": [
+        {
+          "url": "https://mailchimp.com/developer/marketing/api/fundamentals/",
+          "status": 200,
+          "final_url": "https://mailchimp.com/developer/",
+          "error": null,
+          "text_chars": 2871
+        },
+        {
+          "url": "https://mailchimp.com/developer/marketing/docs/fundamentals/",
+          "status": 200,
+          "final_url": "https://mailchimp.com/developer/marketing/docs/fundamentals/",
+          "error": null,
+          "text_chars": 9111
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "oauth2"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "access token",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "openapi",
+            "swagger"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [
+            "open source"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026with best-in-class deliverability. 12403 mailchimp open commerce 12403 build your own commerce stack mailchimp open commerce (formerly reaction commerce) is an open source, api-first, modular commerce stack made for technical, growth-minded retailers. quick start graphql playground documentation you\u2019ll be in good company when you\u2026"
+        },
+        {
+          "field": "gate-signals",
+          "claim": "self-serve-free",
+          "hits": [
+            "partner program"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026nd counting 1b rock-solid reliability delivers 1 billion emails daily 300+ dev teams have launched over 300 mailchimp integrations so far mailchimp integration partner program a helping hand to scale your mailchimp integration as an integration partner, you\u2019ll have access to exclusive benefits, insights, and opportunities to grow you\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 36,
+      "name": "Klaviyo",
+      "evidence_fetches": [
+        {
+          "url": "https://developers.klaviyo.com/en/reference/api_overview",
+          "status": 200,
+          "final_url": "https://developers.klaviyo.com/en/reference/api_overview",
+          "error": null,
+          "text_chars": 27023
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 37,
+      "name": "systeme.io",
+      "evidence_fetches": [
+        {
+          "url": "https://developer.systeme.io/reference",
+          "status": 200,
+          "final_url": "https://developer.systeme.io/reference/api",
+          "error": null,
+          "text_chars": 12793
+        },
+        {
+          "url": "https://rollout.com/integration-guides/systeme.io/api-essentials",
+          "status": 200,
+          "final_url": "https://rollout.com/integration-guides/systeme.io/api-essentials",
+          "error": null,
+          "text_chars": 11276
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "x-api-key"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": true,
+          "first_live": "https://developer.systeme.io/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "pricing",
+            "subscription"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026pi login v2 login get a demo api docs use cases white-labeled zapier real estate developers developers unified api docs resources changelog guides integrations pricing get account get a demo api docs integrations developers developers documentation office hours support resources blog api hub changelog pricing login back syste\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 38,
+      "name": "Pinterest",
+      "evidence_fetches": [
+        {
+          "url": "https://developers.pinterest.com/docs/getting-started/authentication/",
+          "status": 200,
+          "final_url": "https://developers.pinterest.com/docs/getting-started/connect-app/",
+          "error": null,
+          "text_chars": 3310
+        },
+        {
+          "url": "https://developers.pinterest.com/docs/api/v5/",
+          "status": 200,
+          "final_url": "https://developers.pinterest.com/docs/api/v5/introduction/",
+          "error": null,
+          "text_chars": 115
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "authorization code"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "access token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": true,
+          "first_live": "https://pinterest.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 39,
+      "name": "Threads (Meta)",
+      "evidence_fetches": [
+        {
+          "url": "https://developers.facebook.com/docs/threads",
+          "status": 200,
+          "final_url": "https://developers.facebook.com/documentation/threads",
+          "error": null,
+          "text_chars": 2266
+        },
+        {
+          "url": "https://developers.facebook.com/docs/threads/get-started",
+          "status": 200,
+          "final_url": "https://developers.facebook.com/documentation/threads/get-started",
+          "error": null,
+          "text_chars": 6727
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "authorization code"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        },
+        {
+          "field": "gate-signals",
+          "claim": "self-serve-free",
+          "hits": [
+            "app review"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026any time. in order for app users without a role on your app to be able to grant your app these permissions, each permission must first be approved through the [app review](https://developers.facebook.com/documentation/resp-plat-initiatives/individual-processes/app-review) process, and your app must be published. permission grant\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 40,
+      "name": "SendGrid",
+      "evidence_fetches": [
+        {
+          "url": "https://www.twilio.com/docs/sendgrid/api-reference/how-to-use-the-sendgrid-v3-api",
+          "status": 200,
+          "final_url": "https://www.twilio.com/docs/sendgrid/api-reference/how-to-use-the-sendgrid-v3-api",
+          "error": null,
+          "text_chars": 15880
+        },
+        {
+          "url": "https://www.twilio.com/docs/sendgrid/ui/account-and-settings/api-keys",
+          "status": 200,
+          "final_url": "https://www.twilio.com/docs/sendgrid/ui/account-and-settings/api-keys",
+          "error": null,
+          "text_chars": 11783
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "apikey",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": true,
+          "first_live": "https://mcp.twilio.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 41,
+      "name": "Shopify",
+      "evidence_fetches": [
+        {
+          "url": "https://shopify.dev/docs/api",
+          "status": 200,
+          "final_url": "https://shopify.dev/docs/api",
+          "error": null,
+          "text_chars": 7398
+        },
+        {
+          "url": "https://shopify.dev/docs/apps/build/authentication-authorization",
+          "status": 200,
+          "final_url": "https://shopify.dev/docs/apps/build/authentication-authorization",
+          "error": null,
+          "text_chars": 9008
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "authorization code",
+            "client credentials"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "access token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "GraphQL",
+          "hits": [
+            "graphql"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "\\bmcp\\b"
+          ],
+          "strength": "hit",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "pricing"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026unts online store point of sale use cases ai and agents analytics b2b flow global markets marketing and web pixels orders and fulfillment payments products and pricing sales channels selling and growing your app shopify app store billing marketing and growth full index expand on this page what you can do how it works key term\u2026"
+        },
+        {
+          "field": "gate-signals",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "approval"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026f use . authentication covers which token and header each api uses, and access scopes gate what that token can read and write. some apis also require shopify's approval or a specific shopify plan . api versioning explains how shopify releases a new version each quarter and supports each one for a year. you can find new feature\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 42,
+      "name": "WooCommerce",
+      "evidence_fetches": [
+        {
+          "url": "https://woocommerce.com/document/woocommerce-rest-api/",
+          "status": 200,
+          "final_url": "https://woocommerce.com/document/woocommerce-rest-api/",
+          "error": null,
+          "text_chars": 5868
+        },
+        {
+          "url": "https://woocommerce.github.io/woocommerce-rest-api-docs/",
+          "status": 200,
+          "final_url": "https://woocommerce.github.io/woocommerce-rest-api-docs/",
+          "error": null,
+          "text_chars": 763966
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "Basic",
+          "hits": [
+            "basic auth",
+            "http basic",
+            "basic authentication"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "OAuth1",
+          "hits": [
+            "oauth\\s*1",
+            "consumer key"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 43,
+      "name": "BigCommerce",
+      "evidence_fetches": [
+        {
+          "url": "https://developer.bigcommerce.com/docs/start",
+          "status": 200,
+          "final_url": "https://docs.bigcommerce.com/developer/docs/overview/quick-start",
+          "error": null,
+          "text_chars": 17547
+        },
+        {
+          "url": "https://developer.bigcommerce.com/docs/start/authentication/api-accounts",
+          "status": 200,
+          "final_url": "https://docs.bigcommerce.com/developer/docs/overview/api-fundamentals/api-accounts",
+          "error": null,
+          "text_chars": 43660
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "access token",
+            "bearer",
+            "auth token",
+            "api token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "GraphQL",
+          "hits": [
+            "graphql"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [
+            "\\bmcp\\b"
+          ],
+          "strength": "hit",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "pricing",
+            "subscription"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026kout url optimized one-page checkout integrated fastlane by paypal filter wallet shipping options integrating google pay direct pay integrating stripe adaptive pricing overview guide pci compliance guide overview tutorial overview tutorial overview transactions api stored instruments api overview refunds invoice templates cus\u2026"
+        },
+        {
+          "field": "gate-signals",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "approval"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026app ids implementing oauth handling callbacks supporting multiple users listening for events designing the ui creating install buttons following best practices approval requirements publishing apps overview guide glossary postman collection introduction 1: build a ui with bigdesign 2: integrate bigcommerce data 3: single-click\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 44,
+      "name": "Salesforce Commerce Cloud",
+      "evidence_fetches": [
+        {
+          "url": "https://developer.salesforce.com/docs/commerce/commerce-api/overview",
+          "status": 403,
+          "final_url": "https://developer.salesforce.com/docs/commerce/commerce-api/overview",
+          "error": null,
+          "text_chars": 70
+        },
+        {
+          "url": "https://developer.salesforce.com/docs/commerce/commerce-api/guide/slas.html",
+          "status": 403,
+          "final_url": "https://developer.salesforce.com/docs/commerce/commerce-api/guide/slas.html",
+          "error": null,
+          "text_chars": 71
+        }
+      ],
+      "evidence_live": false,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "GraphQL",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "access",
+          "claim": "enterprise-gated",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 45,
+      "name": "Magento (Adobe Commerce)",
+      "evidence_fetches": [
+        {
+          "url": "https://developer.adobe.com/commerce/webapi/get-started/authentication/",
+          "status": 200,
+          "final_url": "https://developer.adobe.com/commerce/webapi/get-started/authentication/",
+          "error": null,
+          "text_chars": 8566
+        },
+        {
+          "url": "https://developer.adobe.com/commerce/webapi/",
+          "status": 200,
+          "final_url": "https://developer.adobe.com/commerce/webapi/",
+          "error": null,
+          "text_chars": 1381
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "access token",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "GraphQL",
+          "hits": [
+            "graphql"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": true,
+          "first_live": "https://developer.adobe.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [
+            "open source"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026er-to-server integration - complete guide for automated system integration generate the ims access token - user authentication guide adobe commerce and magento open source allow developers to define web api resources and their permissions in the webapi.xml configuration file. see services as web apis . before you can make web api\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 46,
+      "name": "Squarespace",
+      "evidence_fetches": [
+        {
+          "url": "https://developers.squarespace.com/",
+          "status": 200,
+          "final_url": "https://developers.squarespace.com/",
+          "error": null,
+          "text_chars": 2079
+        },
+        {
+          "url": "https://developers.squarespace.com/commerce-apis/overview",
+          "status": 200,
+          "final_url": "https://developers.squarespace.com/commerce-apis/overview",
+          "error": null,
+          "text_chars": 2283
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "subscription"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026aking requests retrieve basic site information using commerce apis contacts analytics discounts products websites inventory orders transactions profiles webhooksubscriptions schemas menu copy page getting started overview of commerce apis with squarespace commerce apis, you can build applications to manage the commerce features of\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs",
+        "auth 'API key' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 47,
+      "name": "Ecwid",
+      "evidence_fetches": [
+        {
+          "url": "https://api-docs.ecwid.com/",
+          "status": 200,
+          "final_url": "https://docs.ecwid.com",
+          "error": null,
+          "text_chars": 2942
+        },
+        {
+          "url": "https://api-docs.ecwid.com/guides/getting-started/authentication-and-access",
+          "status": 200,
+          "final_url": "https://docs.ecwid.com",
+          "error": null,
+          "text_chars": 2942
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs",
+        "auth 'Token' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 48,
+      "name": "Gumroad",
+      "evidence_fetches": [
+        {
+          "url": "https://gumroad.com/api",
+          "status": 200,
+          "final_url": "https://gumroad.com/api",
+          "error": null,
+          "text_chars": 5
+        },
+        {
+          "url": "https://gumroad.com/api#authentication",
+          "status": 200,
+          "final_url": "https://gumroad.com/api#authentication",
+          "error": null,
+          "text_chars": 5
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs",
+        "auth 'Token' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 49,
+      "name": "Amazon Selling Partner",
+      "evidence_fetches": [
+        {
+          "url": "https://developer-docs.amazon.com/sp-api/docs/welcome",
+          "status": 200,
+          "final_url": "https://developer-docs.amazon/sp-api/docs/welcome",
+          "error": null,
+          "text_chars": 21663
+        },
+        {
+          "url": "https://developer-docs.amazon.com/sp-api/docs/authorization-and-access-tokens",
+          "status": 200,
+          "final_url": "https://developer-docs.amazon/sp-api/page/404",
+          "error": null,
+          "text_chars": 1132
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "HMAC",
+          "hits": [
+            "signature"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "openapi",
+            "swagger"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "access",
+          "claim": "approval-gated",
+          "hits": [
+            "approval",
+            "verification",
+            "sandbox"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026gration) developer registration request status third-party provider registration third-party provider signature guidance service provider registration and role approval process overview eligible seller central roles for service providers website guidelines for public developers and service providers user permissions for servic\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 50,
+      "name": "FanBasis",
+      "evidence_fetches": [
+        {
+          "url": "https://github.com/otniel-bit/fbnewapi",
+          "status": 200,
+          "final_url": "https://github.com/FanBasis/fbnewapi",
+          "error": null,
+          "text_chars": 8739
+        },
+        {
+          "url": "https://www.fanbasis.com/enterprises",
+          "status": 200,
+          "final_url": "https://commas.com/",
+          "error": null,
+          "text_chars": 6559
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "x-api-key"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "\\bmcp\\b",
+            "mcp server"
+          ],
+          "strength": "hit",
+          "probe_live": true,
+          "first_live": "https://mcp.fanbasis.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "pricing",
+            "subscription"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026ons github advanced security enterprise-grade security features copilot for business enterprise-grade ai features premium support enterprise-grade 24/7 support pricing search / sign in sign up appearance settings you signed in with another tab or window. reload to refresh your session. you signed out in another tab or window.\u2026"
+        },
+        {
+          "field": "gate-signals",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "approval"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026lves ai smart retries, card updates and recovery emails reverse up to 32% of churn before it sticks. enterprise enterprise sellers make more money here. higher approval rates, lower fees, buyer financing and lead intelligence. for businesses who switch, it adds up to 12\u00e2\u0080\u009315% more revenue. enterprise & apis embedded checkouts,\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 51,
+      "name": "DataForSEO",
+      "evidence_fetches": [
+        {
+          "url": "https://docs.dataforseo.com/",
+          "status": 200,
+          "final_url": "https://docs.dataforseo.com/v3/",
+          "error": null,
+          "text_chars": 13155
+        },
+        {
+          "url": "https://docs.dataforseo.com/v3/#authentication",
+          "status": 200,
+          "final_url": "https://docs.dataforseo.com/v3/#authentication",
+          "error": null,
+          "text_chars": 13155
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "Basic",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        },
+        {
+          "field": "gate-signals",
+          "claim": "self-serve-free",
+          "hits": [
+            "app review"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026arches task post tasks ready task get advanced html app list task post tasks ready task get advanced html app info task post tasks ready task get advanced html app reviews task post tasks ready task get app listings categories search apple overview categories locations languages app searches task post tasks ready task get app li\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'Basic' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 52,
+      "name": "SE Ranking",
+      "evidence_fetches": [
+        {
+          "url": "https://seranking.com/api.html",
+          "status": 200,
+          "final_url": "https://seranking.com/api.html",
+          "error": null,
+          "text_chars": 22013
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "\\bmcp\\b",
+            "mcp server"
+          ],
+          "strength": "hit",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "free trial",
+            "pricing",
+            "/mo",
+            "subscription"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026products se ranking grow your visibility with ai seo se visible analyze ai visibility strategically planable manage your socials as a team request a demo start free trial en en english de deutsch fr fran\u00e7ais es espa\u00f1ol nl nederlands it italiano pt portugu\u00eas ua \u0443\u043a\u0440\u0430\u0457\u043d\u0441\u044c\u043a\u0430 ru \u0440\u0443\u0441\u0441\u043a\u0438\u0439 \u3042 \u65e5\u672c\u8a9e sign in request a demo start free trial b\u2026"
+        },
+        {
+          "field": "gate-signals",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "request a demo"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026sibility with ai seo se visible analyze ai visibility strategically planable manage your socials as a team api solutions by business type migrate to se ranking request a demo agencies enterprises growing business tools core seo tools ai search tools other seo tools agency pack content marketing local marketing software integrations \u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 53,
+      "name": "Ahrefs",
+      "evidence_fetches": [
+        {
+          "url": "https://nango.dev/docs/api-integrations/ahrefs/how-to-register-your-own-ahrefs-api-oauth-app",
+          "status": 200,
+          "final_url": "https://nango.dev/docs/api-integrations/ahrefs/how-to-register-your-own-ahrefs-api-oauth-app",
+          "error": null,
+          "text_chars": 17054
+        },
+        {
+          "url": "https://ahrefs.com/api",
+          "status": 200,
+          "final_url": "https://docs.ahrefs.com",
+          "error": null,
+          "text_chars": 3516
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "oauth2",
+            "client credentials",
+            "refresh token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "personal access token",
+            "access token",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "access",
+          "claim": "enterprise-gated",
+          "hits": [
+            "enterprise"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026 cal.com v1 cal.com (v2) calendly callrail candis canny canva canva (mcp) canva canvas lms cdw cerby certn certn partner chargebee chartboost chatarmin chatgpt enterprise (scim api) chattermill checkhq checkout.com checkout.com sandbox checkr partner checkr partner staging chili piper chili piper (mcp) chorus cin7 core circle.so\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 54,
+      "name": "MrScraper",
+      "evidence_fetches": [
+        {
+          "url": "https://docs.mrscraper.com/docs/api/authentication",
+          "status": 200,
+          "final_url": "https://docs.mrscraper.com/docs/api/authentication",
+          "error": null,
+          "text_chars": 2963
+        },
+        {
+          "url": "https://github.com/mrscraper-com/cli",
+          "status": 200,
+          "final_url": "https://github.com/mrscraper-com/cli",
+          "error": null,
+          "text_chars": 22553
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "\\bmcp\\b",
+            "mcp server"
+          ],
+          "strength": "hit",
+          "probe_live": true,
+          "first_live": "https://mrscraper.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "pricing",
+            "subscription"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026ons github advanced security enterprise-grade security features copilot for business enterprise-grade ai features premium support enterprise-grade 24/7 support pricing search / sign in sign up appearance settings you signed in with another tab or window. reload to refresh your session. you signed out in another tab or window.\u2026"
+        },
+        {
+          "field": "gate-signals",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "approval"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026auth mrscraper auth status --json mrscraper login the agent keeps mrscraper login running while the user approves access in the browser. the cli exchanges that approval for a dedicated api key and saves it locally. in headless automation, set mrscraper_api_key instead. for a cli-only installation: npm install -g @mrscraper/cli\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 55,
+      "name": "Apify",
+      "evidence_fetches": [
+        {
+          "url": "https://docs.apify.com/api/v2/",
+          "status": 200,
+          "final_url": "https://docs.apify.com/api/v2",
+          "error": null,
+          "text_chars": 22550
+        },
+        {
+          "url": "https://docs.apify.com/platform/integrations/mcp",
+          "status": 200,
+          "final_url": "https://docs.apify.com/integrations/mcp",
+          "error": null,
+          "text_chars": 18410
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "apikey",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "bearer",
+            "api token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "model context protocol",
+            "\\bmcp\\b",
+            "mcp server"
+          ],
+          "strength": "hit",
+          "probe_live": true,
+          "first_live": "https://mcp.apify.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [
+            "open source"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026 requests with exponential backoff referring to resources reference api reference sdk for javascript sdk for python client for javascript client for python cli open source crawlee fingerprint suite impit mcp cli actor whitepaper proxy-chain security trust center community discord x youtube github for ai llms.txt llms-full.txt ope\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 56,
+      "name": "Firecrawl",
+      "evidence_fetches": [
+        {
+          "url": "https://docs.firecrawl.dev/introduction",
+          "status": 200,
+          "final_url": "https://docs.firecrawl.dev/introduction",
+          "error": null,
+          "text_chars": 12629
+        },
+        {
+          "url": "https://docs.firecrawl.dev/sdks/overview",
+          "status": 200,
+          "final_url": "https://docs.firecrawl.dev/sdks/overview",
+          "error": null,
+          "text_chars": 1694
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "apikey",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "model context protocol",
+            "\\bmcp\\b",
+            "mcp server"
+          ],
+          "strength": "hit",
+          "probe_live": true,
+          "first_live": "https://mcp.firecrawl.dev/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [
+            "free (tier|plan|trial|forever|account)",
+            "open source"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026ptions . for ai agents: use llms.txt for an index of the documentation, or llms-full.txt for the full text. \u200b build and test directly get your api key create a free account for direct api access and higher limits try it in the playground test firecrawl in the browser without writing code \u200b what can firecrawl do? search search the \u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 57,
+      "name": "Bright Data",
+      "evidence_fetches": [
+        {
+          "url": "https://docs.brightdata.com/",
+          "status": 200,
+          "final_url": "https://docs.brightdata.com/introduction",
+          "error": null,
+          "text_chars": 4796
+        },
+        {
+          "url": "https://github.com/brightdata/brightdata-mcp",
+          "status": 200,
+          "final_url": "https://github.com/brightdata/brightdata-mcp",
+          "error": null,
+          "text_chars": 34895
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "Basic",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "model context protocol",
+            "\\bmcp\\b",
+            "mcp server"
+          ],
+          "strength": "hit",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "pricing",
+            "per month",
+            "/mo"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026ons github advanced security enterprise-grade security features copilot for business enterprise-grade ai features premium support enterprise-grade 24/7 support pricing search / sign in sign up appearance settings you signed in with another tab or window. reload to refresh your session. you signed out in another tab or window.\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'Basic' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 58,
+      "name": "Sherlock",
+      "evidence_fetches": [
+        {
+          "url": "https://github.com/sherlock-project/sherlock",
+          "status": 200,
+          "final_url": "https://github.com/sherlock-project/sherlock",
+          "error": null,
+          "text_chars": 6818
+        },
+        {
+          "url": "https://sherlockproject.xyz/",
+          "status": 200,
+          "final_url": "https://sherlockproject.xyz/",
+          "error": null,
+          "text_chars": 592
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "api_surface",
+          "claim": "CLI",
+          "hits": [
+            "\\bcli\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [
+            "\\bmcp\\b"
+          ],
+          "strength": "hit",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [
+            "open source"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026ars ebooks & reports business insights github skills support & services documentation customer support community forum trust center partners view all resources open source community github sponsors fund open source developers programs security lab maintainer community github stars archive program repositories topics trending coll\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 59,
+      "name": "Waterfall",
+      "evidence_fetches": [
+        {
+          "url": "https://docs.waterfall.io/v1/introduction",
+          "status": 200,
+          "final_url": "https://docs.waterfall.io/v1/introduction",
+          "error": null,
+          "text_chars": 3521
+        },
+        {
+          "url": "https://www.waterfall.io/",
+          "status": 200,
+          "final_url": "https://www.waterfall.io/",
+          "error": null,
+          "text_chars": 8330
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "x-api-key"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "pricing",
+            "subscription"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026g direct access to our engineering team via slack. get implementation help, custom solutions, and <1hr response times from the people who built it. transparent pricing usage-based pricing with no surprises. pay for what you use, scale as you grow, no hidden fees. curl python node quick start copy curl --location 'https://api.\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 60,
+      "name": "Clay",
+      "evidence_fetches": [
+        {
+          "url": "https://developers.clay.com/quickstart",
+          "status": 200,
+          "final_url": "https://developers.clay.com/quickstart",
+          "error": null,
+          "text_chars": 2514
+        },
+        {
+          "url": "https://university.clay.com/docs/enrichments",
+          "status": 200,
+          "final_url": "https://university.clay.com/docs/enrichments",
+          "error": null,
+          "text_chars": 6287
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "\\bmcp\\b"
+          ],
+          "strength": "hit",
+          "probe_live": true,
+          "first_live": "https://clay.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "pricing"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026red education linkedin youtube slack community explore clay visit clay.com integrations multi-provider data enrichment sculptor ai claygent audiences sequencer pricing changelog get started here get started lesson clay 101 enroll in clay cohorts engage find a clay experts hire a gtme talent gtm job board community join slack \u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 61,
+      "name": "GitHub",
+      "evidence_fetches": [
+        {
+          "url": "https://docs.github.com/en/rest",
+          "status": 200,
+          "final_url": "https://docs.github.com/en/rest",
+          "error": null,
+          "text_chars": 5795
+        },
+        {
+          "url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps",
+          "status": 200,
+          "final_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps",
+          "error": null,
+          "text_chars": 28560
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "authorization code",
+            "pkce",
+            "refresh token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "access token",
+            "bearer",
+            "personal access token",
+            "auth token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "JWT",
+          "hits": [
+            "\\bjwt\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "GraphQL",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [
+            "free (tier|plan|trial|forever|account)",
+            "open source"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026customer experience best practice view listing metrics view listing transactions marketplace api usage rest api webhook events testing your app new purchases & free trials handling plan changes plan cancellations list an app on the marketplace draft an app listing write listing descriptions set listing pricing plans webhooks for\u2026"
+        }
+      ],
+      "flags": [
+        "claimed official MCP: no docs mention AND no live endpoint"
+      ]
+    },
+    {
+      "id": 62,
+      "name": "Vercel",
+      "evidence_fetches": [
+        {
+          "url": "https://vercel.com/docs/rest-api",
+          "status": 200,
+          "final_url": "https://vercel.com/docs/rest-api",
+          "error": null,
+          "text_chars": 61442
+        },
+        {
+          "url": "https://vercel.com/docs/rest-api/reference#authentication",
+          "status": 200,
+          "final_url": "https://vercel.com/docs/rest-api#authentication",
+          "error": null,
+          "text_chars": 61442
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "auth token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": true,
+          "first_live": "https://vercel.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 63,
+      "name": "Netlify",
+      "evidence_fetches": [
+        {
+          "url": "https://docs.netlify.com/api/get-started/",
+          "status": 200,
+          "final_url": "https://docs.netlify.com/api-and-cli-guides/api-guides/get-started-with-api/",
+          "error": null,
+          "text_chars": 32686
+        },
+        {
+          "url": "https://docs.netlify.com/api/",
+          "status": 200,
+          "final_url": "https://docs.netlify.com/api-and-cli-guides/api-guides/get-started-with-api/",
+          "error": null,
+          "text_chars": 32686
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "oauth2"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "access token",
+            "bearer",
+            "personal access token",
+            "auth token",
+            "api token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "GraphQL",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "claimed official MCP: no docs mention AND no live endpoint"
+      ]
+    },
+    {
+      "id": 64,
+      "name": "Cloudflare",
+      "evidence_fetches": [
+        {
+          "url": "https://developers.cloudflare.com/api/",
+          "status": 200,
+          "final_url": "https://developers.cloudflare.com/api/",
+          "error": null,
+          "text_chars": 379048
+        },
+        {
+          "url": "https://developers.cloudflare.com/fundamentals/api/get-started/create-token/",
+          "status": 200,
+          "final_url": "https://developers.cloudflare.com/fundamentals/api/get-started/create-token/",
+          "error": null,
+          "text_chars": 7390
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "access token",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "access token",
+            "bearer",
+            "api token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "\\bmcp\\b",
+            "mcp server"
+          ],
+          "strength": "hit",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        },
+        {
+          "field": "gate-signals",
+          "claim": "self-serve-free",
+          "hits": [
+            "contact sales"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026dos attack? next get global api key (legacy) was this helpful? yes no edit page report issue on this page overview edit page report issue getting started plans contact sales partners find a partner startups under attack? domain name search company about careers investors press press kit global network public interest project galile\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 65,
+      "name": "Supabase",
+      "evidence_fetches": [
+        {
+          "url": "https://supabase.com/docs",
+          "status": 200,
+          "final_url": "https://supabase.com/docs",
+          "error": null,
+          "text_chars": 3513
+        },
+        {
+          "url": "https://supabase.com/docs/guides/auth",
+          "status": 200,
+          "final_url": "https://supabase.com/docs/guides/auth",
+          "error": null,
+          "text_chars": 5174
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "auth token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "oauth2",
+            "refresh token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "GraphQL",
+          "hits": [
+            "graphql"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "\\bmcp\\b"
+          ],
+          "strength": "hit",
+          "probe_live": true,
+          "first_live": "https://supabase.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [
+            "open source"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026eed some help? contact support latest product updates? see changelog something's not right? check system status \u00a9 supabase inc \u2014 contributing author styleguide open source supasquad privacy settings twitter github discord youtube auth | supabase docs skip to content docs start products build manage reference resources docs search\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'API key' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 66,
+      "name": "Neo4j",
+      "evidence_fetches": [
+        {
+          "url": "https://neo4j.com/docs/http-api/current/",
+          "status": 200,
+          "final_url": "https://neo4j.com/docs/http-api/current/",
+          "error": null,
+          "text_chars": 5427
+        },
+        {
+          "url": "https://neo4j.com/docs/aura/auradb/",
+          "status": 200,
+          "final_url": "https://neo4j.com/docs/aura/",
+          "error": null,
+          "text_chars": 7773
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "Basic",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "http api"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "GraphQL",
+          "hits": [
+            "graphql"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'Basic' not corroborated in fetched docs",
+        "auth 'Token' not corroborated in fetched docs",
+        "auth 'OAuth2' not corroborated in fetched docs",
+        "claimed official MCP: no docs mention AND no live endpoint"
+      ]
+    },
+    {
+      "id": 67,
+      "name": "Snowflake",
+      "evidence_fetches": [
+        {
+          "url": "https://docs.snowflake.com/en/developer-guide/sql-api/authenticating",
+          "status": 200,
+          "final_url": "https://docs.snowflake.com/en/developer-guide/sql-api/authenticating",
+          "error": null,
+          "text_chars": 15199
+        },
+        {
+          "url": "https://docs.snowflake.com/en/user-guide/key-pair-auth",
+          "status": 200,
+          "final_url": "https://docs.snowflake.com/en/user-guide/key-pair-auth",
+          "error": null,
+          "text_chars": 12682
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "JWT key-pair",
+          "hits": [
+            "key[ -]pair",
+            "\\bjwt\\b",
+            "rsa"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "Basic",
+          "hits": [
+            "basic auth",
+            "basic authentication"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "swagger"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        },
+        {
+          "field": "gate-signals",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "approval"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026rization trust center sessions and session policies feature policies scim support access control defense in depth encryption data movement policies multi-party approval organizations & accounts business continuity & data recovery performance optimization cost & billing guides security key-pair authentication and rotation key-p\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs",
+        "claimed official MCP: no docs mention AND no live endpoint"
+      ]
+    },
+    {
+      "id": 68,
+      "name": "MongoDB Atlas",
+      "evidence_fetches": [
+        {
+          "url": "https://www.mongodb.com/docs/atlas/api/",
+          "status": 200,
+          "final_url": "https://www.mongodb.com/docs/atlas/api/",
+          "error": null,
+          "text_chars": 13070
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "Digest",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "JWT",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [
+            "get started for free"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026ongodb with confidence view all products explore our full developer suite arrow-right mongodb 8.0 our fastest version ever arrow-right build with mongodb atlas get started for free in minutes sign up test enterprise advanced develop with mongodb on-premises download try community edition explore the latest version of mongodb download reso\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'API key' not corroborated in fetched docs",
+        "auth 'Digest' not corroborated in fetched docs",
+        "auth 'OAuth2' not corroborated in fetched docs",
+        "auth 'JWT' not corroborated in fetched docs",
+        "claimed official MCP: no docs mention AND no live endpoint"
+      ]
+    },
+    {
+      "id": 69,
+      "name": "Datadog",
+      "evidence_fetches": [
+        {
+          "url": "https://docs.datadoghq.com/api/latest/",
+          "status": 200,
+          "final_url": "https://docs.datadoghq.com/api/latest/",
+          "error": null,
+          "text_chars": 94914
+        },
+        {
+          "url": "https://docs.datadoghq.com/account_management/api-app-keys/",
+          "status": 200,
+          "final_url": "https://docs.datadoghq.com/account_management/api-app-keys/",
+          "error": null,
+          "text_chars": 60177
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "personal access token",
+            "access token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "oauth2",
+            "client credentials"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "http api"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "\\bmcp\\b",
+            "mcp server"
+          ],
+          "strength": "hit",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "free trial",
+            "pricing",
+            "/mo",
+            "subscription"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026ents & webinars leadership careers analyst reports investor relations esg report trust hub blog the monitor engineering ai security labs login get started free free trial toggle navigation home docs api agents essentials getting started agent api apm tracing containers autodiscovery datadog operator dashboards database monitorin\u2026"
+        },
+        {
+          "field": "gate-signals",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "approval"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026rk management projects settings create a work item customization view and manage work items notifications and integrations work item automation rules work item approvals ai tools custom agents troubleshooting actions & remediations bits agent builder workflow automation build workflows access and authentication trigger workflo\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 70,
+      "name": "Sentry",
+      "evidence_fetches": [
+        {
+          "url": "https://docs.sentry.io/api/",
+          "status": 200,
+          "final_url": "https://docs.sentry.io/api/",
+          "error": null,
+          "text_chars": 2041
+        },
+        {
+          "url": "https://docs.sentry.io/account/auth-tokens/",
+          "status": 200,
+          "final_url": "https://docs.sentry.io/account/auth-tokens/",
+          "error": null,
+          "text_chars": 7044
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "auth token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": true,
+          "first_live": "https://mcp.sentry.io/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [
+            "open source"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026ces next get started was this helpful? yes \ud83d\udc4d no \ud83d\udc4e how can we improve this page? email (optional) submit feedback help improve this content our documentation is open source and available on github. your contributions are welcome, whether fixing a typo (drat!) or suggesting an update (\"yeah, this would be better\"). how to contribut\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 71,
+      "name": "Notion",
+      "evidence_fetches": [
+        {
+          "url": "https://developers.notion.com/reference/intro",
+          "status": 200,
+          "final_url": "https://developers.notion.com/reference/intro",
+          "error": null,
+          "text_chars": 7412
+        },
+        {
+          "url": "https://developers.notion.com/docs/authorization",
+          "status": 200,
+          "final_url": "https://developers.notion.com/guides/get-started/authorization",
+          "error": null,
+          "text_chars": 22563
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "authorization code",
+            "refresh token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "access token",
+            "bearer",
+            "personal access token",
+            "api token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "\\bmcp\\b"
+          ],
+          "strength": "hit",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [
+            "open source"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026ests are shown using the notion javascript sdk , and curl . these samples make it easy to copy, paste, and modify as you build your connection. notion sdks are open source projects that you can install to easily start building. you may also choose any other language or library that allows you to make http requests. \u200b pagination e\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 72,
+      "name": "Airtable",
+      "evidence_fetches": [
+        {
+          "url": "https://airtable.com/developers/web/api/introduction",
+          "status": 200,
+          "final_url": "https://airtable.com/developers/web/api/introduction",
+          "error": null,
+          "text_chars": 44
+        },
+        {
+          "url": "https://airtable.com/developers/web/guides/personal-access-tokens",
+          "status": 200,
+          "final_url": "https://airtable.com/developers/web/guides/personal-access-tokens",
+          "error": null,
+          "text_chars": 44
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs",
+        "auth 'Token' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 73,
+      "name": "Linear",
+      "evidence_fetches": [
+        {
+          "url": "https://developers.linear.app/docs/oauth-2-0-authentication",
+          "status": 200,
+          "final_url": "https://linear.app/developers",
+          "error": null,
+          "text_chars": 1602
+        },
+        {
+          "url": "https://developers.linear.app/docs/graphql/working-with-the-graphql-api",
+          "status": 200,
+          "final_url": "https://linear.app/developers",
+          "error": null,
+          "text_chars": 1602
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "GraphQL",
+          "hits": [
+            "graphql"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": true,
+          "first_live": "https://linear.app/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'Token' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 74,
+      "name": "Jira",
+      "evidence_fetches": [
+        {
+          "url": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/",
+          "status": 200,
+          "final_url": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/",
+          "error": null,
+          "text_chars": 13746
+        },
+        {
+          "url": "https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/",
+          "status": 200,
+          "final_url": "https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/",
+          "error": null,
+          "text_chars": 10147
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "authorization code"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "api token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "Basic",
+          "hits": [
+            "basic auth",
+            "http basic",
+            "basic authentication"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "claimed official MCP: no docs mention AND no live endpoint"
+      ]
+    },
+    {
+      "id": 75,
+      "name": "Asana",
+      "evidence_fetches": [
+        {
+          "url": "https://developers.asana.com/docs",
+          "status": 200,
+          "final_url": "https://developers.asana.com/docs/overview",
+          "error": null,
+          "text_chars": 7819
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "access token",
+            "personal access token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "\\bmcp\\b",
+            "mcp server"
+          ],
+          "strength": "hit",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [
+            "free (tier|plan|trial|forever|account)"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026ar with how our api works. here\u2019s a brief overview of how to get started: choose your test workspace. you can test in any of your existing workspaces, create a free account, or request a developer sandbox . the developer sandbox will allow you to test premium features not included in a free account. choose your authentication meth\u2026"
+        },
+        {
+          "field": "gate-signals",
+          "claim": "self-serve-free",
+          "hits": [
+            "approval"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026 workspace events graph exports app components building app components app components on tasks app components on rules ui builder troubleshooting app component approval checklist incoming web requests manage your app share your app app listing guidelines publish your app update your app script actions how to write a script act\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 76,
+      "name": "Monday.com",
+      "evidence_fetches": [
+        {
+          "url": "https://developer.monday.com/api-reference/docs/authentication",
+          "status": 200,
+          "final_url": "https://developer.monday.com/api-reference/docs/authentication",
+          "error": null,
+          "text_chars": 7152
+        },
+        {
+          "url": "https://developer.monday.com/api-reference/docs/introduction-to-graphql",
+          "status": 200,
+          "final_url": "https://developer.monday.com/api-reference/docs/introduction-to-graphql",
+          "error": null,
+          "text_chars": 10398
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "access token",
+            "api token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "GraphQL",
+          "hits": [
+            "graphql"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "\\bmcp\\b",
+            "mcp server"
+          ],
+          "strength": "hit",
+          "probe_live": true,
+          "first_live": "https://developer.monday.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 77,
+      "name": "ClickUp",
+      "evidence_fetches": [
+        {
+          "url": "https://clickup.com/api/developer-portal/authentication/",
+          "status": 200,
+          "final_url": "https://developer.clickup.com/docs/authentication",
+          "error": null,
+          "text_chars": 4592
+        },
+        {
+          "url": "https://clickup.com/api/clickupreference/",
+          "status": 403,
+          "final_url": "https://clickup.com/api/clickupreference",
+          "error": null,
+          "text_chars": 1434
+        }
+      ],
+      "evidence_live": false,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "oauth2",
+            "authorization code"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "access token",
+            "bearer",
+            "api token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [
+            "\\bmcp\\b",
+            "mcp server"
+          ],
+          "strength": "hit",
+          "probe_live": true,
+          "first_live": "https://mcp.clickup.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 78,
+      "name": "Coda",
+      "evidence_fetches": [
+        {
+          "url": "https://coda.io/developers/apis/v1",
+          "status": 200,
+          "final_url": "https://docs.superhuman.com/developers/apis/v1",
+          "error": null,
+          "text_chars": 141905
+        },
+        {
+          "url": "https://coda.io/developers/apis/v1#section/Authentication",
+          "status": 200,
+          "final_url": "https://docs.superhuman.com/developers/apis/v1#section/Authentication",
+          "error": null,
+          "text_chars": 141905
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "bearer",
+            "api token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "openapi",
+            "swagger"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [
+            "\\bmcp\\b",
+            "mcp server"
+          ],
+          "strength": "hit",
+          "probe_live": true,
+          "first_live": "https://coda.io/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 79,
+      "name": "Smartsheet",
+      "evidence_fetches": [
+        {
+          "url": "https://smartsheet.redoc.ly/",
+          "status": 200,
+          "final_url": "https://smartsheet.redoc.ly/",
+          "error": null,
+          "text_chars": 400
+        },
+        {
+          "url": "https://smartsheet.com/developers/",
+          "status": 200,
+          "final_url": "https://developers.smartsheet.com/",
+          "error": null,
+          "text_chars": 1648
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [
+            "\\bmcp\\b",
+            "mcp server"
+          ],
+          "strength": "hit",
+          "probe_live": true,
+          "first_live": "https://smartsheet.redoc.ly/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs",
+        "auth 'Token' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 80,
+      "name": "Harvest",
+      "evidence_fetches": [
+        {
+          "url": "https://help.getharvest.com/api-v2/",
+          "status": 200,
+          "final_url": "https://help.getharvest.com/api-v2/",
+          "error": null,
+          "text_chars": 1499
+        },
+        {
+          "url": "https://help.getharvest.com/api-v2/authentication-api/",
+          "status": 200,
+          "final_url": "https://help.getharvest.com/api-v2/authentication-api/",
+          "error": null,
+          "text_chars": 577
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs",
+        "auth 'Token' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 81,
+      "name": "Stripe",
+      "evidence_fetches": [
+        {
+          "url": "https://stripe.com/docs/api",
+          "status": 200,
+          "final_url": "https://docs.stripe.com/api",
+          "error": null,
+          "text_chars": 9070
+        },
+        {
+          "url": "https://stripe.com/docs/keys",
+          "status": 200,
+          "final_url": "https://docs.stripe.com/keys",
+          "error": null,
+          "text_chars": 22091
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "secret key",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "model context protocol"
+          ],
+          "strength": "hit",
+          "probe_live": true,
+          "first_live": "https://mcp.stripe.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        },
+        {
+          "field": "gate-signals",
+          "claim": "self-serve-free",
+          "hits": [
+            "contact sales",
+            "approval"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026rors arise when your request has invalid parameters. need help? contact support . chat with stripe developers on discord . check out our changelog . questions? contact sales . llm? read llms.txt . powered by markdoc   api keys | stripe documentation skip to content api keys create account or sign in the stripe docs logo search / as\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 82,
+      "name": "Plaid",
+      "evidence_fetches": [
+        {
+          "url": "https://plaid.com/docs/",
+          "status": 200,
+          "final_url": "https://plaid.com/docs/",
+          "error": null,
+          "text_chars": 5264
+        },
+        {
+          "url": "https://plaid.com/docs/api/",
+          "status": 200,
+          "final_url": "https://plaid.com/docs/api/",
+          "error": null,
+          "text_chars": 6316
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [
+            "\\bmcp\\b",
+            "mcp server"
+          ],
+          "strength": "hit",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 83,
+      "name": "Binance",
+      "evidence_fetches": [
+        {
+          "url": "https://github.com/binance/binance-spot-api-docs",
+          "status": 200,
+          "final_url": "https://github.com/binance/binance-spot-api-docs",
+          "error": null,
+          "text_chars": 8067
+        },
+        {
+          "url": "https://binance-docs.github.io/apidocs/spot/en/",
+          "status": 200,
+          "final_url": "https://binance-docs.github.io/apidocs/spot/en/",
+          "error": null,
+          "text_chars": 74
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "HMAC",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "openapi",
+            "swagger"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [
+            "\\bmcp\\b"
+          ],
+          "strength": "hit",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [
+            "open source"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026ars ebooks & reports business insights github skills support & services documentation customer support community forum trust center partners view all resources open source community github sponsors fund open source developers programs security lab maintainer community github stars archive program repositories topics trending coll\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'HMAC' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 84,
+      "name": "Paygent Connect",
+      "evidence_fetches": [
+        {
+          "url": "https://docs.nmi.com/",
+          "status": 200,
+          "final_url": "https://docs.nmi.com/",
+          "error": null,
+          "text_chars": 1062
+        },
+        {
+          "url": "https://www.nmi.com/products/nmi-payments/",
+          "status": 200,
+          "final_url": "https://www.nmi.com/products/nmi-payments/",
+          "error": null,
+          "text_chars": 15095
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "access",
+          "claim": "enterprise-gated",
+          "hits": [
+            "talk to sales"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026ustry verticals resources blog case studies ebooks podcasts whitepapers webinars about us who we are leadership news events careers contact us talk to our team talk to sales contact us support hub policy terms and policies privacy legal process guidelines youtube x linkedin facebook instagram \u00a9 2026 nmi trading in the uk as network\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'API key' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 85,
+      "name": "iPayX",
+      "evidence_fetches": [
+        {
+          "url": "https://www.ipayx.ai/docs",
+          "status": 200,
+          "final_url": "https://www.ipayx.ai/docs",
+          "error": null,
+          "text_chars": 914
+        },
+        {
+          "url": "https://mcpservers.org/servers/ipayx-technologies/mcp-fx-audit",
+          "status": 200,
+          "final_url": "https://mcpservers.org/servers/ipayx-technologies/mcp-fx-audit",
+          "error": null,
+          "text_chars": 6423
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "model context protocol",
+            "\\bmcp\\b",
+            "mcp server"
+          ],
+          "strength": "hit",
+          "probe_live": true,
+          "first_live": "https://mcp.ipayx.ai/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [
+            "free (tier|plan|trial|forever|account)"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026currency pair. parameters: from_currency (string) - source currency code (e.g. cad ) to_currency (string) - target currency code (e.g. usd ) auth: none | cost: free forever example: { \"from_currency\": \"cad\", \"to_currency\": \"usd\" } audit_transaction audit a specific fx transaction. compares the rate your bank applied against the re\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 86,
+      "name": "QuickBooks",
+      "evidence_fetches": [
+        {
+          "url": "https://developer.intuit.com/app/developer/qbo/docs/get-started",
+          "status": 200,
+          "final_url": "https://developer.intuit.com/app/developer/qbo/docs/get-started",
+          "error": null,
+          "text_chars": 63
+        },
+        {
+          "url": "https://developer.intuit.com/app/developer/qbo/docs/get-started/start-developing-your-app",
+          "status": 200,
+          "final_url": "https://developer.intuit.com/app/developer/qbo/docs/get-started/start-developing-your-app",
+          "error": null,
+          "text_chars": 63
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": true,
+          "first_live": "https://developer.intuit.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "approval-gated",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 87,
+      "name": "Xero",
+      "evidence_fetches": [
+        {
+          "url": "https://developer.xero.com/documentation/guides/oauth2/",
+          "status": 200,
+          "final_url": "https://developer.xero.com/documentation/guides/oauth2/",
+          "error": null,
+          "text_chars": 16
+        },
+        {
+          "url": "https://developer.xero.com/documentation/guides/oauth2/custom-connections/",
+          "status": 200,
+          "final_url": "https://developer.xero.com/documentation/guides/oauth2/custom-connections/",
+          "error": null,
+          "text_chars": 77
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "JWT key-pair",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": true,
+          "first_live": "https://mcp.xero.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs",
+        "auth 'JWT key-pair' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 88,
+      "name": "Brex",
+      "evidence_fetches": [
+        {
+          "url": "https://developer.brex.com/guides/authentication",
+          "status": 200,
+          "final_url": "https://developer.brex.com/guides/authentication",
+          "error": null,
+          "text_chars": 2895
+        },
+        {
+          "url": "https://developer.brex.com/guides/partner_authentication",
+          "status": 200,
+          "final_url": "https://developer.brex.com/guides/partner_authentication",
+          "error": null,
+          "text_chars": 9570
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "oauth2",
+            "authorization code",
+            "pkce",
+            "client credentials",
+            "refresh token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "access token",
+            "bearer",
+            "api token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "access",
+          "claim": "approval-gated",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 89,
+      "name": "Ramp",
+      "evidence_fetches": [
+        {
+          "url": "https://docs.ramp.com/",
+          "status": 200,
+          "final_url": "https://docs.ramp.com/",
+          "error": null,
+          "text_chars": 914
+        },
+        {
+          "url": "https://ramp.com/blog/technology-partner-program",
+          "status": 200,
+          "final_url": "https://ramp.com/blog/technology-partner-program",
+          "error": null,
+          "text_chars": 18166
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [
+            "\\bmcp\\b"
+          ],
+          "strength": "hit",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "approval-gated",
+          "hits": [
+            "approval",
+            "partner program",
+            "sandbox"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026to grow. our recently refreshed api documentation makes it easier to understand what is available and get started. partners can work with real-time spend data, approval workflows, user provisioning and spend controls, virtual cards, vendor payouts, and more. we are also bringing ramp into new workflows that did not exist a yea\u2026"
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs",
+        "auth 'API key' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 90,
+      "name": "PitchBook",
+      "evidence_fetches": [
+        {
+          "url": "https://pipeline.zoominfo.com/sales/pitchbook-api-review",
+          "status": 200,
+          "final_url": "https://pipeline.zoominfo.com/sales/pitchbook-api-review",
+          "error": null,
+          "text_chars": 26713
+        },
+        {
+          "url": "https://dlthub.com/context/source/pitchbook-api",
+          "status": 200,
+          "final_url": "https://dlthub.com/context/source/pitchbook-api",
+          "error": null,
+          "text_chars": 8209
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "access token",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "openapi",
+            "swagger"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "access",
+          "claim": "enterprise-gated",
+          "hits": [
+            "contact sales",
+            "enterprise",
+            "contract",
+            "account manager"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026learn blog case studies resource center events ai sales coach free tools gtm plays help center company about us careers partner program newsroom pricing log in contact sales free trial sales \u00b7 24 min read published on 08/06/2026 pitchbook api review: can you build on it? [2026] dominik facher chief product officer dominik facher ch\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 91,
+      "name": "NotebookLM",
+      "evidence_fetches": [
+        {
+          "url": "https://notebooklm.google/",
+          "status": 200,
+          "final_url": "https://notebook.google/",
+          "error": null,
+          "text_chars": 53
+        },
+        {
+          "url": "https://ai.google.dev/gemini-api/docs",
+          "status": 200,
+          "final_url": "https://ai.google.dev/gemini-api/docs",
+          "error": null,
+          "text_chars": 12733
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "access",
+          "claim": "no-public-api",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 92,
+      "name": "Otter AI",
+      "evidence_fetches": [
+        {
+          "url": "https://help.otter.ai/hc/en-us/articles/35287607569687-Otter-MCP-Server",
+          "status": 403,
+          "final_url": "https://help.otter.ai/hc/en-us/articles/35287607569687-Otter-MCP-Server",
+          "error": null,
+          "text_chars": 58
+        },
+        {
+          "url": "https://www.scalekit.com/blog/otter-mcp-vs-api",
+          "status": 200,
+          "final_url": "https://www.scalekit.com/blog/otter-mcp-vs-api",
+          "error": null,
+          "text_chars": 18845
+        }
+      ],
+      "evidence_live": false,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "model context protocol",
+            "\\bmcp\\b",
+            "mcp server"
+          ],
+          "strength": "hit",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "approval-gated",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 93,
+      "name": "Fathom",
+      "evidence_fetches": [
+        {
+          "url": "https://developers.fathom.ai/",
+          "status": 200,
+          "final_url": "https://developers.fathom.ai/",
+          "error": null,
+          "text_chars": 1113
+        },
+        {
+          "url": "https://help.fathom.video/en/articles/6220097",
+          "status": 200,
+          "final_url": "https://help.fathom.video/en/articles/6220097",
+          "error": null,
+          "text_chars": 15572
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [
+            "\\bmcp\\b"
+          ],
+          "strength": "hit",
+          "probe_live": true,
+          "first_live": "https://fathom.ai/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 94,
+      "name": "Consensus",
+      "evidence_fetches": [
+        {
+          "url": "https://consensus.app/home/api",
+          "status": 200,
+          "final_url": "https://consensus.app/home/api/",
+          "error": null,
+          "text_chars": 7435
+        },
+        {
+          "url": "https://mcp.consensus.app/mcp",
+          "status": 401,
+          "final_url": "https://mcp.consensus.app/mcp",
+          "error": null,
+          "text_chars": 70
+        }
+      ],
+      "evidence_live": false,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "approval-gated",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'OAuth2' not corroborated in fetched docs",
+        "claimed official MCP: no docs mention AND no live endpoint"
+      ]
+    },
+    {
+      "id": 95,
+      "name": "Reducto",
+      "evidence_fetches": [
+        {
+          "url": "https://docs.reducto.ai/quickstart",
+          "status": 200,
+          "final_url": "https://docs.reducto.ai/quickstart",
+          "error": null,
+          "text_chars": 24709
+        },
+        {
+          "url": "https://docs.reducto.ai/agent-guide",
+          "status": 200,
+          "final_url": "https://docs.reducto.ai/agent-guide",
+          "error": null,
+          "text_chars": 20612
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "apikey",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [
+            "\\brest\\b",
+            "openapi"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [
+            "free (tier|plan|trial|forever|account)"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026typed fields), see the /extract endpoint after completing this quickstart. \u200b prerequisites 1 create a reducto account go to studio.reducto.ai and sign up for a free account. 2 get your api key in the studio sidebar, click api keys , then create api key . give it a name and copy the key. click api keys in the sidebar to create a ne\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 96,
+      "name": "Devin",
+      "evidence_fetches": [
+        {
+          "url": "https://docs.devin.ai/work-with-devin/devin-mcp",
+          "status": 200,
+          "final_url": "https://docs.devin.ai/work-with-devin/devin-mcp",
+          "error": null,
+          "text_chars": 8843
+        },
+        {
+          "url": "https://docs.devin.ai/",
+          "status": 200,
+          "final_url": "https://docs.devin.ai/get-started/devin-intro",
+          "error": null,
+          "text_chars": 6685
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key",
+            "personal access token",
+            "access token",
+            "bearer"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [
+            "model context protocol",
+            "\\bmcp\\b",
+            "mcp server"
+          ],
+          "strength": "hit",
+          "probe_live": true,
+          "first_live": "https://mcp.devin.ai/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 97,
+      "name": "Higgsfield",
+      "evidence_fetches": [
+        {
+          "url": "https://docs.higgsfield.ai/docs",
+          "status": 200,
+          "final_url": "https://docs.higgsfield.ai/docs",
+          "error": null,
+          "text_chars": 3238
+        },
+        {
+          "url": "https://higgsfield.ai/cli",
+          "status": 200,
+          "final_url": "https://higgsfield.ai/cli",
+          "error": null,
+          "text_chars": 8253
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [
+            "api[ -]?key"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "pricing",
+            "/mo"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026? no. add the higgsfield mcp server url in your agent's settings and authenticate through your higgsfield account. no api keys to manage or configure. how does pricing work? higgsfield tools use the same credit system as the higgsfield platform. each generation costs credits based on the model and resolution. your existing hi\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 98,
+      "name": "Mermaid CLI",
+      "evidence_fetches": [
+        {
+          "url": "https://github.com/mermaid-js/mermaid-cli",
+          "status": 200,
+          "final_url": "https://github.com/mermaid-js/mermaid-cli",
+          "error": null,
+          "text_chars": 8748
+        },
+        {
+          "url": "https://www.npmjs.com/package/@mermaid-js/mermaid-cli",
+          "status": 403,
+          "final_url": "https://www.npmjs.com/package/@mermaid-js/mermaid-cli",
+          "error": null,
+          "text_chars": 58
+        }
+      ],
+      "evidence_live": false,
+      "checks": [
+        {
+          "field": "api_surface",
+          "claim": "CLI",
+          "hits": [
+            "command line",
+            "\\bcli\\b",
+            "npm install"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "mcp",
+          "claim": "community",
+          "hits": [
+            "\\bmcp\\b"
+          ],
+          "strength": "hit",
+          "probe_live": false,
+          "first_live": null
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [
+            "open source"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026ars ebooks & reports business insights github skills support & services documentation customer support community forum trust center partners view all resources open source community github sponsors fund open source developers programs security lab maintainer community github stars archive program repositories topics trending coll\u2026"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": 99,
+      "name": "YouTube Transcript",
+      "evidence_fetches": [
+        {
+          "url": "https://transcriptapi.com/documentation",
+          "status": 200,
+          "final_url": "https://transcriptapi.com/documentation",
+          "error": null,
+          "text_chars": 15
+        },
+        {
+          "url": "https://transcriptapi.com/pricing",
+          "status": 200,
+          "final_url": "https://transcriptapi.com/pricing",
+          "error": null,
+          "text_chars": 15
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "API key",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-free",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        }
+      ],
+      "flags": [
+        "auth 'API key' not corroborated in fetched docs"
+      ]
+    },
+    {
+      "id": 100,
+      "name": "Grain",
+      "evidence_fetches": [
+        {
+          "url": "https://developers.grain.com/",
+          "status": 200,
+          "final_url": "https://developers.grain.com/",
+          "error": null,
+          "text_chars": 62
+        },
+        {
+          "url": "https://support.grain.com/en/articles/15507288-grain-api",
+          "status": 200,
+          "final_url": "https://support.grain.com/en/articles/15507288-grain-api",
+          "error": null,
+          "text_chars": 4534
+        }
+      ],
+      "evidence_live": true,
+      "checks": [
+        {
+          "field": "auth",
+          "claim": "Token",
+          "hits": [
+            "access token",
+            "personal access token",
+            "api token"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "auth",
+          "claim": "OAuth2",
+          "hits": [
+            "oauth\\s*2",
+            "oauth2"
+          ],
+          "strength": "hit"
+        },
+        {
+          "field": "api_surface",
+          "claim": "REST",
+          "hits": [],
+          "strength": "miss"
+        },
+        {
+          "field": "mcp",
+          "claim": "official",
+          "hits": [],
+          "strength": "miss",
+          "probe_live": true,
+          "first_live": "https://grain.com/mcp"
+        },
+        {
+          "field": "access",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [],
+          "strength": "miss",
+          "excerpt": ""
+        },
+        {
+          "field": "gate-signals",
+          "claim": "self-serve-paid-or-trial",
+          "hits": [
+            "enterprise plan"
+          ],
+          "strength": "hit",
+          "excerpt": "\u2026ch user owns it. use this for server-side integrations where you need workspace-wide access. requires admin access to generate and is available on business and enterprise plans. click here to generate a wat. oauth2 : the standard flow for building integrations to be used by any grain user. users authorize your application directly, a\u2026"
+        }
+      ],
+      "flags": []
+    }
+  ]
+}

@@ -25,6 +25,13 @@
       "name": "Human adjudication (the ops person)",
       "what": "Reviewed all 41 machine flags + all keyword-miss excerpts; decided each as (correct-but-unverifiable-by-machine / real error); wrote data/ground_truth.json + data/corrections.json (23 decisions, 5 rule updates).",
       "found": "6 real field errors (see misses_taxonomy), 8 broken evidence URLs, 1 unscorable app. Machine flags that were NOT real errors: 35 (fetch limitations) — machine precision on flags was 6/41 ≈ 15%, recall unknown; this is why human review is the last mile."
+    },
+    {
+      "id": "D",
+      "name": "Full-set sweep (agent + human, after the audit loops)",
+      "what": "Ran the same machine checks across ALL 100 rows (196 evidence fetches, 490 keyword checks) + 12 targeted cross-exam searches on every remaining medium/low-confidence claim and unconfirmed 'official MCP' label.",
+      "found": "5 more row-level errors hiding in the un-audited 60 — Discord (phantom official MCP), Plain (phantom OAuth2), Brex (under-listed dashboard tokens), MrScraper (under-claimed hosted MCP), plus 20 dead evidence links across 16 apps. All fixed in corrections.json (round 2) and re-verified: 0 dead links remain. Prediction confirmed: errors concentrate exactly where priors are weakest.",
+      "limitations": "Zoho Cliq + Zendesk intro remain bot-walled to fetchers (valid in browsers); disclosed as fetcher-hostile, cross-cited via support portals."
     }
   ],
   "misses_taxonomy": {
@@ -55,12 +62,13 @@
     ]
   },
   "accuracy": {
-    "first_pass_fields": "189/195 = 96.9% (before loops)",
-    "final_fields": "195/195 = 100% (after loops, same 195 checks — improvement is partly by-construction; that is what an audit set is for)",
+    "wording_note": "Say 'agreement with docs-adjudicated ground truth on audited checks' — not blanket 'accuracy'. 195 checks over 39 scorable apps is a sample, and ground truth is human-adjudicated (cited) rather than omniscient.",
+    "first_pass_fields": "189/195 = 96.9% agreement (before loops)",
+    "final_fields": "195/195 = 100% agreement on audited checks (after loops; same 195 checks — improvement is partly by-construction; that is what an audit set is for)",
     "first_pass_evidence_integrity": "70/79 cited URLs free of link rot = 88.6% (9 dead: 8x404 + 1 DNS-dead subdomain)",
-    "final_evidence_integrity": "76/76 cited URLs resolve = 100% (5 disclosed as fetcher-hostile but human-valid: 4x403 bot-walls [Salesforce x3, Otter] + 1 JS-gated [Consensus docs]); 0 link rot",
-    "holdout_10_apps": "50/50 checks correct in pass 1 AND pass 2 (10 apps: #1,12,22,33,41,55,61,73,86,97). No sample-derived rule regressed anything; errors concentrated in the long-tail of the core sample (Pylon, Freshdesk, Gladly, Neo4j, Pumble, iPayX).",
-    "calibration_note": "First-pass field accuracy on well-known apps was already high because the research agent's priors are strong for mainstream SaaS. The measurable value of the loops was in evidence hygiene (10% of URLs broken), long-tail apps, MCP-existence claims (over- AND under-claimed), and trap names — exactly where priors are weakest. Residual risk after loops: medium-confidence judgment calls (Waterfall access tier, FanBasis onboarding), and any SPA-gated claim we could only cross-check via search snippets (Salesforce, SFCC, Intuit, GoHighLevel, Otter, Consensus)."
+    "final_evidence_integrity": "full-set sweep: 20 dead of 196 URLs before round-2 fixes (all in un-audited rows) -> 0 dead of 196 after. Fetcher-hostile-but-valid disclosed separately (4x403 bot-walls, Zoho/Zendesk walls, JS-rendered shells).",
+    "holdout_10_apps": "50/50 checks agree in pass 1 AND pass 2 (10 apps: #1,12,22,33,41,55,61,73,86,97). No sample-derived rule regressed anything; errors concentrated in the long-tail of the core sample (Pylon, Freshdesk, Gladly, Neo4j, Pumble, iPayX).",
+    "calibration_note": "First-pass agreement on well-known apps was already high because the research agent's priors are strong for mainstream SaaS. The measurable value of the loops was in evidence hygiene (~10% of URLs broken), long-tail apps, MCP-existence claims (over- AND under-claimed), and trap names — exactly where priors are weakest. The full-set sweep then found 5 more row errors in the un-audited 60 — evidence that audit-set numbers alone would have over-stated trust. Residual risk after the sweep: judgment calls (Waterfall access tier, FanBasis onboarding), fetcher-hostile claims cross-checked only via search snippets (Salesforce, SFCC, Intuit, GoHighLevel, Otter, Consensus), and any 'none-found' absence claim."
   },
   "human_touchpoints": [
     "Designed the schema + taxonomy (what counts as scheme vs credential vs gate).",

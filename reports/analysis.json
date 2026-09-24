@@ -1,8 +1,8 @@
 {
   "n": 100,
   "auth_family_counts": {
-    "static-key": 80,
-    "oauth2": 70,
+    "static-key": 81,
+    "oauth2": 69,
     "basic": 10,
     "jwt": 8,
     "bot token": 4,
@@ -27,8 +27,8 @@
   },
   "mcp_counts": {
     "official": 42,
-    "community": 33,
-    "none-found": 25
+    "community": 34,
+    "none-found": 24
   },
   "breadth_counts": {
     "very-broad": 21,
@@ -629,11 +629,6 @@
       "category": "Communications and Messaging"
     },
     {
-      "id": 26,
-      "name": "Discord",
-      "category": "Communications and Messaging"
-    },
-    {
       "id": 37,
       "name": "systeme.io",
       "category": "Marketing, Ads, Email and Social"
@@ -651,6 +646,11 @@
     {
       "id": 52,
       "name": "SE Ranking",
+      "category": "Data, SEO and Scraping"
+    },
+    {
+      "id": 54,
+      "name": "MrScraper",
       "category": "Data, SEO and Scraping"
     },
     {
