@@ -1,5 +1,7 @@
 # Composio AI Product Ops Intern — 100-App Toolkit Research
 
+**GitHub repository:** https://github.com/mukund976/composio-ai-product-intern-assignment
+
 ## What I built
 
 I built an agent-assisted research pipeline that studied **100 apps across 10 categories** to see how ready each one is for AI-agent toolkits. For every app it recorded the authentication method, whether access is self-serve or gated, the API surface, MCP support, a buildability verdict, and the evidence behind every claim. The agent produced the raw findings; human review then verified them against official documentation. The result is a single, self-contained HTML case study backed by this runnable repository.
