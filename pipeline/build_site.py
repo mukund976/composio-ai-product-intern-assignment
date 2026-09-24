@@ -342,7 +342,7 @@ table.compact td,table.compact th{padding:6px 8px}
   <p class="sub">An agent researched 100 apps for AI-agent toolkits. Human review verified the answers against official docs. Findings first, proof second, receipts always.</p>
 
   <div class="submit">
-    <a class="btn" href="#run">▶ Live case study &amp; deploy</a>
+    <a class="btn" href="https://mukund976.github.io/composio-ai-product-intern-assignment/" target="_blank" rel="noopener">▶ Live case study</a>
     <a class="btn" href="https://github.com/mukund976/composio-ai-product-intern-assignment" target="_blank" rel="noopener">▶ Source repo</a>
     <span class="dim small">live repo · <span class="mono">verify &rarr; corrections &rarr; build</span> reproduce every number on this page</span>
   </div>
@@ -503,7 +503,7 @@ table.compact td,table.compact th{padding:6px 8px}
   <h2><span class="n">05</span>Proof, GitHub &amp; run instructions</h2>
   <div class="submit" style="margin-top:4px">
     <a class="btn" href="https://github.com/mukund976/composio-ai-product-intern-assignment" target="_blank" rel="noopener">▶ github.com/mukund976/composio-ai-product-intern-assignment</a>
-    <span class="dim small">this page = <span class="mono">site/index.html</span> · serve: <span class="mono">python3 -m http.server 8000 -d site</span> · deploy: <span class="mono">npx netlify-cli deploy --prod --dir site</span></span>
+    <span class="dim small">live page: <span class="mono">mukund976.github.io/composio-ai-product-intern-assignment</span> (GitHub Pages) · source: <span class="mono">site/index.html</span> · local: <span class="mono">python3 -m http.server 8000 -d site</span></span>
   </div>
   <div class="card run">
     <code># clone + install

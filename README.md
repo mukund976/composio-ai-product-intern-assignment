@@ -11,7 +11,7 @@ sweep of all 100 rows that found + fixed 5 further row errors and 20 dead links,
 
 | | |
 |---|---|
-| **Live case study (HTML)** | `site/index.html` — self-contained, opens in any browser · serve live: `python3 -m http.server 8000 -d site` → http://localhost:8000 · deploy: `npx netlify-cli deploy --prod --dir site` |
+| **Live case study (HTML)** | **https://mukund976.github.io/composio-ai-product-intern-assignment/** (GitHub Pages) · source: `site/index.html`, self-contained · local: `python3 -m http.server 8000 -d site` |
 | **Source repo** | this repo (`composio-ai-product-intern-assignment/`) → publish with `git remote add origin https://github.com/mukund976/composio-ai-product-intern-assignment && git push -u origin main` |
 
 ---
