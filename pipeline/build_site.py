@@ -343,8 +343,8 @@ table.compact td,table.compact th{padding:6px 8px}
 
   <div class="submit">
     <a class="btn" href="#run">▶ Live case study &amp; deploy</a>
-    <a class="btn" href="https://github.com/OWNER/appkit-research" target="_blank" rel="noopener">▶ Source repo</a>
-    <span class="dim small">replace OWNER after <span class="mono">git push -u origin main</span> · repo is commit-ready in <span class="mono">appkit-research/</span></span>
+    <a class="btn" href="https://github.com/mukund976/composio-ai-product-intern-assignment" target="_blank" rel="noopener">▶ Source repo</a>
+    <span class="dim small">live repo · <span class="mono">verify &rarr; corrections &rarr; build</span> reproduce every number on this page</span>
   </div>
 
   <div class="tldr">
@@ -502,12 +502,12 @@ table.compact td,table.compact th{padding:6px 8px}
 <section id="run">
   <h2><span class="n">05</span>Proof, GitHub &amp; run instructions</h2>
   <div class="submit" style="margin-top:4px">
-    <a class="btn" href="https://github.com/OWNER/appkit-research" target="_blank" rel="noopener">▶ github.com/OWNER/appkit-research</a>
+    <a class="btn" href="https://github.com/mukund976/composio-ai-product-intern-assignment" target="_blank" rel="noopener">▶ github.com/mukund976/composio-ai-product-intern-assignment</a>
     <span class="dim small">this page = <span class="mono">site/index.html</span> · serve: <span class="mono">python3 -m http.server 8000 -d site</span> · deploy: <span class="mono">npx netlify-cli deploy --prod --dir site</span></span>
   </div>
   <div class="card run">
     <code># clone + install
-git clone https://github.com/OWNER/appkit-research.git &amp;&amp; cd appkit-research
+git clone https://github.com/mukund976/composio-ai-product-intern-assignment.git &amp;&amp; cd composio-ai-product-intern-assignment
 pip install -r pipeline/requirements.txt
 
 # research (validate all 100 rows; re-run any app live)

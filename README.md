@@ -1,4 +1,4 @@
-# appkit-research — 100-app toolkit research, built as an agent pipeline
+# composio-ai-product-intern-assignment — 100-app toolkit research, built as an agent pipeline
 
 **Take-home deliverable for Composio's AI Product Ops Intern role.** One agent pipeline researched 100 apps
 (auth · self-serve vs gated · API surface · MCP · buildability · evidence), then machine + human verification
@@ -12,7 +12,7 @@ sweep of all 100 rows that found + fixed 5 further row errors and 20 dead links,
 | | |
 |---|---|
 | **Live case study (HTML)** | `site/index.html` — self-contained, opens in any browser · serve live: `python3 -m http.server 8000 -d site` → http://localhost:8000 · deploy: `npx netlify-cli deploy --prod --dir site` |
-| **Source repo** | this repo (`appkit-research/`) → publish with `git remote add origin https://github.com/OWNER/appkit-research && git push -u origin main` |
+| **Source repo** | this repo (`composio-ai-product-intern-assignment/`) → publish with `git remote add origin https://github.com/mukund976/composio-ai-product-intern-assignment && git push -u origin main` |
 
 ---
 
@@ -20,8 +20,8 @@ sweep of all 100 rows that found + fixed 5 further row errors and 20 dead links,
 
 ```bash
 # 0 · GET THE CODE
-git clone https://github.com/OWNER/appkit-research.git
-cd appkit-research
+git clone https://github.com/mukund976/composio-ai-product-intern-assignment.git
+cd composio-ai-product-intern-assignment
 
 # 1 · INSTALL
 pip install -r pipeline/requirements.txt            # requests + beautifulsoup4
