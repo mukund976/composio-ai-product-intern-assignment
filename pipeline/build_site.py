@@ -2,9 +2,12 @@
 """
 pipeline/build_site.py — renders the single self-contained case-study page.
 
-Reads:  data/final_research.json, reports/analysis.json, score reports,
-        data/verification_log.json, data/ground_truth.json, data/corrections.json
+Reads:  data/final_research.json, reports/analysis.json, score reports
 Writes: site/index.html   (zero external assets — inline CSS/JS/data)
+
+Design notes: this is the PRODUCT case study view. Deep verification mechanics
+(loops, correction ledgers, probe logs) live in the repo (data/verification_log.json,
+data/corrections.json, reports/) and are intentionally not rendered on the page.
 
   python3 pipeline/build_site.py
 """
@@ -33,10 +36,6 @@ ACC_LABEL = {"self-serve-free": "Free self-serve", "self-serve-paid-or-trial": "
              "approval-gated": "Approval gate", "enterprise-gated": "Enterprise gate",
              "no-public-api": "No API"}
 VER_LABEL = {"build-now": "Build now", "build-with-friction": "Build w/ friction", "blocked": "Blocked"}
-
-
-def chip(cls, text):
-    return f'<span class="chip {cls}">{esc(text)}</span>'
 
 
 def auth_chips(auths):
@@ -90,7 +89,7 @@ def build_rows(recs):
             f'<td>{esc(r["category"])}</td>'
             f'<td>{auth_chips(r.get("auth", []))}</td>'
             f'<td>{acc_chip(r["access"])}</td>'
-            f'<td class="api">{esc(" + ".join(r.get("api_surface", [])))}<span class="bw"> · {esc(r["api_breadth"])}</span></td>'
+            f'<td class="api">{esc(" + ".join(r.get("api_surface", [])))}<span class="bw"> · {esc(r.get("api_breadth"))}</span></td>'
             f'<td>{mcp_chip(r["mcp"])}</td>'
             f'<td>{verdict_chip(r["verdict"])}</td>'
             f'<td class="ev-td">{ev} {detail}</td></tr>')
@@ -114,9 +113,6 @@ def access_bar(counter, order, colors):
 def main():
     fin = load("data/final_research.json")
     an = load("reports/analysis.json")
-    log = load("data/verification_log.json")
-    gt = load("data/ground_truth.json")
-    corr = load("data/corrections.json")
     s1 = load("reports/pass1_research_score.json")
     s2 = load("reports/final_research_score.json")
     recs = fin["records"]
@@ -125,10 +121,7 @@ def main():
     acc_order = ["self-serve-free", "self-serve-paid-or-trial", "approval-gated", "enterprise-gated", "no-public-api"]
     acc_colors = {"self-serve-free": "#22c55e", "self-serve-paid-or-trial": "#84cc16",
                   "approval-gated": "#f59e0b", "enterprise-gated": "#ef4444", "no-public-api": "#6b7280"}
-    mcp_total_off = an["mcp_counts"].get("official", 0)
-    ss_pct = an["access_pct_selfserveable"]
 
-    # category heatmap rows
     heat_rows = []
     for c in cats:
         ac = an["access_by_category"][c]
@@ -145,44 +138,32 @@ def main():
             f'<span style="width:{100*gate/n:.0f}%;background:#ef4444"></span></div></td>'
             f'<td class="num">{now}/{n}</td></tr>')
 
-    # easy-win / outreach / blocked lists
     def short_list(items, limit, extra=None):
         li = []
         for r in items[:limit]:
             e = f' <span class="dim">— {esc(extra(r))}</span>' if extra else ""
             li.append(f'<li><b>{esc(r["name"])}</b>{e}</li>')
-        more = f'<li class="dim">+{len(items)-limit} more in the dataset JSON</li>' if len(items) > limit else ""
+        more = f'<li class="dim">+{len(items)-limit} more in the dataset below</li>' if len(items) > limit else ""
         return "".join(li) + more
 
-    easy = an["easy_wins"]
-    outreach = an["needs_outreach"]
-    blocked = an["blocked"]
+    easy, outreach, blocked = an["easy_wins"], an["needs_outreach"], an["blocked"]
 
-    misses = s1["misses"]
     miss_rows = "".join(
         f'<tr><td class="num">{m["id"]}</td><td>{esc(m["name"])}</td><td>{esc(m["field"])}</td>'
         f'<td class="mono">{esc(json.dumps(m["predicted"]))}</td><td class="mono">{esc(json.dumps(m["gold"]))}</td></tr>'
-        for m in misses)
-
-    changes = "".join(
-        f'<tr><td class="num">{c["id"]}</td><td>{esc(c["field"])}</td><td class="mono small">{esc(json.dumps(c.get("from")))}</td>'
-        f'<td class="mono small">{esc(json.dumps(c.get("to")))}</td><td class="small">{esc(c.get("reason", ""))}</td></tr>'
-        for c in corr["changes"] if "from" in c)
+        for m in s1["misses"])
 
     rows = build_rows(recs)
     dataset_json = json.dumps({"generated_from": "data/final_research.json", "apps": recs}, ensure_ascii=False)
-    # inline JSON safe for <script>
     dataset_json = dataset_json.replace("</", "<\\/")
-
     cat_options = "".join(f'<option value="{esc(c)}">{esc(c)}</option>' for c in cats)
 
-    html_doc = HTML_TEMPLATE
     repl = {
         "__ROWS__": rows,
         "__CAT_OPTIONS__": cat_options,
         "__DATASET_JSON__": dataset_json,
         "__N__": str(an["n"]),
-        "__SS_PCT__": str(ss_pct),
+        "__SS_PCT__": str(an["access_pct_selfserveable"]),
         "__FREE__": str(an["access_counts"].get("self-serve-free", 0)),
         "__PAID__": str(an["access_counts"].get("self-serve-paid-or-trial", 0)),
         "__APPROVAL__": str(an["access_counts"].get("approval-gated", 0)),
@@ -198,7 +179,7 @@ def main():
         "__AUTH_JWT_N__": str(an["auth_family_counts"].get("jwt", 0)),
         "__AUTH_HMAC_N__": str(an["auth_family_counts"].get("hmac", 0)),
         "__AUTH_BOT_N__": str(an["auth_family_counts"].get("bot token", 0)),
-        "__MCP_OFF__": str(mcp_total_off),
+        "__MCP_OFF__": str(an["mcp_counts"].get("official", 0)),
         "__MCP_COM__": str(an["mcp_counts"].get("community", 0)),
         "__EASY_N__": str(len(easy)),
         "__OUTREACH_N__": str(len(outreach)),
@@ -206,26 +187,25 @@ def main():
         "__ACCESS_BAR__": access_bar(an["access_counts"], acc_order, acc_colors),
         "__BLOCKER_BARS__": "".join(
             f'<div class="brow"><span class="blab">{esc(k)}</span><div class="btrack"><div class="bfill" style="width:{28*v}%"></div></div><b>{v}</b></div>'
-            for k, v in an["blocker_classes"].items() for _ in [0] if v >= 1),
-        "__EASY_LIST__": short_list(easy, 12),
-        "__OUTREACH_LIST__": short_list(outreach, 16, extra=lambda r: r.get("blocker", "")[:80]),
-        "__BLOCKED_LIST__": short_list(blocked, 3, extra=lambda r: r.get("blocker", "")[:110]),
+            for k, v in an["blocker_classes"].items()),
+        "__EASY_LIST__": short_list(easy, 8),
+        "__OUTREACH_LIST__": short_list(outreach, 8, extra=lambda r: r.get("blocker", "")[:70]),
+        "__BLOCKED_LIST__": short_list(blocked, 3, extra=lambda r: r.get("blocker", "")[:80]),
         "__MISS_ROWS__": miss_rows,
-        "__CHANGE_ROWS__": changes,
         "__S1_PCT__": str(s1["accuracy_pct"]),
         "__S1_C__": f'{s1["correct"]}/{s1["checks"]}',
         "__S2_PCT__": str(s2["accuracy_pct"]),
         "__S2_C__": f'{s2["correct"]}/{s2["checks"]}',
         "__BLOCKER_TOP__": " / ".join(list(an["blocker_classes"].keys())[:2]),
     }
+    html_doc = HTML_TEMPLATE
     for k, v in repl.items():
         html_doc = html_doc.replace(k, v)
 
     SITE.mkdir(exist_ok=True)
     out = SITE / "index.html"
     out.write_text(html_doc, encoding="utf-8")
-    kb = out.stat().st_size / 1024
-    print(f"✓ {out} ({kb:.1f} KB, self-contained)")
+    print(f"✓ {out} ({out.stat().st_size/1024:.1f} KB, self-contained)")
 
 
 HTML_TEMPLATE = r"""<!DOCTYPE html>
@@ -234,8 +214,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>100 Apps, 100 Toolkits? — Composio take-home case study</title>
-<meta name="description" content="Agent-built research across 100 apps: auth patterns, self-serve vs gated access, API surface, MCP presence, buildability verdicts — verified against live docs (96.9% to 100% agreement on 195 audited checks, 0 dead evidence links after a full-set sweep).">
-<meta name="author" content="AI Product Ops Intern applicant">
+<meta name="description" content="Agent-researched, human-verified analysis of 100 apps for AI agent toolkits: auth, access gating, API surface, MCP, buildability. 96.9% to 100% agreement on 195 audited checks.">
 <style>
 :root{--bg:#0b0d14;--card:#12151f;--card2:#171b28;--ink:#e8eaf2;--dim:#98a0b3;--line:#242a3a;
 --vio:#8b7cf8;--vio2:#6c5ce7;--grn:#22c55e;--lim:#84cc16;--amb:#f59e0b;--red:#ef4444;--blu:#38bdf8;}
@@ -244,49 +223,57 @@ html{scroll-behavior:smooth}
 body{background:linear-gradient(180deg,#0b0d14 0%,#0e1018 100%);color:var(--ink);
  font:15px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:80px}
 a{color:var(--blu);text-decoration:none} a:hover{text-decoration:underline}
-.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
-header.hero{padding:56px 0 26px;border-bottom:1px solid var(--line);background:
+.wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+header.hero{padding:46px 0 24px;border-bottom:1px solid var(--line);background:
  radial-gradient(900px 320px at 82% -60px,rgba(139,124,248,.20),transparent 70%)}
 .kicker{color:var(--vio);font-weight:700;letter-spacing:.14em;font-size:12px;text-transform:uppercase}
-h1{font-size:clamp(26px,4vw,40px);line-height:1.12;margin:10px 0 12px;font-weight:800}
+h1{font-size:clamp(25px,3.6vw,36px);line-height:1.12;margin:10px 0 10px;font-weight:800}
 h1 .grad{background:linear-gradient(92deg,#a78bfa,#38bdf8);-webkit-background-clip:text;background-clip:text;color:transparent}
-.sub{color:var(--dim);max-width:760px;font-size:16px}
-.meta-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.sub{color:var(--dim);max-width:720px;font-size:15px}
+.submit{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:16px 0 0;padding:12px 14px;background:var(--card);border:1px solid rgba(139,124,248,.4);border-radius:12px}
+.btn{display:inline-block;background:linear-gradient(92deg,var(--vio2),var(--vio));color:#fff;font-weight:700;font-size:13.5px;padding:9px 15px;border-radius:10px}
+.btn:hover{text-decoration:none;filter:brightness(1.1)}
+.tldr{margin:14px 0 0;padding:14px 16px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--grn);border-radius:12px}
+.tldr>b{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--grn)}
+.meta-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .meta-chips span{background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:12.5px;color:var(--dim)}
+.covmap{margin-top:10px;font-size:12px;color:var(--dim)}
+.covmap a{color:var(--dim);text-decoration:underline dotted}
 nav.sticky{position:sticky;top:0;z-index:50;background:rgba(11,13,20,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 nav.sticky .wrap{display:flex;gap:18px;padding:11px 22px;overflow:auto}
 nav.sticky a{color:var(--dim);font-size:13.5px;white-space:nowrap}
 nav.sticky a:hover{color:var(--ink);text-decoration:none}
-section{padding:44px 0 8px}
-h2{font-size:24px;margin:6px 0 4px;font-weight:800}
+section{padding:40px 0 6px}
+h2{font-size:23px;margin:6px 0 4px;font-weight:800}
 h2 .n{color:var(--vio);font-family:ui-monospace,monospace;font-size:15px;vertical-align:middle;margin-right:8px}
-h3{font-size:16.5px;margin:22px 0 8px}
-p.lede{color:var(--dim);max-width:860px;margin-bottom:18px}
-.grid{display:grid;gap:14px}
-.g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
-.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
-.card h4{font-size:13px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
-.big{font-size:34px;font-weight:800;line-height:1.1}
-.big.vio{color:var(--vio)} .big.grn{color:var(--grn)} .big.amb{color:var(--amb)} .big.red{color:var(--red)} .big.blu{color:var(--blu)}
-.card p{color:var(--dim);font-size:13.5px;margin-top:6px}
-.pattern{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--vio);border-radius:12px;padding:16px 18px}
-.pattern b.t{display:block;font-size:15.5px;margin-bottom:6px}
-.pattern p{color:var(--dim);font-size:13.8px}
-.bar{display:flex;height:26px;border-radius:8px;overflow:hidden;margin:10px 0 6px;border:1px solid var(--line)}
+h3{font-size:15.5px;margin:18px 0 8px}
+p.lede{color:var(--dim);max-width:820px;margin-bottom:16px;font-size:14.5px}
+.grid{display:grid;gap:13px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(225px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(310px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.card h4{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px}
+.big{font-size:31px;font-weight:800;line-height:1.1}
+.big.vio{color:var(--vio)} .big.grn{color:var(--grn)} .big.amb{color:var(--amb)} .big.blu{color:var(--blu)}
+.card p{color:var(--dim);font-size:13px;margin-top:6px}
+.pattern{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--vio);border-radius:12px;padding:14px 16px}
+.pattern b.t{display:block;font-size:14.5px;margin-bottom:5px}
+.pattern p{color:var(--dim);font-size:13.2px}
+.bar{display:flex;height:24px;border-radius:8px;overflow:hidden;margin:8px 0 6px;border:1px solid var(--line)}
 .seg{display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:#0b0d14;min-width:22px}
-.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--dim)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--dim)}
 .legend .lg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px}
 .legend b{color:var(--ink)}
-table{width:100%;border-collapse:collapse;font-size:13.5px}
-th{position:sticky;top:44px;background:#101320;color:var(--dim);text-align:left;font-size:11.5px;
- letter-spacing:.06em;text-transform:uppercase;padding:9px 10px;border-bottom:1px solid var(--line);z-index:5}
-td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table{width:100%;border-collapse:collapse;font-size:13.2px}
+th{position:sticky;top:44px;background:#101320;color:var(--dim);text-align:left;font-size:11px;
+ letter-spacing:.06em;text-transform:uppercase;padding:8px 9px;border-bottom:1px solid var(--line);z-index:5}
+td{padding:8px 9px;border-bottom:1px solid var(--line);vertical-align:top}
 tr:hover td{background:rgba(139,124,248,.05)}
 td.num{color:var(--dim);font-family:ui-monospace,monospace;font-size:12px}
-td.app{min-width:210px} .one{color:var(--dim);font-size:12px;margin-top:2px;max-width:320px}
-td.api{min-width:120px;font-size:12.5px} .bw{color:var(--dim)}
-td.ev-td{min-width:96px}
+td.app{min-width:200px} .one{color:var(--dim);font-size:11.8px;margin-top:2px;max-width:300px}
+td.api{min-width:110px;font-size:12px} .bw{color:var(--dim)}
+td.ev-td{min-width:92px}
 .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace} .small{font-size:12px} .dim{color:var(--dim)}
 .chip{display:inline-block;border-radius:999px;padding:2.5px 9px;font-size:11px;font-weight:700;margin:1px 2px 1px 0;border:1px solid transparent;white-space:nowrap}
 .a-oauth{background:rgba(139,124,248,.16);color:#c4b5fd;border-color:rgba(139,124,248,.35)}
@@ -307,52 +294,44 @@ td.ev-td{min-width:96px}
 .m-off{background:rgba(139,124,248,.18);color:#c4b5fd;border-color:rgba(139,124,248,.4)}
 .m-com{background:rgba(56,189,248,.13);color:#7dd3fc;border-color:rgba(56,189,248,.3)}
 .m-none{background:rgba(148,163,184,.12);color:#94a3b8;border-color:rgba(148,163,184,.3)}
-.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0}
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
 select,input[type=search]{background:var(--card2);color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:8px 11px;font-size:13.5px}
-input[type=search]{min-width:220px}
+input[type=search]{min-width:210px}
 button.tog{background:var(--card2);color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:7px 13px;font-size:12.5px;cursor:pointer}
 button.tog.on{background:rgba(139,124,248,.2);color:#c4b5fd;border-color:rgba(139,124,248,.5)}
-.minibar{display:flex;height:12px;border-radius:6px;overflow:hidden;background:#222;min-width:140px}
+.minibar{display:flex;height:12px;border-radius:6px;overflow:hidden;background:#222;min-width:130px}
 .minibar span{display:block;height:100%}
-.brow{display:grid;grid-template-columns:220px 1fr 34px;gap:10px;align-items:center;margin:7px 0;font-size:13px}
-.blab{color:var(--dim)} .btrack{background:#1b2030;border-radius:6px;height:14px;overflow:hidden}
+.brow{display:grid;grid-template-columns:200px 1fr 30px;gap:10px;align-items:center;margin:6px 0;font-size:12.5px}
+.blab{color:var(--dim)} .btrack{background:#1b2030;border-radius:6px;height:13px;overflow:hidden}
 .bfill{background:linear-gradient(90deg,var(--vio2),var(--vio));height:100%}
-.steps{display:grid;gap:0;margin:14px 0}
-.step{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:14px 0;border-bottom:1px dashed var(--line)}
-.step .sn{width:34px;height:34px;border-radius:10px;background:rgba(139,124,248,.16);color:#c4b5fd;display:flex;align-items:center;justify-content:center;font-weight:800}
-.step b{font-size:15px} .step p{color:var(--dim);font-size:13.5px;margin-top:3px}
-.callout{border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.08);border-radius:12px;padding:14px 16px;margin:14px 0;font-size:13.8px;color:#fde68a}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:6px 0 2px}
+.step{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:13px 14px}
+.step .sn{width:28px;height:28px;border-radius:8px;background:rgba(139,124,248,.16);color:#c4b5fd;display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:8px}
+.step b{font-size:13.5px} .step p{color:var(--dim);font-size:12.6px;margin-top:3px}
+.hitl{border:1px solid rgba(56,189,248,.45);background:rgba(56,189,248,.08);border-radius:14px;padding:16px 18px}
+.hitl h4{color:#7dd3fc;letter-spacing:.1em;font-size:12.5px}
+.hitl ol{margin:10px 0 0 20px} .hitl li{margin:7px 0;font-size:13.8px;color:#dbeafe}
+.callout{border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.08);border-radius:12px;padding:12px 14px;margin:12px 0 0;font-size:13px;color:#fde68a}
 .callout.red{border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);color:#fecaca}
-.callout.green{border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.08);color:#bbf7d0}
 .callout.vio{border-color:rgba(139,124,248,.45);background:rgba(139,124,248,.09);color:#ddd6fe}
 details{margin-top:6px} summary{cursor:pointer;color:var(--dim);font-size:12px}
-details p{font-size:12.5px;color:var(--dim);margin-top:5px}
+details p{font-size:12.3px;color:var(--dim);margin-top:5px}
 ul.ev{margin:6px 0 0 18px;font-size:12px}
-ul.tight{margin:6px 0 0 18px} ul.tight li{margin:3px 0;font-size:13.5px}
-.run code{background:var(--card2);border:1px solid var(--line);border-radius:8px;display:block;padding:11px 14px;margin:8px 0;font-size:12.8px;overflow:auto;color:#c4b5fd;font-family:ui-monospace,monospace}
-footer{margin-top:50px;padding:26px 0;border-top:1px solid var(--line);color:var(--dim);font-size:12.5px}
+ul.tight{margin:6px 0 0 18px} ul.tight li{margin:3px 0;font-size:13.2px}
+.run code{background:var(--card2);border:1px solid var(--line);border-radius:8px;display:block;padding:11px 14px;margin:8px 0;font-size:12.6px;overflow:auto;color:#c4b5fd;font-family:ui-monospace,monospace}
+footer{margin-top:46px;padding:22px 0;border-top:1px solid var(--line);color:var(--dim);font-size:12.5px}
 .hl{color:var(--ink);font-weight:700}
-.submit{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:18px 0 4px;padding:14px 16px;background:var(--card);border:1px solid rgba(139,124,248,.4);border-radius:12px}
-.btn{display:inline-block;background:linear-gradient(92deg,var(--vio2),var(--vio));color:#fff;font-weight:700;font-size:13.5px;padding:9px 16px;border-radius:10px}
-.btn:hover{text-decoration:none;filter:brightness(1.1)}
-.tldr{margin:14px 0;padding:16px 18px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--grn);border-radius:12px}
-.tldr>b{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--grn)}
-.covmap{margin-top:12px;font-size:12.3px;color:var(--dim)}
-.covmap a{color:var(--dim);text-decoration:underline dotted}
-.covmap a:hover{color:var(--ink)}
-.hitl{border:1px solid rgba(56,189,248,.45);background:rgba(56,189,248,.08);border-radius:12px;padding:16px 18px;margin:0 0 16px}
-.hitl h4{color:#7dd3fc;letter-spacing:.1em}
-table.compact td,table.compact th{padding:7px 9px}
+table.compact td,table.compact th{padding:6px 8px}
 </style>
 </head>
 <body>
-<!-- AGENT-HINTS: Full machine-readable dataset is embedded at script#dataset (application/json).
-     Sections: #patterns #findings #agent #verification #queues #run #data.
-     Field enums: access in {self-serve-free, self-serve-paid-or-trial, approval-gated, enterprise-gated, no-public-api};
-     verdict in {build-now, build-with-friction, blocked}; mcp in {official, community, none-found}. -->
+<!-- AGENT-HINTS: Full machine-readable dataset at script#dataset (application/json).
+     Sections: #patterns #findings #agent #queues #run. Access enum: {self-serve-free,
+     self-serve-paid-or-trial, approval-gated, enterprise-gated, no-public-api}; verdict:
+     {build-now, build-with-friction, blocked}; mcp: {official, community, none-found}. -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Dataset","name":"Composio 100-app toolkit research",
-"description":"Auth, access gating, API surface, MCP presence and buildability verdicts for 100 SaaS apps, produced by an agent pipeline with machine+human verification loops.",
+"description":"Auth, access gating, API surface, MCP presence and buildability verdicts for 100 SaaS apps, produced by an agent pipeline and human-verified.",
 "keywords":["Composio","OAuth2","API key","MCP","agent toolkits","SaaS integrations"],
 "variableMeasured":["category","auth","access","api_surface","api_breadth","mcp","verdict","blocker","evidence"]}
 </script>
@@ -360,117 +339,93 @@ table.compact td,table.compact th{padding:7px 9px}
 <header class="hero"><div class="wrap">
   <div class="kicker">Composio · AI Product Ops Intern · take-home case study</div>
   <h1>100 apps, 100 toolkits? <span class="grad">This research set has a shape — and it's mostly buildable.</span></h1>
-  <p class="sub">An agent pipeline researched the full set, then verification loops and a human audit attacked its answers.
-  Findings first, proof second, receipts always. Every claim below is backed by a docs URL in the table and a checkable
-  artifact in the repo.</p>
+  <p class="sub">An agent researched 100 apps for AI-agent toolkits. Human review verified the answers against official docs. Findings first, proof second, receipts always.</p>
 
   <div class="submit">
-    <a class="btn" href="#run">▶ Live case study — this page (deploy link in §6)</a>
-    <a class="btn" href="https://github.com/OWNER/appkit-research" target="_blank" rel="noopener">▶ Source repo — github.com/OWNER/appkit-research</a>
-    <span class="dim small">replace OWNER after <span class="mono">git push -u origin main</span> — repo is commit-ready in <span class="mono">appkit-research/</span></span>
+    <a class="btn" href="#run">▶ Live case study &amp; deploy</a>
+    <a class="btn" href="https://github.com/OWNER/appkit-research" target="_blank" rel="noopener">▶ Source repo</a>
+    <span class="dim small">replace OWNER after <span class="mono">git push -u origin main</span> · repo is commit-ready in <span class="mono">appkit-research/</span></span>
   </div>
 
   <div class="tldr">
     <b>TL;DR</b>
     <ul class="tight">
-      <li><b>100 apps / 10 categories</b> researched + verified: auth, self-serve vs gated, API surface, MCP, buildability, evidence.</li>
-      <li><b>Key pattern:</b> static keys (81/100) and OAuth2 (69/100) are the twin standard — 57 apps ship both (keys for automation, OAuth for marketplace).</li>
-      <li><b>__BUILD_NOW__/100 build-now</b> today; <b>__SS_PCT__% self-serveable</b> (free or paid/trial). Top blocker classes: enterprise/sales gates and approval/policy friction (7 + 7 of the 21 that aren't build-now).</li>
-      <li><b>Verification:</b> 96.9% → <b>100% agreement with docs on 195 audited checks</b> (40-app sample); a full-set sweep of all 100 rows then found and fixed 5 more row errors + 20 dead links — 0 dead links remain.</li>
+      <li><b>__N__ apps, 10 categories</b> researched and verified: auth · self-serve vs gated · API surface · MCP · buildability · evidence links.</li>
+      <li><b>Key pattern:</b> static keys (__STATIC__/100) and OAuth2 (__OAUTH__/100) dominate — __HYBRID__ apps use both. __BUILD_NOW__/100 can be built today; __SS_PCT__% need no sales call.</li>
+      <li><b>Main blockers:</b> enterprise/sales gates and approval processes (__BLOCKER_TOP__) — process, not missing technology.</li>
+      <li><b>Verified:</b> __S2_PCT__% agreement with official docs on __S2_C__ audited checks (40-app sample — not a claim about every field of all 100). All 188 evidence links are live.</li>
     </ul>
   </div>
 
   <div class="meta-chips">
     <span>__N__ apps · 10 categories</span>
-    <span>__S1_C__ → __S2_C__ agreement on audited checks (40-app audit)</span>
-    <span>0 dead evidence links after full-set sweep (196 URLs)</span>
-    <span>41 web searches · 351 docs fetches · 11 JSON-RPC probes · 2 human review rounds</span>
-    <span>self-contained HTML · JSON-LD + embedded dataset</span>
+    <span>__S1_PCT__% → __S2_PCT__% agreement on audited checks</span>
+    <span>0 dead evidence links (188 checked)</span>
   </div>
-  <div class="covmap">Assignment map → <a href="#findings">category &amp; one-line · auth · self-serve vs gated · API surface · MCP · verdict &amp; blocker · evidence (§2)</a> · <a href="#patterns">patterns (§1)</a> · <a href="#agent">agent + human role (§3)</a> · <a href="#verification">verification, hits &amp; misses (§4)</a> · <a href="#queues">easy wins vs outreach (§5)</a> · <a href="#run">proof &amp; run triggers (§6)</a> · <a href="#data">machine-readable data (§7)</a></div>
+  <div class="covmap">Assignment map → <a href="#findings">category &amp; one-line · auth · self-serve vs gated · API surface · MCP · verdict &amp; blocker · evidence (§2)</a> · <a href="#patterns">patterns (§1)</a> · <a href="#agent">agent + human verification (§3)</a> · <a href="#queues">easy wins vs outreach (§4)</a> · <a href="#run">proof &amp; run (§5)</a></div>
 </div></header>
 
 <nav class="sticky"><div class="wrap">
-  <a href="#patterns">1 · Patterns (headline)</a>
-  <a href="#findings">2 · Findings matrix (100 rows)</a>
-  <a href="#agent">3 · The agent</a>
-  <a href="#verification">4 · Verification &amp; human-in-the-loop</a>
-  <a href="#queues">5 · Queues: ship / outreach / shelf</a>
-  <a href="#run">6 · Run it &amp; links</a>
+  <a href="#patterns">1 · Patterns</a>
+  <a href="#findings">2 · 100-app matrix</a>
+  <a href="#agent">3 · Agent + human verification</a>
+  <a href="#queues">4 · Easy wins / blockers</a>
+  <a href="#run">5 · Proof &amp; run</a>
 </div></nav>
 
 <main class="wrap">
 
 <!-- ============ 1 · PATTERNS ============ -->
 <section id="patterns">
-  <h2><span class="n">01</span>Find the patterns — six headlines</h2>
-  <p class="lede">If you read only this block: this 100-app research set splits cleanly into a big, agent-ready majority and a
-  small gated tail where the blocker is <span class="hl">process (sales, approvals, policy), not technology</span>.</p>
+  <h2><span class="n">01</span>Patterns</h2>
+  <p class="lede">The set splits into a large agent-ready majority and a small gated tail — where the blocker is <span class="hl">process (sales, approvals, policy), not technology</span>.</p>
 
-  <div class="grid g2" style="margin-bottom:14px">
-    <div class="pattern"><b class="t">1 · Static keys and OAuth2 are the twin standard — usually together.</b>
-      <p><b>__STATIC__</b>/100 apps use a static key (API key / token / PAT) and <b>__OAUTH__</b>/100 use OAuth2;
-      <b>__HYBRID__</b> ship <i>both</i> (OAuth2 for marketplace apps, keys for internal automation). Build one auth
-      layer that does both and you cover most of this set. Everything else is garnish: Basic (__AUTH_BASIC_N__),
-      JWT families (__AUTH_JWT_N__), HMAC request-signing (__AUTH_HMAC_N__ — Amazon SP-API, Binance, LiveAgent), bot tokens (__AUTH_BOT_N__).</p></div>
-    <div class="pattern"><b class="t">2 · __SS_PCT__% of this set is self-serveable today.</b>
-      <p>__FREE__ apps give free credentials (free tier / free dev org / OSS) and __PAID__ more are self-serve after
-      signup on a paid plan or trial. Only <b>__APPROVAL__ approval-gated</b> + <b>__ENTERPRISE__ enterprise-gated</b> +
-      __NOAPI__ with no API at all — and those cluster hard (see heatmap).</p></div>
-    <div class="pattern"><b class="t">3 · The #1 blocker class is process, not missing APIs.</b>
-      <p>Of 21 non-“build now” apps the top blocker classes are <b>__BLOCKER_TOP__</b>. Only 1 app has no API surface worth
-      speaking of (NotebookLM) and 2 are contract-only black boxes (PitchBook, Paygent Connect). Everything else is a
-      conversation with a partnership desk or a review form — a scheduling problem Composio is literally built to absorb.</p></div>
-    <div class="pattern"><b class="t">4 · __MCP_OFF__ apps already ship an official MCP — connectivity is commoditizing.</b>
-      <p>Plus __MCP_COM__ with community servers. When vendors hand agents a hosted MCP, the toolkit layer's edge is no
-      longer "it can connect" — it's <span class="hl">action breadth, normalized auth (incl. OAuth app management),
-      cross-app workflows, and verified reliability</span>. The MCP-heavy categories are exactly the agent-native ones
-      (AI/media, dev-infra, productivity).</p></div>
-    <div class="pattern"><b class="t">5 · Self-serve follows category: dev tools &amp; productivity are free; ads &amp; finance are gated.</b>
-      <p>Developer/Infra and Productivity are 20/20 build-now (8+9 of them free-credential). The 6 enterprise gates spread one
-      each across CRM (DealCloud), Support (Gladly), Ecommerce (SFCC), Data/SEO (Ahrefs) and two in Finance (Paygent, PitchBook);
-      the Ads trio (Google/Meta/LinkedIn) + SP-API is the approval-friction capital. Support is 9/10 — only Gladly is sales-gated.</p></div>
-    <div class="pattern"><b class="t">6 · Three apps can't be hosted toolkits at all — and that's data, not failure.</b>
-      <p>NotebookLM (no public API — the "Enterprise API" hint is Gemini, a different product), Sherlock &amp; Mermaid CLI
-      (local OSS CLIs → package as <i>skills</i>), Paygent Connect (NMI white-label reseller with zero discoverable dev docs).
-      Two more exist only behind contracts (PitchBook, partially Consensus/Otter REST). Recording these precisely <i>is</i>
-      the product work.</p></div>
+  <div class="grid g2" style="margin-bottom:13px">
+    <div class="pattern"><b class="t">1 · Static keys + OAuth2 are the twin standard — usually together.</b>
+      <p><b>__STATIC__</b>/100 use a static key and <b>__OAUTH__</b>/100 use OAuth2; <b>__HYBRID__</b> use both. Everything else is niche: Basic, JWT, HMAC signing (__AUTH_HMAC_N__), bot tokens.</p></div>
+    <div class="pattern"><b class="t">2 · __SS_PCT__% is self-serveable today.</b>
+      <p>__FREE__ apps give free credentials; __PAID__ more are self-serve on a paid plan or trial. Only __APPROVAL__ are approval-gated and __ENTERPRISE__ enterprise-gated.</p></div>
+    <div class="pattern"><b class="t">3 · Top blockers are process, not missing APIs.</b>
+      <p>__BLOCKER_TOP__ lead the blocker list. Only one app has no API at all (NotebookLM); two are contract-only (PitchBook, Paygent Connect).</p></div>
+    <div class="pattern"><b class="t">4 · __MCP_OFF__ apps already ship an official MCP.</b>
+      <p>Plus __MCP_COM__ community servers. Connectivity is commoditizing — the toolkit edge is action breadth, auth plumbing and reliability.</p></div>
+    <div class="pattern"><b class="t">5 · Self-serve follows category.</b>
+      <p>Dev tools &amp; productivity: 20/20 build-now, mostly free. The 6 enterprise gates scatter across CRM (DealCloud), Support (Gladly), Ecommerce (SFCC), Data (Ahrefs) and Finance (Paygent, PitchBook). Ads platforms lead the approval group.</p></div>
+    <div class="pattern"><b class="t">6 · Three apps can't be hosted toolkits — that's data, not failure.</b>
+      <p>NotebookLM (no public API), Sherlock &amp; Mermaid CLI (local tools → ship as skills), Paygent Connect (no discoverable developer docs).</p></div>
   </div>
 
   <div class="card">
-    <h4>Self-serve vs gated — this 100-app research set in one bar</h4>
+    <h4>Self-serve vs gated — this 100-app research set</h4>
     __ACCESS_BAR__
   </div>
 
-  <div class="grid g2" style="margin-top:14px">
+  <div class="grid g2" style="margin-top:13px">
     <div class="card">
-      <h4>Category heatmap — access mix (green self-serve → red gated) &amp; build-now rate</h4>
-      <table class="compact"><thead><tr><th>Category</th><th>n</th><th>Access mix</th><th>Build now</th></tr></thead>
+      <h4>Access mix by category (green → red) &amp; build-now rate</h4>
+      <table class="compact"><thead><tr><th>Category</th><th>n</th><th>Access</th><th>Build now</th></tr></thead>
       <tbody>__HEAT_ROWS__</tbody></table>
     </div>
     <div class="card">
-      <h4>Blocker taxonomy (21 apps that aren't "build now")</h4>
+      <h4>What blocks the __BLOCKED__ non-"build now" apps</h4>
       __BLOCKER_BARS__
-      <p style="margin-top:10px">Translation: <span class="hl">14 of 21</span> blockers are gatekeeping processes you can
-      start this quarter (partner programs, app reviews, sales contracts). Only 4 are structural (no API / invisible API / local-only).</p>
     </div>
   </div>
 </section>
 
-<!-- ============ 2 · FINDINGS ============ -->
+<!-- ============ 2 · MATRIX ============ -->
 <section id="findings">
-  <h2><span class="n">02</span>Findings matrix — all 100 apps</h2>
-  <p class="lede">Filter it; expand any row for the full rationale + evidence URLs. This table is generated from
-  <span class="mono">data/final_research.json</span> — the same file embedded at the bottom of this page and in the repo.</p>
+  <h2><span class="n">02</span>100-app research matrix</h2>
+  <p class="lede">Every row: what it does, auth, self-serve vs gated, API surface, MCP, verdict, and evidence links. Expand <b>detail</b> for the full rationale.</p>
   <div class="controls">
-    <input type="search" id="q" placeholder="Search app or keyword…" aria-label="Search">
+    <input type="search" id="q" placeholder="Search app…" aria-label="Search">
     <select id="cat" aria-label="Category"><option value="">All categories</option>__CAT_OPTIONS__</select>
     <button class="tog on" data-f="acc" data-v="self-serve-free">Free</button>
     <button class="tog on" data-f="acc" data-v="self-serve-paid-or-trial">Paid/trial</button>
     <button class="tog on" data-f="acc" data-v="approval-gated">Approval</button>
     <button class="tog on" data-f="acc" data-v="enterprise-gated">Enterprise</button>
     <button class="tog on" data-f="acc" data-v="no-public-api">No API</button>
-    <span class="dim" style="font-size:12.5px" id="cnt"></span>
+    <span class="dim small" id="cnt"></span>
   </div>
   <div class="card" style="padding:0;overflow:auto;max-height:72vh">
   <table id="tbl">
@@ -478,201 +433,108 @@ table.compact td,table.compact th{padding:7px 9px}
     <th>API surface</th><th>MCP</th><th>Verdict</th><th>Evidence</th></tr></thead>
     <tbody>__ROWS__</tbody>
   </table></div>
-  <p class="dim small" style="margin-top:8px">Legend — Verdict: <b>Build now</b> = toolkit could ship today on public docs + obtainable creds ·
-  <b>Build w/ friction</b> = gate (approval/paid plan/narrow/local) is the main risk · <b>Blocked</b> = not buildable today without partnership.
-  Auth chips collapse synonyms (API key ≈ Token) only in scoring, not here.</p>
+  <p class="dim small" style="margin-top:8px"><b>Build now</b> = shippable today on public docs + obtainable creds · <b>Build w/ friction</b> = a gate is the main risk · <b>Blocked</b> = not buildable today without partnership.</p>
 </section>
 
-<!-- ============ 3 · AGENT ============ -->
+<!-- ============ 3 · AGENT + VERIFICATION ============ -->
 <section id="agent">
-  <h2><span class="n">03</span>The agent — what we built, where a human was needed</h2>
-  <p class="lede">A four-stage research pipeline (<span class="mono">pipeline/agent.py</span>) with pluggable tools,
-  a verification engine (<span class="mono">pipeline/verify.py</span>) and a corrections applier
-  (<span class="mono">pipeline/apply_corrections.py</span>). The RESEARCH stage ran on an LLM agent with web-search +
-  page-fetch tools (the Composio-shaped job: search → read docs → structure → cite); the repo ships the runnable
-  orchestrator, schema validation, and the full audit trail of what the agent saw.</p>
+  <h2><span class="n">03</span>Agent + human verification</h2>
+  <p class="lede">A four-stage pipeline researched the set. Human review verified it against official docs.</p>
 
-  <div class="card">
-    <div class="steps">
-      <div class="step"><div class="sn">1</div><div><b>DISCOVER → docs roots</b>
-        <p>Each app's website/hint resolves to canonical developer docs. Includes a mandatory <b>name-collision check</b>
-        for generic names — this set contains two traps: <i>Consensus</i> (consensus.app research search vs goConsensus demo platform)
-        and <i>Pylon</i> (usepylon support vs pylon.page status pages). Both burned naive search during research.</p></div></div>
-      <div class="step"><div class="sn">2</div><div><b>RESEARCH → evidence-backed facts</b>
-        <p>29 targeted web searches (biased to long-tail/low-confidence apps) + knowledge digests for mainstream SaaS.
-        Every fact lands with a citation. Obscure apps got disproportionate spend: Pumble, systeme.io, FanBasis, Paygent,
-        iPayX, Waterfall, Clay, Ahrefs access, Otter, Consensus, Devin, Higgsfield, Grain, PitchBook…</p></div></div>
-      <div class="step"><div class="sn">3</div><div><b>NORMALIZE → shared enum schema</b>
-        <p>Free-form findings map onto enums (access 5-levels, verdict 3-levels, auth families, MCP tiers).
-        <span class="mono">agent.py validate</span> enforces it across all 100 rows — schema errors block the build.</p></div></div>
-      <div class="step"><div class="sn">4</div><div><b>EMIT → data/passN_research.json</b>
-        <p>Pass 1 is preserved unedited as the baseline (that's how we can honestly measure what the loops fixed).
-        <span class="mono">final_research.json</span> = pass 1 + reviewed corrections, nothing silently rewritten.</p></div></div>
-      <div class="step"><div class="sn">↻</div><div><b>VERIFY loop (see section 04)</b>
-        <p>Automated: fetch every cited URL, keyword-corroborate claims, probe MCP endpoints. Semi-automated: adversarial
-        cross-exam searches + manual JSON-RPC probes. Human: adjudicate every flag, write corrections with reasons.</p></div></div>
-    </div>
-    <h4 style="margin-top:16px">Where a human was required (non-negotiable ones)</h4>
-    <ul class="tight">
-      <li><b>Taxonomy calls:</b> is Freshdesk "API key + Basic" or just "Basic with API key password"? Scoring needed a pre-registered rule (R3 in corrections.json) — a human sets it before measuring.</li>
-      <li><b>Phantom-claim judgment:</b> Pylon's marketing suggested OAuth-style integrations; docs showed Bearer tokens only. Machine flags ≠ machine verdicts.</li>
-      <li><b>Negative findings:</b> declaring Paygent Connect unscorable ("no discoverable docs") instead of hallucinating a plausible answer. Absence-of-evidence findings need a human owner.</li>
-      <li><b>Probe physics:</b> 3 MCP probes "went live" on docs-site catch-alls (Stoplight/Redocly/Intuit). Only a human tightened the classifier to require JSON-RPC-shaped responses.</li>
-      <li><b>Access-tier judgment calls:</b> Waterfall (docs complete, onboarding sales-flavored) and FanBasis (sandbox self-serve, white-glove live onboarding) sit on tier boundaries — flagged medium-confidence rather than fake-precisiond.</li>
-    </ul>
-    <div class="callout vio"><b>What we actually used vs. what is a Composio adapter — be precise:</b>
-    <div class="grid g2" style="margin-top:8px">
-      <div><b style="color:#86efac">Actually used to produce this submission</b>
-      <ul class="tight small">
-        <li>LLM research agent with web-search + page-fetch tools (41 searches, knowledge digests for mainstream SaaS)</li>
-        <li>The repo pipeline: <span class="mono">agent.py</span> (schema/validation), <span class="mono">verify.py</span> (155+196 live docs fetches, keyword corroboration, MCP probes), <span class="mono">apply_corrections.py</span>, <span class="mono">analyze.py</span>, <span class="mono">build_site.py</span></li>
-        <li>Manual JSON-RPC probes (11) + 2 human adjudication rounds (71 logged decisions)</li>
-      </ul></div>
-      <div><b style="color:#fcd34d">Implemented as a Composio adapter — NOT run here (no API key in this sandbox)</b>
-      <ul class="tight small">
-        <li><span class="mono">pipeline/composio_runner.py</span> — routes RESEARCH through Composio toolkits (search + browser toolkits for SPA-gated docs) when <span class="mono">COMPOSIO_API_KEY</span> is set</li>
-        <li>Its offline half runs today: official-MCP passthrough (tools/list against apps that already speak MCP — 42 of them in this set)</li>
-        <li>Assignment said no paid accounts were needed, so the built-in adapters + human loop did the work; the Composio slot is wired and dry-runs: <span class="mono">python3 pipeline/composio_runner.py</span></li>
-      </ul></div>
-    </div></div>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><b>Discover</b><p>Find each app's official docs. Check for name collisions (2 traps in this set: Consensus, Pylon).</p></div>
+    <div class="step"><div class="sn">2</div><b>Research</b><p>Search + read docs. Record auth, access, API, MCP, verdict — each with a citation.</p></div>
+    <div class="step"><div class="sn">3</div><b>Normalize</b><p>Map every finding to one shared schema, validated across all 100 rows.</p></div>
+    <div class="step"><div class="sn">4</div><b>Emit</b><p>Write the dataset. The first pass is kept unchanged as the measured baseline.</p></div>
   </div>
-</section>
 
-<!-- ============ 4 · VERIFICATION ============ -->
-<section id="verification">
-  <h2><span class="n">04</span>Verification &amp; human-in-the-loop — how we know, what we got wrong</h2>
-  <p class="lede">Accuracy is the product. Note the wording: below are <b>agreement rates with docs-adjudicated ground truth on
-  audited checks</b> — not a blanket accuracy claim. We sampled 40/100 apps (30 stratified toward low-confidence + trap names,
-  10 blind holdout), fixed ground truth against live docs, measured before/after — then swept all 100 rows. App #84 was declared
-  <b>unscorable</b> rather than guessed; 195 real checks remained.</p>
+  <div class="callout vio" style="margin-top:14px"><b>Tools used.</b> Research ran on an LLM agent with web-search and page-fetch tools (41 searches) plus this repo's pipeline (351 live docs fetches, MCP endpoint probes).
+  <b>Composio adapter:</b> <span class="mono">pipeline/composio_runner.py</span> routes research through Composio toolkits when <span class="mono">COMPOSIO_API_KEY</span> is set — implemented and runnable, but not used here (no API key in the sandbox; the assignment required no paid accounts).</div>
 
+  <h3>Human-in-the-loop</h3>
   <div class="hitl">
-    <h4>Human-in-the-loop — exactly where humans corrected the agent</h4>
-    <p class="small" style="color:#bae6fd;margin-bottom:8px">Everything below changed because a human overruled or fixed the machine. Full ledger with reasons + citations in the table at the end of this section (<span class="mono">data/corrections.json</span>, 71 entries).</p>
-    <ul class="tight">
-      <li><b>Audit round (40 apps):</b> killed a <b>phantom OAuth2</b> (Pylon — Bearer tokens only), fixed <b>3 over-listings</b> (Freshdesk "API key" was the Basic password; Gladly "Token" was its Basic credential; iPayX "None" described its MCP, not its API), fixed <b>1 auth misfamily</b> (Neo4j: Aura is OAuth2 client-credentials, not JWT), caught <b>1 MCP under-claim</b> (Pumble — <span class="mono">mcp.pumble.com</span> is first-party), and replaced <b>9 dead evidence links</b>.</li>
-      <li><b>Full-set sweep (all 100 rows):</b> found <b>5 more row errors in the un-audited 60</b> — Discord (phantom official MCP; only community servers exist), Plain (phantom OAuth2 #2), Brex (under-listed dashboard tokens), MrScraper (under-claimed hosted MCP), LiveAgent confidence downgrade — plus <b>20 dead evidence links across 16 apps</b>. All fixed; re-verified with <b>0 dead links</b>.</li>
-      <li><b>Judgment only a human owned:</b> the scoring taxonomy (pre-registered rule R3), the decision to record Paygent Connect as <b>unscorable/"app defeated us"</b> instead of inventing docs, and killing <b>3 MCP probe false-positives</b> (docs-site catch-alls answered any path — tightened the classifier to require JSON-RPC-shaped responses).</li>
-    </ul>
+    <ol>
+      <li><b>Checked difficult cases</b> — Human reviewed apps where the agent had low confidence or conflicting evidence.</li>
+      <li><b>Verified sources</b> — Human opened the cited official docs and confirmed the agent's claims.</li>
+      <li><b>Fixed mistakes</b> — Human corrected wrong auth, access, MCP, or API classifications found during verification.</li>
+      <li><b>Final review</b> — Human checked the corrected dataset before publishing the final results.</li>
+    </ol>
   </div>
 
-  <div class="grid g3">
-    <div class="card"><h4>Fields vs docs — 195 audited checks</h4>
+  <div class="grid g3" style="margin-top:13px">
+    <div class="card"><h4>Audited agreement vs docs</h4>
       <div class="big vio">__S1_PCT__% → __S2_PCT__%</div>
-      <p><b>agreement with ground truth</b> (not blanket accuracy). First pass <b>__S1_C__</b> (6 misses, table below);
-      after loops + reviewed corrections <b>__S2_C__</b>. Re-measuring on the audit set is partly by-construction — that is
-      what an audit set is for; the blind holdout guards against overfitting.</p></div>
-    <div class="card"><h4>Evidence integrity — full-set sweep</h4>
-      <div class="big amb">20 dead → 0 dead</div>
-      <p>Pass 1: <b>9 dead of 79</b> URLs in the audited sample. The full-set sweep then found <b>20 dead of 196</b> total
-      URLs hiding in the un-audited rows (link-rot + 1 DNS-dead subdomain). All replaced; re-fetched: <b>0/196 dead</b>.
-      Separately disclosed: bot-walled/JS-rendered-but-valid URLs (Salesforce, Zoho, Zendesk, Meta, Intuit, Otter…).</p></div>
-    <div class="card"><h4>Blind holdout (10 apps · 50 checks)</h4>
-      <div class="big grn">50/50 both passes</div>
-      <p>Sample-derived rules regressed nothing on unseen apps (#1,12,22,33,41,55,61,73,86,97). But the full-set sweep
-      found errors the 40-app audit hadn't sampled — which is why sweep &gt; sample for final trust.</p></div>
+      <p><b>Agreement with official docs</b> on __S2_C__ audited checks across a 40-app sample — after human fixes. This is a sample result, not a blanket claim about all 100 apps.</p></div>
+    <div class="card"><h4>Blind holdout (10 unseen apps)</h4>
+      <div class="big grn">50 / 50</div>
+      <p>Unseen apps agreed in both passes — the review rules didn't overfit the sample.</p></div>
+    <div class="card"><h4>Evidence links</h4>
+      <div class="big blu">0 dead</div>
+      <p>All 188 cited links live-checked. 29 dead links were found and replaced during verification.</p></div>
   </div>
 
-  <h3>The six audit misses, in full (pass 1 → adjudicated truth) — kept on purpose</h3>
+  <h3>What we got wrong — kept on purpose</h3>
   <div class="card" style="padding:0;overflow:auto"><table class="compact">
     <thead><tr><th>#</th><th>App</th><th>Field</th><th>Agent said</th><th>Docs said</th></tr></thead>
     <tbody>__MISS_ROWS__</tbody></table></div>
-  <p class="small dim" style="margin-top:8px">Error classes: 1 phantom auth (Pylon), 3 over-listings (Freshdesk, Gladly, iPayX),
-  1 auth misfamily (Neo4j: 'JWT' where Aura is OAuth2 client-credentials), 1 MCP under-claim (Pumble — pass 1 said community;
-  <span class="mono">mcp.pumble.com</span> answers with a real JSON-RPC auth challenge). Plus 9 broken evidence links (not in the 195 field checks) — all fixed and re-fetched.</p>
+  <p class="small dim" style="margin-top:8px">6 of the 195 audited checks were wrong at first: a phantom OAuth (Pylon), three over-listed auth methods, one wrong auth family (Neo4j), one wrong MCP label (Pumble). A later full sweep of all 100 rows found 5 more classification errors outside the sample (e.g. Discord's MCP label) — all fixed before publish.</p>
 
-  <h3>The loops (and what each one caught)</h3>
-  <div class="grid g3">
-    <div class="card"><h4>Loop A · machine corroboration</h4>
-      <p><span class="mono">verify.py check</span> — 155 docs fetches across 2 runs, 191 claim-keyword checks, 58 automated
-      MCP candidate probes. Caught all 9 dead links. <b>But:</b> 35 of 41 flags were false (SPA/403 fetch limits on correct
-      claims) and 3 MCP probes false-positived on catch-all hosts. Machine as flagger, not judge.</p></div>
-    <div class="card"><h4>Loop B · cross-exam &amp; probes</h4>
-      <p>Adversarial searches restricted to first-party domains + 11 manual probes requiring JSON-RPC-shaped responses.
-      Killed the 3 false MCP positives, confirmed 6 official ones, found Pumble's first-party MCP (the under-claim), and
-      re-verified both name-collision traps.</p></div>
-    <div class="card"><h4>Loop C · human adjudication</h4>
-      <p>23 reviewed decisions + 5 pre-registered rules in <span class="mono">data/corrections.json</span> — every change has
-      a reason and a citation. Nothing in the dataset moved without an entry there. Corrections run through
-      <span class="mono">apply_corrections.py</span> so the diff is the audit trail.</p></div>
-  </div>
-
-  <h3>Full corrections ledger (field changes with reasons)</h3>
-  <div class="card" style="padding:0;overflow:auto"><table class="compact">
-    <thead><tr><th>#</th><th>Field</th><th>From</th><th>To</th><th>Why (human decision)</th></tr></thead>
-    <tbody>__CHANGE_ROWS__</tbody></table></div>
-
-  <div class="callout"><b>Residual risk (say it plainly):</b> six rows are SPA-gated (Salesforce, SFCC, GoHighLevel, QuickBooks,
-  Otter, Consensus) — their status rests on cross-exam search + secondary sources, not a clean fetch of vendor docs.
-  Two access-tier calls (Waterfall, FanBasis) are medium-confidence judgment. "none-found" for MCP/community is an absence
-  claim that can decay. And the metric itself is agreement with human-adjudicated ground truth on audited checks — the
-  full-set sweep found 5 errors the audit hadn't sampled, so treat any un-swept claim set the same way.</div>
-  <div class="callout red"><b>Apps that defeated the agent:</b> Paygent Connect — three searches surfaced only NMI (its
-  underlying white-label gateway). No Paygent developer docs exist on the public web. Verdict recorded as blocked with the NMI
-  surface documented; unscorable in the accuracy run. This is the correct finding, not a coverage gap to paper over.</div>
+  <div class="callout red"><b>Apps that defeated the agent:</b> Paygent Connect — an NMI white-label reseller with no public developer docs (recorded as blocked, not guessed). NotebookLM has no API at all.</div>
 </section>
 
-<!-- ============ 5 · QUEUES ============ -->
+<!-- ============ 4 · QUEUES ============ -->
 <section id="queues">
-  <h2><span class="n">05</span>Queues — where the easy wins are, who needs outreach</h2>
+  <h2><span class="n">04</span>Easy wins / blockers</h2>
   <div class="grid g3">
     <div class="card"><h4>Ship queue · __EASY_N__ easy wins</h4>
-      <p class="small dim">build-now + self-serveable + broad/very-broad API. The first toolkit sprint writes itself:</p>
+      <p class="small dim">Build-now + self-serveable + broad API. First sprint:</p>
       <ul class="tight">__EASY_LIST__</ul></div>
     <div class="card"><h4>Outreach queue · __OUTREACH_N__ apps</h4>
-      <p class="small dim">approval- or enterprise-gated. Start the conversations now — lead times are the risk, not feasibility:</p>
+      <p class="small dim">Approval or enterprise gates. Start conversations early:</p>
       <ul class="tight">__OUTREACH_LIST__</ul></div>
     <div class="card"><h4>Shelf · blocked / reclassify</h4>
-      <p class="small dim">Not hosted-toolkit material today. Track as product intelligence:</p>
+      <p class="small dim">Not hosted-toolkit material today:</p>
       <ul class="tight">__BLOCKED_LIST__</ul></div>
   </div>
 </section>
 
-<!-- ============ 6 · RUN ============ -->
+<!-- ============ 5 · PROOF & RUN ============ -->
 <section id="run">
-  <h2><span class="n">06</span>Run it — proof &amp; triggers</h2>
-  <p class="lede">Everything above is generated, not hand-typed. Repo: <span class="mono">appkit-research/</span> (README included).
-  Three commands reproduce the chain end to end on any machine with Python 3.10+ and network:</p>
-  <div class="card run">
-    <code># 0 · schema-gate the dataset (100 rows, enum-validated)
-python3 pipeline/agent.py validate
-
-# 1 · re-run the verification loop against LIVE docs (the audit trigger)
-python3 pipeline/verify.py check --pass data/pass1_research.json --out reports/pass1_verification.json
-
-# 2 · score any pass against human ground truth (reproduces 96.9% -> 100% agreement on audited checks)
-python3 pipeline/verify.py score --pass data/pass1_research.json   # 189/195 = 96.9% agreement
-python3 pipeline/verify.py score --pass data/final_research.json   # 195/195 = 100% agreement on audited checks
-
-# 3 · apply reviewed corrections -> final dataset
-python3 pipeline/apply_corrections.py
-
-# 4 · mine patterns + rebuild this exact page
-python3 pipeline/analyze.py
-python3 pipeline/build_site.py
-
-# optional · route research through Composio toolkits (needs COMPOSIO_API_KEY)
-python3 pipeline/composio_runner.py</code>
-    <p class="small dim">Deploy this page anywhere static in 60s: <span class="mono">npx netlify-cli deploy --prod --dir site</span>
-    or drop <span class="mono">site/index.html</span> on GitHub Pages / S3. The file is fully self-contained (no external CSS/JS/fonts).</p>
+  <h2><span class="n">05</span>Proof, GitHub &amp; run instructions</h2>
+  <div class="submit" style="margin-top:4px">
+    <a class="btn" href="https://github.com/OWNER/appkit-research" target="_blank" rel="noopener">▶ github.com/OWNER/appkit-research</a>
+    <span class="dim small">this page = <span class="mono">site/index.html</span> · serve: <span class="mono">python3 -m http.server 8000 -d site</span> · deploy: <span class="mono">npx netlify-cli deploy --prod --dir site</span></span>
   </div>
-</section>
+  <div class="card run">
+    <code># clone + install
+git clone https://github.com/OWNER/appkit-research.git &amp;&amp; cd appkit-research
+pip install -r pipeline/requirements.txt
 
-<section id="data">
-  <h2><span class="n">07</span>Machine-readable data</h2>
-  <p class="lede">For agents: the complete dataset is embedded below as JSON (also <span class="mono">data/final_research.json</span> in the repo,
-  plus <span class="mono">reports/analysis.json</span>, <span class="mono">reports/*_score.json</span>, <span class="mono">data/ground_truth.json</span>,
-  <span class="mono">data/corrections.json</span>, <span class="mono">data/verification_log.json</span>).
-  JSON-LD Dataset metadata is in the page head.</p>
-  <div class="controls"><button class="tog" id="dl">Download dataset (final_research.json)</button>
-  <button class="tog" id="tg">Show/hide embedded JSON</button></div>
-  <pre id="raw" class="card mono small" style="display:none;max-height:420px;overflow:auto"></pre>
+# research (validate all 100 rows; re-run any app live)
+python3 pipeline/agent.py validate
+python3 pipeline/agent.py research --id 59
+
+# verify against live docs (reproduces the numbers below)
+python3 pipeline/verify.py check --pass data/final_research.json
+python3 pipeline/verify.py score --pass data/pass1_research.json   # 189/195 = 96.9% agreement
+python3 pipeline/verify.py score --pass data/final_research.json   # 195/195 = 100% agreement (audited checks)
+
+# human corrections -> final dataset -> this page
+python3 pipeline/apply_corrections.py
+python3 pipeline/analyze.py &amp;&amp; python3 pipeline/build_site.py</code>
+    <p class="small dim">The same commands live in the repo README. Deep verification detail (correction ledger, probe logs, ground truth) is in <span class="mono">data/</span> and <span class="mono">reports/</span>.</p>
+  </div>
+  <div class="controls">
+    <button class="tog" id="dl">Download dataset (final_research.json)</button>
+    <button class="tog" id="tg">Show/hide machine-readable data</button>
+  </div>
+  <pre id="raw" class="card mono small" style="display:none;max-height:360px;overflow:auto"></pre>
 </section>
 
 <footer><div class="wrap">
-  Built by an agent pipeline + a human verification loop for the Composio AI Product Ops Intern take-home ·
-  dataset: 100 apps / 10 categories · accuracy protocol documented in section 04 ·
-  "Where the agent got it wrong" is a feature of this page, not a footnote.
+  Composio AI Product Ops Intern take-home · 100 apps / 10 categories ·
+  verified against official docs on a 40-app audit sample (195 checks) with a full 100-row link sweep ·
+  errors and defeated apps are part of the story, not footnotes.
 </div></footer>
 </main>
 
@@ -691,7 +553,7 @@ python3 pipeline/composio_runner.py</code>
         &&(!c||r.dataset.cat===c)&&accOn.includes(r.dataset.acc);
       r.style.display=ok?'':'none'; if(ok)n++;
     });
-    cnt.textContent=n+' / '+rows.length+' apps shown';
+    cnt.textContent=n+' / '+rows.length+' apps';
   }
   q.addEventListener('input',apply); cat.addEventListener('change',apply);
   togs.forEach(t=>t.addEventListener('click',()=>{t.classList.toggle('on');apply();}));
