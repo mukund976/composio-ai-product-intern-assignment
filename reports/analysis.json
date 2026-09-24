@@ -1,0 +1,1005 @@
+{
+  "n": 100,
+  "auth_family_counts": {
+    "static-key": 80,
+    "oauth2": 70,
+    "basic": 10,
+    "jwt": 8,
+    "bot token": 4,
+    "hmac": 3,
+    "none": 3,
+    "oauth1": 1,
+    "digest": 1
+  },
+  "hybrid_oauth_plus_static": 57,
+  "access_counts": {
+    "self-serve-free": 51,
+    "self-serve-paid-or-trial": 32,
+    "enterprise-gated": 6,
+    "approval-gated": 10,
+    "no-public-api": 1
+  },
+  "access_pct_selfserveable": 83.0,
+  "verdict_counts": {
+    "build-now": 79,
+    "build-with-friction": 18,
+    "blocked": 3
+  },
+  "mcp_counts": {
+    "official": 42,
+    "community": 33,
+    "none-found": 25
+  },
+  "breadth_counts": {
+    "very-broad": 21,
+    "broad": 35,
+    "moderate": 33,
+    "narrow": 11
+  },
+  "surface_counts": {
+    "REST": 95,
+    "SOAP": 1,
+    "GraphQL": 14,
+    "Bulk": 1,
+    "Metadata": 1,
+    "CLI": 2,
+    "None": 1
+  },
+  "access_by_category": {
+    "AI, Research and Media-native": {
+      "no-public-api": 1,
+      "approval-gated": 2,
+      "self-serve-free": 4,
+      "self-serve-paid-or-trial": 3
+    },
+    "CRM and Sales": {
+      "self-serve-free": 5,
+      "self-serve-paid-or-trial": 4,
+      "enterprise-gated": 1
+    },
+    "Communications and Messaging": {
+      "self-serve-free": 8,
+      "approval-gated": 1,
+      "self-serve-paid-or-trial": 1
+    },
+    "Data, SEO and Scraping": {
+      "self-serve-free": 4,
+      "self-serve-paid-or-trial": 5,
+      "enterprise-gated": 1
+    },
+    "Developer, Infra and Data platforms": {
+      "self-serve-free": 8,
+      "self-serve-paid-or-trial": 2
+    },
+    "Ecommerce": {
+      "self-serve-paid-or-trial": 4,
+      "self-serve-free": 4,
+      "enterprise-gated": 1,
+      "approval-gated": 1
+    },
+    "Finance and Fintech": {
+      "self-serve-free": 4,
+      "enterprise-gated": 2,
+      "approval-gated": 3,
+      "self-serve-paid-or-trial": 1
+    },
+    "Marketing, Ads, Email and Social": {
+      "approval-gated": 3,
+      "self-serve-paid-or-trial": 2,
+      "self-serve-free": 5
+    },
+    "Productivity and Project Management": {
+      "self-serve-free": 9,
+      "self-serve-paid-or-trial": 1
+    },
+    "Support and Helpdesk": {
+      "self-serve-paid-or-trial": 9,
+      "enterprise-gated": 1
+    }
+  },
+  "verdict_by_category": {
+    "AI, Research and Media-native": {
+      "blocked": 1,
+      "build-with-friction": 4,
+      "build-now": 5
+    },
+    "CRM and Sales": {
+      "build-now": 9,
+      "build-with-friction": 1
+    },
+    "Communications and Messaging": {
+      "build-now": 9,
+      "build-with-friction": 1
+    },
+    "Data, SEO and Scraping": {
+      "build-now": 7,
+      "build-with-friction": 3
+    },
+    "Developer, Infra and Data platforms": {
+      "build-now": 10
+    },
+    "Ecommerce": {
+      "build-now": 8,
+      "build-with-friction": 2
+    },
+    "Finance and Fintech": {
+      "build-now": 5,
+      "blocked": 2,
+      "build-with-friction": 3
+    },
+    "Marketing, Ads, Email and Social": {
+      "build-with-friction": 3,
+      "build-now": 7
+    },
+    "Productivity and Project Management": {
+      "build-now": 10
+    },
+    "Support and Helpdesk": {
+      "build-now": 9,
+      "build-with-friction": 1
+    }
+  },
+  "blocker_classes": {
+    "enterprise / sales gate": 7,
+    "approval / policy friction": 7,
+    "local-only (CLI/OSS)": 2,
+    "contract-only / invisible API": 2,
+    "other": 1,
+    "no public API": 1,
+    "paid-plan gate": 1
+  },
+  "easy_wins": [
+    {
+      "id": 1,
+      "name": "Salesforce",
+      "category": "CRM and Sales",
+      "breadth": "very-broad"
+    },
+    {
+      "id": 2,
+      "name": "HubSpot",
+      "category": "CRM and Sales",
+      "breadth": "very-broad"
+    },
+    {
+      "id": 3,
+      "name": "Pipedrive",
+      "category": "CRM and Sales",
+      "breadth": "broad"
+    },
+    {
+      "id": 6,
+      "name": "Podio",
+      "category": "CRM and Sales",
+      "breadth": "broad"
+    },
+    {
+      "id": 7,
+      "name": "Zoho CRM",
+      "category": "CRM and Sales",
+      "breadth": "very-broad"
+    },
+    {
+      "id": 8,
+      "name": "Close",
+      "category": "CRM and Sales",
+      "breadth": "broad"
+    },
+    {
+      "id": 11,
+      "name": "Zendesk",
+      "category": "Support and Helpdesk",
+      "breadth": "very-broad"
+    },
+    {
+      "id": 12,
+      "name": "Intercom",
+      "category": "Support and Helpdesk",
+      "breadth": "broad"
+    },
+    {
+      "id": 13,
+      "name": "Freshdesk",
+      "category": "Support and Helpdesk",
+      "breadth": "broad"
+    },
+    {
+      "id": 14,
+      "name": "Front",
+      "category": "Support and Helpdesk",
+      "breadth": "broad"
+    },
+    {
+      "id": 16,
+      "name": "LiveAgent",
+      "category": "Support and Helpdesk",
+      "breadth": "broad"
+    },
+    {
+      "id": 19,
+      "name": "Gorgias",
+      "category": "Support and Helpdesk",
+      "breadth": "broad"
+    },
+    {
+      "id": 21,
+      "name": "Slack",
+      "category": "Communications and Messaging",
+      "breadth": "very-broad"
+    },
+    {
+      "id": 22,
+      "name": "Twilio",
+      "category": "Communications and Messaging",
+      "breadth": "very-broad"
+    },
+    {
+      "id": 24,
+      "name": "Lark (Larksuite)",
+      "category": "Communications and Messaging",
+      "breadth": "very-broad"
+    },
+    {
+      "id": 26,
+      "name": "Discord",
+      "category": "Communications and Messaging",
+      "breadth": "broad"
+    },
+    {
+      "id": 27,
+      "name": "Telegram",
+      "category": "Communications and Messaging",
+      "breadth": "broad"
+    },
+    {
+      "id": 30,
+      "name": "Vonage",
+      "category": "Communications and Messaging",
+      "breadth": "very-broad"
+    },
+    {
+      "id": 34,
+      "name": "GoHighLevel",
+      "category": "Marketing, Ads, Email and Social",
+      "breadth": "broad"
+    },
+    {
+      "id": 35,
+      "name": "Mailchimp",
+      "category": "Marketing, Ads, Email and Social",
+      "breadth": "broad"
+    },
+    {
+      "id": 36,
+      "name": "Klaviyo",
+      "category": "Marketing, Ads, Email and Social",
+      "breadth": "broad"
+    },
+    {
+      "id": 40,
+      "name": "SendGrid",
+      "category": "Marketing, Ads, Email and Social",
+      "breadth": "broad"
+    },
+    {
+      "id": 41,
+      "name": "Shopify",
+      "category": "Ecommerce",
+      "breadth": "very-broad"
+    },
+    {
+      "id": 42,
+      "name": "WooCommerce",
+      "category": "Ecommerce",
+      "breadth": "broad"
+    },
+    {
+      "id": 43,
+      "name": "BigCommerce",
+      "category": "Ecommerce",
+      "breadth": "broad"
+    },
+    {
+      "id": 45,
+      "name": "Magento (Adobe Commerce)",
+      "category": "Ecommerce",
+      "breadth": "very-broad"
+    },
+    {
+      "id": 51,
+      "name": "DataForSEO",
+      "category": "Data, SEO and Scraping",
+      "breadth": "very-broad"
+    },
+    {
+      "id": 52,
+      "name": "SE Ranking",
+      "category": "Data, SEO and Scraping",
+      "breadth": "broad"
+    },
+    {
+      "id": 55,
+      "name": "Apify",
+      "category": "Data, SEO and Scraping",
+      "breadth": "broad"
+    },
+    {
+      "id": 57,
+      "name": "Bright Data",
+      "category": "Data, SEO and Scraping",
+      "breadth": "broad"
+    },
+    {
+      "id": 61,
+      "name": "GitHub",
+      "category": "Developer, Infra and Data platforms",
+      "breadth": "very-broad"
+    },
+    {
+      "id": 62,
+      "name": "Vercel",
+      "category": "Developer, Infra and Data platforms",
+      "breadth": "broad"
+    },
+    {
+      "id": 63,
+      "name": "Netlify",
+      "category": "Developer, Infra and Data platforms",
+      "breadth": "broad"
+    },
+    {
+      "id": 64,
+      "name": "Cloudflare",
+      "category": "Developer, Infra and Data platforms",
+      "breadth": "very-broad"
+    },
+    {
+      "id": 65,
+      "name": "Supabase",
+      "category": "Developer, Infra and Data platforms",
+      "breadth": "broad"
+    },
+    {
+      "id": 67,
+      "name": "Snowflake",
+      "category": "Developer, Infra and Data platforms",
+      "breadth": "very-broad"
+    },
+    {
+      "id": 68,
+      "name": "MongoDB Atlas",
+      "category": "Developer, Infra and Data platforms",
+      "breadth": "broad"
+    },
+    {
+      "id": 69,
+      "name": "Datadog",
+      "category": "Developer, Infra and Data platforms",
+      "breadth": "very-broad"
+    },
+    {
+      "id": 70,
+      "name": "Sentry",
+      "category": "Developer, Infra and Data platforms",
+      "breadth": "broad"
+    },
+    {
+      "id": 73,
+      "name": "Linear",
+      "category": "Productivity and Project Management",
+      "breadth": "broad"
+    },
+    {
+      "id": 74,
+      "name": "Jira",
+      "category": "Productivity and Project Management",
+      "breadth": "very-broad"
+    },
+    {
+      "id": 75,
+      "name": "Asana",
+      "category": "Productivity and Project Management",
+      "breadth": "broad"
+    },
+    {
+      "id": 76,
+      "name": "Monday.com",
+      "category": "Productivity and Project Management",
+      "breadth": "broad"
+    },
+    {
+      "id": 77,
+      "name": "ClickUp",
+      "category": "Productivity and Project Management",
+      "breadth": "broad"
+    },
+    {
+      "id": 81,
+      "name": "Stripe",
+      "category": "Finance and Fintech",
+      "breadth": "very-broad"
+    },
+    {
+      "id": 82,
+      "name": "Plaid",
+      "category": "Finance and Fintech",
+      "breadth": "broad"
+    },
+    {
+      "id": 83,
+      "name": "Binance",
+      "category": "Finance and Fintech",
+      "breadth": "very-broad"
+    },
+    {
+      "id": 87,
+      "name": "Xero",
+      "category": "Finance and Fintech",
+      "breadth": "broad"
+    }
+  ],
+  "needs_outreach": [
+    {
+      "id": 10,
+      "name": "DealCloud",
+      "category": "CRM and Sales",
+      "access": "enterprise-gated",
+      "blocker": "Outreach: enterprise contract needed before any credential exists."
+    },
+    {
+      "id": 20,
+      "name": "Gladly",
+      "category": "Support and Helpdesk",
+      "access": "enterprise-gated",
+      "blocker": "Outreach: platform account only via sales contract."
+    },
+    {
+      "id": 28,
+      "name": "WhatsApp Business",
+      "category": "Communications and Messaging",
+      "access": "approval-gated",
+      "blocker": "Policy: Meta business verification + message-template/quality enforcement."
+    },
+    {
+      "id": 31,
+      "name": "Google Ads",
+      "category": "Marketing, Ads, Email and Social",
+      "access": "approval-gated",
+      "blocker": "Approval: developer token review process (days to weeks)."
+    },
+    {
+      "id": 32,
+      "name": "Meta Ads",
+      "category": "Marketing, Ads, Email and Social",
+      "access": "approval-gated",
+      "blocker": "Approval: App Review / Marketing API Standard Access verification."
+    },
+    {
+      "id": 33,
+      "name": "LinkedIn Ads",
+      "category": "Marketing, Ads, Email and Social",
+      "access": "approval-gated",
+      "blocker": "Partner gate: Marketing Developer Platform approval (not open sign-up)."
+    },
+    {
+      "id": 44,
+      "name": "Salesforce Commerce Cloud",
+      "category": "Ecommerce",
+      "access": "enterprise-gated",
+      "blocker": "Outreach: SFCC license or partner sandbox needed for any credential."
+    },
+    {
+      "id": 49,
+      "name": "Amazon Selling Partner",
+      "category": "Ecommerce",
+      "access": "approval-gated",
+      "blocker": "Approval: SP-API app registration + role/privileges + seller auth flow."
+    },
+    {
+      "id": 53,
+      "name": "Ahrefs",
+      "category": "Data, SEO and Scraping",
+      "access": "enterprise-gated",
+      "blocker": "Paywall+review: Enterprise subscription required before OAuth app goes Active."
+    },
+    {
+      "id": 84,
+      "name": "Paygent Connect",
+      "category": "Finance and Fintech",
+      "access": "enterprise-gated",
+      "blocker": "APP DEFEATED US: no discoverable developer docs for Paygent Connect itself (NMI white-label reseller). Build against NMI (docs.nmi.com) only if you hold a merchant account."
+    },
+    {
+      "id": 86,
+      "name": "QuickBooks",
+      "category": "Finance and Fintech",
+      "access": "approval-gated",
+      "blocker": "Approval: Intuit app review + customer's paid QBO plan for production use."
+    },
+    {
+      "id": 88,
+      "name": "Brex",
+      "category": "Finance and Fintech",
+      "access": "approval-gated",
+      "blocker": "Account gate: Brex customer eligibility + admin token issuance."
+    },
+    {
+      "id": 89,
+      "name": "Ramp",
+      "category": "Finance and Fintech",
+      "access": "approval-gated",
+      "blocker": "Partner review for public apps; account eligibility gates live data."
+    },
+    {
+      "id": 90,
+      "name": "PitchBook",
+      "category": "Finance and Fintech",
+      "access": "enterprise-gated",
+      "blocker": "Outreach + budget: separate enterprise Direct Data contract; API undocumented publicly."
+    },
+    {
+      "id": 92,
+      "name": "Otter AI",
+      "category": "AI, Research and Media-native",
+      "access": "approval-gated",
+      "blocker": "Split surface: MCP is read-only/self-serve; rich REST API is Enterprise-only."
+    },
+    {
+      "id": 94,
+      "name": "Consensus",
+      "category": "AI, Research and Media-native",
+      "access": "approval-gated",
+      "blocker": "Enterprise gate on REST; MCP path exists for search/fetch (name collision with goconsensus.com is a research trap)."
+    }
+  ],
+  "blocked": [
+    {
+      "id": 84,
+      "name": "Paygent Connect",
+      "category": "Finance and Fintech",
+      "blocker": "APP DEFEATED US: no discoverable developer docs for Paygent Connect itself (NMI white-label reseller). Build against NMI (docs.nmi.com) only if you hold a merchant account."
+    },
+    {
+      "id": 90,
+      "name": "PitchBook",
+      "category": "Finance and Fintech",
+      "blocker": "Outreach + budget: separate enterprise Direct Data contract; API undocumented publicly."
+    },
+    {
+      "id": 91,
+      "name": "NotebookLM",
+      "category": "AI, Research and Media-native",
+      "blocker": "No API at all. Treat Gemini API as a different app if the intent is LLM access."
+    }
+  ],
+  "mcp_official": [
+    {
+      "id": 1,
+      "name": "Salesforce",
+      "category": "CRM and Sales"
+    },
+    {
+      "id": 2,
+      "name": "HubSpot",
+      "category": "CRM and Sales"
+    },
+    {
+      "id": 4,
+      "name": "Attio",
+      "category": "CRM and Sales"
+    },
+    {
+      "id": 7,
+      "name": "Zoho CRM",
+      "category": "CRM and Sales"
+    },
+    {
+      "id": 11,
+      "name": "Zendesk",
+      "category": "Support and Helpdesk"
+    },
+    {
+      "id": 12,
+      "name": "Intercom",
+      "category": "Support and Helpdesk"
+    },
+    {
+      "id": 14,
+      "name": "Front",
+      "category": "Support and Helpdesk"
+    },
+    {
+      "id": 21,
+      "name": "Slack",
+      "category": "Communications and Messaging"
+    },
+    {
+      "id": 22,
+      "name": "Twilio",
+      "category": "Communications and Messaging"
+    },
+    {
+      "id": 24,
+      "name": "Lark (Larksuite)",
+      "category": "Communications and Messaging"
+    },
+    {
+      "id": 25,
+      "name": "Pumble",
+      "category": "Communications and Messaging"
+    },
+    {
+      "id": 26,
+      "name": "Discord",
+      "category": "Communications and Messaging"
+    },
+    {
+      "id": 37,
+      "name": "systeme.io",
+      "category": "Marketing, Ads, Email and Social"
+    },
+    {
+      "id": 41,
+      "name": "Shopify",
+      "category": "Ecommerce"
+    },
+    {
+      "id": 50,
+      "name": "FanBasis",
+      "category": "Ecommerce"
+    },
+    {
+      "id": 52,
+      "name": "SE Ranking",
+      "category": "Data, SEO and Scraping"
+    },
+    {
+      "id": 55,
+      "name": "Apify",
+      "category": "Data, SEO and Scraping"
+    },
+    {
+      "id": 56,
+      "name": "Firecrawl",
+      "category": "Data, SEO and Scraping"
+    },
+    {
+      "id": 57,
+      "name": "Bright Data",
+      "category": "Data, SEO and Scraping"
+    },
+    {
+      "id": 60,
+      "name": "Clay",
+      "category": "Data, SEO and Scraping"
+    },
+    {
+      "id": 61,
+      "name": "GitHub",
+      "category": "Developer, Infra and Data platforms"
+    },
+    {
+      "id": 62,
+      "name": "Vercel",
+      "category": "Developer, Infra and Data platforms"
+    },
+    {
+      "id": 63,
+      "name": "Netlify",
+      "category": "Developer, Infra and Data platforms"
+    },
+    {
+      "id": 64,
+      "name": "Cloudflare",
+      "category": "Developer, Infra and Data platforms"
+    },
+    {
+      "id": 65,
+      "name": "Supabase",
+      "category": "Developer, Infra and Data platforms"
+    },
+    {
+      "id": 66,
+      "name": "Neo4j",
+      "category": "Developer, Infra and Data platforms"
+    },
+    {
+      "id": 67,
+      "name": "Snowflake",
+      "category": "Developer, Infra and Data platforms"
+    },
+    {
+      "id": 68,
+      "name": "MongoDB Atlas",
+      "category": "Developer, Infra and Data platforms"
+    },
+    {
+      "id": 69,
+      "name": "Datadog",
+      "category": "Developer, Infra and Data platforms"
+    },
+    {
+      "id": 70,
+      "name": "Sentry",
+      "category": "Developer, Infra and Data platforms"
+    },
+    {
+      "id": 71,
+      "name": "Notion",
+      "category": "Productivity and Project Management"
+    },
+    {
+      "id": 73,
+      "name": "Linear",
+      "category": "Productivity and Project Management"
+    },
+    {
+      "id": 74,
+      "name": "Jira",
+      "category": "Productivity and Project Management"
+    },
+    {
+      "id": 75,
+      "name": "Asana",
+      "category": "Productivity and Project Management"
+    },
+    {
+      "id": 76,
+      "name": "Monday.com",
+      "category": "Productivity and Project Management"
+    },
+    {
+      "id": 81,
+      "name": "Stripe",
+      "category": "Finance and Fintech"
+    },
+    {
+      "id": 85,
+      "name": "iPayX",
+      "category": "Finance and Fintech"
+    },
+    {
+      "id": 87,
+      "name": "Xero",
+      "category": "Finance and Fintech"
+    },
+    {
+      "id": 92,
+      "name": "Otter AI",
+      "category": "AI, Research and Media-native"
+    },
+    {
+      "id": 94,
+      "name": "Consensus",
+      "category": "AI, Research and Media-native"
+    },
+    {
+      "id": 96,
+      "name": "Devin",
+      "category": "AI, Research and Media-native"
+    },
+    {
+      "id": 100,
+      "name": "Grain",
+      "category": "AI, Research and Media-native"
+    }
+  ],
+  "free_creds_today": [
+    {
+      "id": 1,
+      "name": "Salesforce"
+    },
+    {
+      "id": 2,
+      "name": "HubSpot"
+    },
+    {
+      "id": 4,
+      "name": "Attio"
+    },
+    {
+      "id": 5,
+      "name": "Twenty"
+    },
+    {
+      "id": 7,
+      "name": "Zoho CRM"
+    },
+    {
+      "id": 21,
+      "name": "Slack"
+    },
+    {
+      "id": 22,
+      "name": "Twilio"
+    },
+    {
+      "id": 23,
+      "name": "Zoho Cliq"
+    },
+    {
+      "id": 24,
+      "name": "Lark (Larksuite)"
+    },
+    {
+      "id": 25,
+      "name": "Pumble"
+    },
+    {
+      "id": 26,
+      "name": "Discord"
+    },
+    {
+      "id": 27,
+      "name": "Telegram"
+    },
+    {
+      "id": 30,
+      "name": "Vonage"
+    },
+    {
+      "id": 35,
+      "name": "Mailchimp"
+    },
+    {
+      "id": 36,
+      "name": "Klaviyo"
+    },
+    {
+      "id": 38,
+      "name": "Pinterest"
+    },
+    {
+      "id": 39,
+      "name": "Threads (Meta)"
+    },
+    {
+      "id": 40,
+      "name": "SendGrid"
+    },
+    {
+      "id": 42,
+      "name": "WooCommerce"
+    },
+    {
+      "id": 45,
+      "name": "Magento (Adobe Commerce)"
+    },
+    {
+      "id": 47,
+      "name": "Ecwid"
+    },
+    {
+      "id": 48,
+      "name": "Gumroad"
+    },
+    {
+      "id": 51,
+      "name": "DataForSEO"
+    },
+    {
+      "id": 55,
+      "name": "Apify"
+    },
+    {
+      "id": 56,
+      "name": "Firecrawl"
+    },
+    {
+      "id": 58,
+      "name": "Sherlock"
+    },
+    {
+      "id": 61,
+      "name": "GitHub"
+    },
+    {
+      "id": 62,
+      "name": "Vercel"
+    },
+    {
+      "id": 63,
+      "name": "Netlify"
+    },
+    {
+      "id": 64,
+      "name": "Cloudflare"
+    },
+    {
+      "id": 65,
+      "name": "Supabase"
+    },
+    {
+      "id": 66,
+      "name": "Neo4j"
+    },
+    {
+      "id": 68,
+      "name": "MongoDB Atlas"
+    },
+    {
+      "id": 70,
+      "name": "Sentry"
+    },
+    {
+      "id": 71,
+      "name": "Notion"
+    },
+    {
+      "id": 72,
+      "name": "Airtable"
+    },
+    {
+      "id": 73,
+      "name": "Linear"
+    },
+    {
+      "id": 74,
+      "name": "Jira"
+    },
+    {
+      "id": 75,
+      "name": "Asana"
+    },
+    {
+      "id": 76,
+      "name": "Monday.com"
+    },
+    {
+      "id": 77,
+      "name": "ClickUp"
+    },
+    {
+      "id": 78,
+      "name": "Coda"
+    },
+    {
+      "id": 80,
+      "name": "Harvest"
+    },
+    {
+      "id": 81,
+      "name": "Stripe"
+    },
+    {
+      "id": 82,
+      "name": "Plaid"
+    },
+    {
+      "id": 83,
+      "name": "Binance"
+    },
+    {
+      "id": 85,
+      "name": "iPayX"
+    },
+    {
+      "id": 93,
+      "name": "Fathom"
+    },
+    {
+      "id": 95,
+      "name": "Reducto"
+    },
+    {
+      "id": 98,
+      "name": "Mermaid CLI"
+    },
+    {
+      "id": 99,
+      "name": "YouTube Transcript"
+    }
+  ],
+  "category_order": [
+    "AI, Research and Media-native",
+    "CRM and Sales",
+    "Communications and Messaging",
+    "Data, SEO and Scraping",
+    "Developer, Infra and Data platforms",
+    "Ecommerce",
+    "Finance and Fintech",
+    "Marketing, Ads, Email and Social",
+    "Productivity and Project Management",
+    "Support and Helpdesk"
+  ]
+}

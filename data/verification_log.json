@@ -1,0 +1,80 @@
+{
+  "title": "Verification log — how accuracy was checked and improved",
+  "protocol": {
+    "sample": "40 of 100 apps: 30 stratified (3 per category, biased toward low-confidence + trap names) + 10 blind holdout (2-3 per half of the table). 5 fields per app = 200 potential checks; app #84 (Paygent Connect) declared unscorable (no observable docs) → 195 scored.",
+    "ground_truth": "data/ground_truth.json — human adjudication against fetched official docs + cross-exam searches + live MCP probes. Cited per row.",
+    "scoring": "pipeline/verify.py score — field-level exact match with synonym collapse (see ground_truth.json scoring_rules)."
+  },
+  "loops": [
+    {
+      "id": "A",
+      "name": "Machine corroboration (agent, automated)",
+      "what": "pipeline/verify.py check — fetched every cited evidence URL (79 fetches run 1, 76 run 2 after fixes), keyword-checked 191 claim/fact pairs, probed MCP endpoint candidates.",
+      "found": "22 fetch problems (9 genuinely dead links incl. 1 dead DNS name; 10 SPA/403 bot-blocks; moved deep links), 41 flags for human review.",
+      "limitations": "SPA docs sites (Stoplight, Fern, Intuit) return thin HTML → keyword misses on CORRECT claims (false flags); catch-all hosts answer /mcp with 200/400/405 → false MCP positives."
+    },
+    {
+      "id": "B",
+      "name": "Cross-examination search + manual MCP probes (agent, semi-automated)",
+      "what": "6 adversarial web searches limited to first-party domains (Pylon, Salesforce, Intercom, Lark, Bright Data, Monday) + 1 (Netlify) + 11 manual curl probes requiring JSON-RPC-shaped responses.",
+      "found": "1 phantom auth (Pylon had no OAuth2), 1 under-claimed MCP (mcp.pumble.com is first-party), 5 official-MCP confirmations (Salesforce/Intercom/Lark/Bright Data/Netlify/Monday), 3 false-positive MCP probes killed (Stoplight catch-all, Redocly catch-all, Intuit generic 405), 2 name collisions re-checked (Consensus≠goConsensus, Pylon≠pylon.page).",
+      "limitations": "Search snippets can be stale; every consequential claim from search was pinned to a first-party URL where possible."
+    },
+    {
+      "id": "C",
+      "name": "Human adjudication (the ops person)",
+      "what": "Reviewed all 41 machine flags + all keyword-miss excerpts; decided each as (correct-but-unverifiable-by-machine / real error); wrote data/ground_truth.json + data/corrections.json (23 decisions, 5 rule updates).",
+      "found": "6 real field errors (see misses_taxonomy), 8 broken evidence URLs, 1 unscorable app. Machine flags that were NOT real errors: 35 (fetch limitations) — machine precision on flags was 6/41 ≈ 15%, recall unknown; this is why human review is the last mile."
+    }
+  ],
+  "misses_taxonomy": {
+    "phantom_auth": [{"id": 15, "name": "Pylon", "detail": "claimed OAuth2; docs show Bearer tokens only"}],
+    "over_listing": [
+      {"id": 13, "name": "Freshdesk", "detail": "'API key' listed as 3rd scheme; it is the Basic password"},
+      {"id": 20, "name": "Gladly", "detail": "'Token' listed separately from token-based Basic"},
+      {"id": 85, "name": "iPayX", "detail": "'None' listed as an API auth (it describes the MCP surface)"}
+    ],
+    "misfamily": [{"id": 66, "name": "Neo4j", "detail": "'JWT' where Aura Data API is OAuth2 client-credentials"}],
+    "mcp_underclaim": [{"id": 25, "name": "Pumble", "detail": "said community; mcp.pumble.com is a first-party JSON-RPC endpoint"}],
+    "broken_evidence": [
+      {"id": 22, "name": "Twilio", "detail": "/docs/iam/credentials 404"},
+      {"id": 25, "name": "Pumble", "detail": "pumble.com/api 404"},
+      {"id": 31, "name": "Google Ads", "detail": "developer-token deep link 404"},
+      {"id": 33, "name": "LinkedIn Ads", "detail": "marketing-apis-overview deep link 404"},
+      {"id": 46, "name": "Squarespace", "detail": "/commerce-api 404"},
+      {"id": 57, "name": "Bright Data", "detail": "web-scraper-api deep link 404"},
+      {"id": 80, "name": "Harvest", "detail": "auth deep link (trailing slash) 404"},
+      {"id": 99, "name": "YouTube Transcript", "detail": "docs.transcriptapi.com — DNS does not resolve"}
+    ],
+    "name_collision_traps": [
+      {"name": "Consensus", "detail": "goconsensus.com (demo platform) OAuth guides rank for 'Consensus API OAuth' — different company than consensus.app (research search)"},
+      {"name": "Pylon", "detail": "pylon.page (status pages) has its own API docs — different company than usepylon.com (B2B support)"}
+    ],
+    "apps_defeating_the_agent": [
+      {"id": 84, "name": "Paygent Connect", "detail": "NMI white-label reseller with no discoverable developer docs; three searches surfaced only NMI. Finding recorded as gated/blocked with NMI as the underlying surface."}
+    ]
+  },
+  "accuracy": {
+    "first_pass_fields": "189/195 = 96.9% (before loops)",
+    "final_fields": "195/195 = 100% (after loops, same 195 checks — improvement is partly by-construction; that is what an audit set is for)",
+    "first_pass_evidence_integrity": "70/79 cited URLs free of link rot = 88.6% (9 dead: 8x404 + 1 DNS-dead subdomain)",
+    "final_evidence_integrity": "76/76 cited URLs resolve = 100% (5 disclosed as fetcher-hostile but human-valid: 4x403 bot-walls [Salesforce x3, Otter] + 1 JS-gated [Consensus docs]); 0 link rot",
+    "holdout_10_apps": "50/50 checks correct in pass 1 AND pass 2 (10 apps: #1,12,22,33,41,55,61,73,86,97). No sample-derived rule regressed anything; errors concentrated in the long-tail of the core sample (Pylon, Freshdesk, Gladly, Neo4j, Pumble, iPayX).",
+    "calibration_note": "First-pass field accuracy on well-known apps was already high because the research agent's priors are strong for mainstream SaaS. The measurable value of the loops was in evidence hygiene (10% of URLs broken), long-tail apps, MCP-existence claims (over- AND under-claimed), and trap names — exactly where priors are weakest. Residual risk after loops: medium-confidence judgment calls (Waterfall access tier, FanBasis onboarding), and any SPA-gated claim we could only cross-check via search snippets (Salesforce, SFCC, Intuit, GoHighLevel, Otter, Consensus)."
+  },
+  "human_touchpoints": [
+    "Designed the schema + taxonomy (what counts as scheme vs credential vs gate).",
+    "Ran cross-exam searches and manual MCP probes the pipeline only stubs (composio_runner.py is the pluggable slot for these tools).",
+    "Adjudicated all 41 machine flags (kept vs fixed) — see corrections.json.",
+    "Declared #84 unscorable instead of inventing an answer.",
+    "Verified the 2 name-collision traps against each other before writing ground truth."
+  ],
+  "counts": {
+    "web_searches_total": 29,
+    "evidence_urls_fetched_by_verify_loop": 155,
+    "mcp_endpoint_probes_automated": 58,
+    "mcp_endpoint_probes_manual_jsonrpc": 11,
+    "human_adjudicated_decisions": 23,
+    "rule_updates": 5
+  }
+}

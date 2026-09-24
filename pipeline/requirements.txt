@@ -1,0 +1,7 @@
+# Core pipeline (stdlib + requests is enough to run everything)
+requests>=2.31
+beautifulsoup4>=4.12
+# Optional: Composio SDK integration (pipeline/composio_runner.py)
+# composio>=0.7
+# Optional: richer LLM-driven re-research (pipeline/agent.py --llm)
+# openai>=1.40

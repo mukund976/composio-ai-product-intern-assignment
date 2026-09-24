@@ -1,0 +1,79 @@
+{
+  "checks": 195,
+  "correct": 189,
+  "accuracy_pct": 96.9,
+  "misses": [
+    {
+      "id": 13,
+      "name": "Freshdesk",
+      "field": "auth",
+      "predicted": [
+        "API key",
+        "OAuth2",
+        "Basic"
+      ],
+      "gold": [
+        "Basic",
+        "OAuth2"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Pylon",
+      "field": "auth",
+      "predicted": [
+        "API key",
+        "OAuth2"
+      ],
+      "gold": [
+        "Token"
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Gladly",
+      "field": "auth",
+      "predicted": [
+        "Basic",
+        "Token"
+      ],
+      "gold": [
+        "Basic"
+      ]
+    },
+    {
+      "id": 25,
+      "name": "Pumble",
+      "field": "mcp",
+      "predicted": "community",
+      "gold": "official"
+    },
+    {
+      "id": 66,
+      "name": "Neo4j",
+      "field": "auth",
+      "predicted": [
+        "Basic",
+        "Token",
+        "JWT"
+      ],
+      "gold": [
+        "Basic",
+        "Token",
+        "OAuth2"
+      ]
+    },
+    {
+      "id": 85,
+      "name": "iPayX",
+      "field": "auth",
+      "predicted": [
+        "API key",
+        "None"
+      ],
+      "gold": [
+        "API key"
+      ]
+    }
+  ]
+}
